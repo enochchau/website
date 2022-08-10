@@ -1,10 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from '@astrojs/image/components';
 import Nav from '../components/Nav.astro';
+import penguin from '../assets/penguin.png'
 ---
 <Layout title="enoch chau">
 	<div class="title">
-		<img alt="penguin" src="https://avatars.githubusercontent.com/u/22567131?v=4" />
+		<Image src={penguin} format="webp" width={160} height={0} alt="penguin mascot"/>
 		<h1>enoch chau</h1>
 		<h2>conversation enthusiast</h2>
 		<h3>(humans and computers)</h3>
@@ -18,7 +20,6 @@ import Nav from '../components/Nav.astro';
 <style lang="scss">
 	.title {
 		img {
-			width: 10rem;
 			cursor: pointer;
 		}
 

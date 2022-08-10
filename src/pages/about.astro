@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from '@astrojs/image/components';
+import me from '../assets/me.jpg'
 ---
 <Layout title="enoch - about">
 	<div class="about">
-		<img src="/me.jpg" alt="enoch bouldering in red rock" />
+		<Image src={me} alt="enoch bouldering in red rock" width={360} height={0} format="webp" />
 		<article>
 			<h1>hello there</h1>
 			<p>
@@ -19,9 +21,11 @@ import Layout from '../layouts/Layout.astro';
 	.about {
 		display: flex;
 		flex-wrap: wrap-reverse;
+
 		article {
 			width: 23rem;
 			margin-bottom: 2rem;
+
 			h1 {
 				margin-bottom: 0.6rem;
 			}
@@ -29,7 +33,6 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	img {
-		width: 23rem;
 		margin-right: 2rem;
 	}
 </style>
