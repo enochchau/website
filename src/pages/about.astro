@@ -2,4 +2,34 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="enoch - about">
+	<div class="about">
+		<img src="/me.jpg" alt="enoch bouldering in red rock" />
+		<article>
+			<h1>hello there</h1>
+			<p>
+				I'm a full stack software enigneer at <a href="https://gatsby.events">Gatsby</a>. I'm interested in JavaScript
+				bundlers and distributed systems. On the weekends, you'll probably find me out at the <a
+					href="https://www.mountainproject.com/user/200380484/enoch-chau">boulders</a>.
+			</p>
+		</article>
+	</div>
 </Layout>
+
+<style lang="scss">
+	.about {
+		display: flex;
+		flex-wrap: wrap-reverse;
+		article {
+			width: 23rem;
+			margin-bottom: 2rem;
+			h1 {
+				margin-bottom: 0.6rem;
+			}
+		}
+	}
+
+	img {
+		width: 23rem;
+		margin-right: 2rem;
+	}
+</style>
