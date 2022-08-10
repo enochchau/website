@@ -1,41 +1,50 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from '@astrojs/image/components';
-import Nav from '../components/Nav.astro';
-import penguin from '../assets/penguin.png'
+import Layout from "../layouts/Layout.astro";
+import { Image } from "@astrojs/image/components";
+import Nav from "../components/Nav.astro";
+import penguin from "../assets/penguin.png";
 ---
+
 <Layout title="enoch chau">
-	<div class="title">
-		<Image src={penguin} format="webp" width={160} height={0} alt="penguin mascot"/>
-		<h1>enoch chau</h1>
-		<h2>conversation enthusiast</h2>
-		<h3>(humans and computers)</h3>
-		<div class="links">
-			<h3><a href="https://www.linkedin.com/in/enoch-chau-a2a522126/">linkedin</a></h3>
-			<h3><a href="https://github.com/ec965">github</a></h3>
-		</div>
-	</div>
+  <div class="title">
+    <Image
+      src={penguin}
+      format="webp"
+      width={160}
+      height={0}
+      alt="penguin mascot"
+    />
+    <h1>enoch chau</h1>
+    <h2>conversation enthusiast</h2>
+    <h3>(humans and computers)</h3>
+    <div class="links">
+      <h3>
+        <a href="https://www.linkedin.com/in/enoch-chau-a2a522126/">linkedin</a>
+      </h3>
+      <h3><a href="https://github.com/ec965">github</a></h3>
+    </div>
+  </div>
 </Layout>
 
 <style lang="scss">
-	.title {
-		img {
-			cursor: pointer;
-		}
+  .title {
+    img {
+      cursor: pointer;
+    }
 
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-		>* {
-			margin-bottom: 1rem;
-		}
-	}
+    > * {
+      margin-bottom: 1rem;
+    }
+  }
 
-	.links {
-		display: flex;
-		justify-content: space-between;
-		width: 10rem;
-	}
+  .links {
+    display: flex;
+    justify-content: space-between;
+    width: 10rem;
+  }
 </style>

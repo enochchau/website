@@ -1,120 +1,119 @@
 ---
-import Nav from '../components/Nav.astro';
+import Nav from "../components/Nav.astro";
 
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props as Props;
-let page = title.substring('enoch - '.length)
+let page = title.substring("enoch - ".length);
 ---
+
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	<link rel="stylesheet" href="/styles/reset.css" />
-	<meta name="generator" content={Astro.generator} />
-	<title>{title}</title>
-</head>
+  <body>
+    <Nav page={page} />
+    <slot />
+    <style lang="scss">
+      :root {
+        --primary: #282c34;
+        --secondary: #6f1cc5;
+        --background: #f0f0f0;
+        --background-secondary: #ddd;
+        --font-sans-serif: -apple-system, blinkmacsystemfont, avenir next,
+          avenir, segoe ui, helvetica neue, helvetica, cantarell, ubuntu, roboto,
+          noto, arial, sans-serif;
+        --font-serif: iowan old style, apple garamond, baskerville,
+          times new roman, droid serif, times, source serif pro, serif,
+          apple color emoji, segoe ui emoji, segoe ui symbol;
+        --font-mono: menlo, consolas, monaco, liberation mono, lucida console,
+          monospace;
 
-<body>
-	<Nav page={page}/>
-	<slot />
-</body>
+        --font-size-xl: 2rem;
+        --font-size-lg: 1.6rem;
+        --font-size-md: 1.4rem;
+        --font-size-sm: 1.2rem;
+        --font-size-xs: 1rem;
 
+        --hover-time: 0.15s;
+        --border-radius: 8px;
+        --shadow-color: rgb(0 0 0 / 40%);
+      }
+
+      .dark-theme {
+        --background: #1a1b1d;
+        --background-secondary: #444;
+        --primary: #f0f0f0;
+        --secondary: #a86be7;
+      }
+
+      html {
+        color: var(--primary);
+        background: var(--background);
+        font-family: var(--font-sans-serif);
+      }
+
+      body {
+        margin: auto;
+        max-width: 50rem;
+        line-height: 1.2;
+      }
+
+      :global(*) {
+        box-sizing: border-box;
+      }
+
+      :global(h1) {
+        font-size: var(--font-size-xl);
+      }
+
+      :global(h2) {
+        font-size: var(--font-size-lg);
+      }
+
+      :global(h3) {
+        font-size: var(--font-size-md);
+      }
+
+      :global(h4) {
+        font-size: var(--font-size-sm);
+      }
+
+      :global(h5) {
+        font-size: var(--font-size-xs);
+      }
+
+      :global(p) {
+        font-size: var(--font-size-xs);
+      }
+
+      :global(code) {
+        font-family: var(--font-mono);
+      }
+
+      :global(strong) {
+        font-weight: bold;
+      }
+
+      :global(a) {
+        text-decoration-color: var(--background);
+        transition: text-decoration var(--hover-time) ease;
+        color: var(--secondary);
+
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: var(--primary);
+        }
+      }
+    </style>
+  </body>
 </html>
-<style lang="scss">
-	:root {
-		--primary: #282c34;
-		--secondary: #6f1cc5;
-		--background: #f0f0f0;
-		--background-secondary: #ddd;
-		--font-sans-serif: -apple-system, blinkmacsystemfont, avenir next, avenir,
-			segoe ui, helvetica neue, helvetica, cantarell, ubuntu, roboto, noto, arial,
-			sans-serif;
-		--font-serif: iowan old style, apple garamond, baskerville, times new roman,
-			droid serif, times, source serif pro, serif, apple color emoji,
-			segoe ui emoji, segoe ui symbol;
-		--font-mono: menlo, consolas, monaco, liberation mono, lucida console,
-			monospace;
-
-		--font-size-xl: 2rem;
-		--font-size-lg: 1.6rem;
-		--font-size-md: 1.4rem;
-		--font-size-sm: 1.2rem;
-		--font-size-xs: 1rem;
-
-		--hover-time: 0.15s;
-		--border-radius: 8px;
-		--shadow-color: rgb(0 0 0 / 40%);
-	}
-
-	.dark-theme {
-		--background: #1a1b1d;
-		--background-secondary: #444;
-		--primary: #f0f0f0;
-		--secondary: #a86be7;
-	}
-
-	html {
-		color: var(--primary);
-		background: var(--background);
-		font-family: var(--font-sans-serif);
-	}
-
-	body {
-		margin: auto;
-		max-width: 50rem;
-		line-height: 1.2;
-	}
-
-	:global(*) {
-		box-sizing: border-box;
-	}
-
-	:global(h1) {
-		font-size: var(--font-size-xl);
-	}
-
-	:global(h2) {
-		font-size: var(--font-size-lg);
-	}
-
-	:global(h3) {
-		font-size: var(--font-size-md);
-	}
-
-	:global(h4) {
-		font-size: var(--font-size-sm);
-	}
-
-	:global(h5) {
-		font-size: var(--font-size-xs);
-	}
-
-	:global(p) {
-		font-size: var(--font-size-xs);
-	}
-
-	:global(code) {
-		font-family: var(--font-mono);
-	}
-
-	:global(strong) {
-		font-weight: bold;
-	}
-
-	:global(a) {
-		text-decoration-color: var(--background);
-		transition: text-decoration var(--hover-time) ease;
-		color: var(--secondary);
-
-		&:hover {
-			text-decoration: underline;
-			text-decoration-color: var(--primary);
-		}
-	}
-</style>

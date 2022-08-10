@@ -1,53 +1,54 @@
 ---
 interface Props {
-	page: string;
+  page: string;
 }
 
 const { page } = Astro.props as Props;
 
-const navItems = [
-	'dev',
-	'create',
-	'recipes',
-	'about'
-];
-
+const navItems = ["dev", "create", "recipes", "about"];
 ---
+
 <nav>
-	<h3><a href="/">enoch chau</a></h3>
-	<div class="items" id="nav-items">
-		{navItems.map((item) => (
-		<h3><a href={"/" + item} class={page === item ? 'current-nav' : '' }>{item}</a></h3>
-		))}
-	</div>
+  <h3><a href="/">enoch chau</a></h3>
+  <div class="items" id="nav-items">
+    {
+      navItems.map((item) => (
+        <h3>
+          <a href={"/" + item} class={page === item ? "current-nav" : ""}>
+            {item}
+          </a>
+        </h3>
+      ))
+    }
+  </div>
 </nav>
 
 <style lang="scss">
-	.current-nav {
-		text-decoration: underline;
-		text-decoration-color: var(--secondary);
-	}
+  .current-nav {
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+  }
 
-	nav {
-		margin: 2vh 0 2vh 0;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
+  nav {
+    margin: 2vh 0 2vh 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-	h3 {
-		font-weight: bold;
+  h3 {
+    font-weight: bold;
 
-		>a {
-			color: var(--primary);
-		}
-	}
+    > a {
+      color: var(--primary);
+    }
+  }
 
-	.items {
-		display: flex;
+  .items {
+    display: flex;
 
-		>* {
-			margin-left: .7rem;
-		}
-	}
+    > * {
+      margin-left: 0.7rem;
+    }
+  }
 </style>
