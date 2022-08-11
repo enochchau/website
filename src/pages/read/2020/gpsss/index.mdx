@@ -2,13 +2,16 @@
 slug: gpsss
 title: GPS Sound Sensor
 date: March 2020
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # GPS Sound Sensor
 
 ## March 2020
 
-- [**project site**](http://projects.eng.uci.edu/projects/2019-2020/gps-sound-sensor-rescue-assistance)
+- [project site](http://projects.eng.uci.edu/projects/2019-2020/gps-sound-sensor-rescue-assistance)
 
 The GPSSS is a WiFi connected directional sensor based on the time delay of
 arrival algorthim for sound. My contributions include configuring WiFi
@@ -16,14 +19,14 @@ connectivity between the sensor and android application. Special thanks to my
 teammates Minh Tam Chau, Sam Longo, and Kelwin Li.
 
 <video width="640" controls>
-  <source src="/videos/gpsss_vid.mp4" type="video/mp4">
+  <source src="/videos/gpsss_vid.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
 
 **GPSSS**
 
-![GPSSS](/images/gpssss/1.webp)
+<Image src={import("./1.jpg")} alt="GPSSS" width="400" format="webp"/>
 
 **sensor internals**
 
-![Sensor Internals](/images/gpssss/2.webp/)
+<Image src={import("./2.jpg")} alt="Sensor Internals" width="400" format="webp"/>
