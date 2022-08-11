@@ -2,16 +2,19 @@
 title: MCutie
 date: February 2021
 slug: mcutie
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # MCutie
 
 ## January 2021 - February 2021
 
-- [**github**](https://github.com/ec965/MCutie/)
-- [**demo**](https://m-cutie.herokuapp.com/)
+- [github](https://github.com/ec965/MCutie/)
+- [demo](https://m-cutie.herokuapp.com/)
 
-![**MQTT Dashboard**](/images/mcutie/dashboard.webp)
+<Image alt="MQTT Dashboard" src={import("./dashboard.png")} width={400} format="webp"/>
 
 MCutie is a web app that provides logging and real time data graphs for MQTT
 sensor data. Building off of Esp Temp, I'm planning to build more IoT sensor for
@@ -28,7 +31,7 @@ the sensors.
 
 **live websocket graph**
 
-![Live Websocket Graph](/images/mcutie/graph.webp)
+<Image alt="Live Websocket Graph" src={import("./graph.png")} width={400} format="webp"/>
 
 In addition to the websocket, I also made a REST API for non-live data analysis
 I've wanted to learn backend web development for some time. This project allowed

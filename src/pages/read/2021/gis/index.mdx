@@ -2,13 +2,16 @@
 title: GIS is Split
 date: May 2021
 slug: gis
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # GIS is Split
 
 ## April 2021 - May 2021
 
-- **[github](https://github.com/ec965/GIS)**
+- [github](https://github.com/ec965/GIS)
 
 GIS is a split keyboard that uses low profile choc switches. The key layout
 draws inspiration from the
@@ -25,12 +28,12 @@ You may recognize the PCB art.
 
 **GIS is built!**
 
-![gis built](/images/gis/built.webp)
+<Image alt="gis built" src={import("./built.jpg")} width={400} format="webp"/>
 
 **Back of GIS**
 
-![gis back](/images/gis/back.webp)
+<Image alt="gis back" src={import("./back.jpg")} width={400} format="webp"/>
 
 **Front of GIS**
 
-![gis front](/images/gis/front.webp)
+<Image alt="gis front" src={import("./front.jpg")} width={400} format="webp"/>

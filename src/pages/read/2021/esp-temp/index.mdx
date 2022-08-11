@@ -2,15 +2,18 @@
 title: Esp Temp
 date: January 2021
 slug: esp-temp
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # Esp Temp
 
 ## January 2021
 
-- [**github**](https://github.com/ec965/esp-temp)
+- [github](https://github.com/ec965/esp-temp)
 
-![Esp Temp](/images/iotTemp/perfboardFront.webp)
+<Image alt="Esp Temp" src={import("./perfboardFront.jpg")} width={400} format="webp"/>
 
 Recently, I made an IoT temperature probe. It shows data physically over a seven
 segment display but it can also stream data over WiFi using MQTT.
@@ -22,8 +25,8 @@ wiring is fun... right?
 
 **hand wiring is fun, right...?**
 
-![hand wiring is fun, right...?](/images/iotTemp/perboardBack.webp)
+<Image alt="hand wiring is fun, right...?" src={import("./perboardBack.jpg")} width={400} format="webp"/>
 
 **breadboarding**
 
-![breadboarding](/images/iotTemp/breadboard.webp)
+<Image alt="breadboarding" src={import("./breadboard.jpg")} width={400} format="webp"/>

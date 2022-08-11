@@ -1,0 +1,26 @@
+---
+title: Hacker News with SolidJS
+date: November 2021
+slug: hacker-news
+layout: "../../../../layouts/Md.astro"
+---
+
+import { Image } from '@astrojs/image/components';
+
+# Hacker News with SolidJS
+
+## November 2021
+
+- [demo](https://enochchau.com/hn)
+- [source code](https://github.com/ec965/hn)
+
+Reimplementing Hacker News using [SolidJS](https://github.com/solidjs/solid) and
+the [Hacker News API](https://github.com/HackerNews/API).
+
+**light mode**
+
+<Image alt="Light Mode" src={import("./hn-light.png")} width={400} format="webp"/>
+
+**dark mode**
+
+<Image alt="Dark Mode" src={import("./hn-dark.png")} width={400} format="webp"/>
