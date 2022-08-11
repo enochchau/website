@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "fmt": "prettier -w --plugin-search-dir=. .",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "check": "astro check"
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.3",
