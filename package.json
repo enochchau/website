@@ -8,12 +8,21 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fmt": "prettier -w --plugin-search-dir=. ."
+    "fmt": "prettier -w --plugin-search-dir=. .",
+    "lint": "eslint src/"
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.3",
+    "@astrojs/mdx": "^0.8.2",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
     "astro": "^1.0.1",
+    "astro-eslint-parser": "^0.5.0",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-astro": "^0.17.1",
     "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.5.0"
+    "prettier-plugin-astro": "^0.5.0",
+    "typescript": "^4.7.4"
   }
 }

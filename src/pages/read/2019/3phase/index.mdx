@@ -1,0 +1,40 @@
+---
+title: 3 Phase Wattmeter
+slug: 3-phase
+date: June 2019
+layout: "../../../../layouts/Md.astro"
+---
+
+import { Image } from '@astrojs/image/components';
+
+# 3 Phase Wattmeter
+
+## California Plug Load Center: March 2019 - June 2019
+
+- [github](https://github.com/CalPlug/ADE9078-3PhaseWattmeter)
+- [calplug](http://calplug.org/)
+- [calit2](https://www.calit2.uci.edu/)
+
+**demo setup**
+
+<Image src={import("./demo.jpg")} alt="Demo Setup" width={500} format="webp"/>
+
+Using the ADE9078, our group created a PCB and wrote firmware to create a small
+portable three phase wattmeter. Our demo setup was designed to detect faults in
+a three phase motor. By performing a Fast Fourier Transform (FFT) on the power
+data and looking for irregularities, we were able to determine if the motor was
+faulty.
+
+My primary contribution was configuring the waveform buffer firmware and
+creating a graphical interface for FFT.
+
+**power graph**
+
+<video width="640" controls>
+  <source src="/videos/3phasewatt_sin.mov" type="video/mp4"></source>
+  Your browser does not support the video tag.
+</video>
+
+**FFT processing graph**
+
+<Image src={import("./processing.png")} alt="FFT Processing Graph" width={500} format="webp"/>

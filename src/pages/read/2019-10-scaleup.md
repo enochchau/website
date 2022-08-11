@@ -1,0 +1,20 @@
+---
+title: Scale Up
+slug: scaleup
+date: October 2019
+---
+
+# Scale Up
+
+## SD Hacks 2019 at UC San Diego
+
+- [**github**](https://github.com/ec965/smart_scale)
+- [**devpost**](https://devpost.com/software/scale-up)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G3OunuLPnXA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Scale Up can calculate caloric data based on weight of foods. Google Vision was
+used to find food types while the USDA Nutrition API to find caloric
+information. Checkout the DevPost for more infromation.
+
+![Scale Up](/images/scaleUp/labeled.webp)

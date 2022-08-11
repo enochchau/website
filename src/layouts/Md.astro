@@ -1,0 +1,34 @@
+---
+import Layout from "./Layout.astro";
+
+interface Props {
+  content: {
+    title: string;
+    slug: string;
+    date: string;
+  };
+}
+
+let { content } = Astro.props;
+---
+
+<Layout title={content.title}>
+  <slot />
+</Layout>
+
+<style>
+  :global(img),
+  :global(iframe),
+  :global(ul),
+  :global(p),
+  :global(video),
+  :global(h1),
+  :global(h2),
+  :global(h3),
+  :global(h4),
+  :global(h5),
+  :global(h6),
+  :global(ol) {
+    margin: 0.5rem 0;
+  }
+</style>
