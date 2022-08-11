@@ -18,7 +18,7 @@ const navItems = ["read", "create", "about"];
           <a
             href={"/" + item}
             class={
-              new RegExp(`^enoch - ${item}`).test(pageTitle)
+              new RegExp(`^enoch - ${item}`, "i").test(pageTitle)
                 ? "current-nav"
                 : ""
             }
