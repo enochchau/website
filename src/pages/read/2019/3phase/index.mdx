@@ -5,7 +5,7 @@ date: June 2019
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # 3 Phase Wattmeter
 
@@ -17,7 +17,7 @@ import { Image } from '@astrojs/image/components';
 
 **demo setup**
 
-<Image src={import("./demo.jpg")} alt="Demo Setup" width={500} format="webp"/>
+<MdImage src={import("./demo.jpg")} alt="Demo Setup" />
 
 Using the ADE9078, our group created a PCB and wrote firmware to create a small
 portable three phase wattmeter. Our demo setup was designed to detect faults in
@@ -37,4 +37,4 @@ creating a graphical interface for FFT.
 
 **FFT processing graph**
 
-<Image src={import("./processing.png")} alt="FFT Processing Graph" width={500} format="webp"/>
+<MdImage src={import("./processing.png")} alt="FFT Processing Graph" />

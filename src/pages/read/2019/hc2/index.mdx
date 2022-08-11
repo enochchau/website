@@ -5,7 +5,7 @@ date: November 2019
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # HC2 IoT Sensor
 
@@ -20,4 +20,4 @@ private repository). Connections include WiFi, Email, and LoRa.
 
 **HC2, Moteino (LoRa), & Raspberry Pi**
 
-<Image alt="HC2, Moteino (LoRa), & Raspberry Pi" src={import("./hc2.jpg")} width={400} format="webp"/>
+<MdImage alt="HC2, Moteino (LoRa), & Raspberry Pi" src={import("./hc2.jpg")} />

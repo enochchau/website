@@ -5,7 +5,7 @@ slug: esp-temp
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Esp Temp
 
@@ -13,7 +13,7 @@ import { Image } from '@astrojs/image/components';
 
 - [github](https://github.com/ec965/esp-temp)
 
-<Image alt="Esp Temp" src={import("./perfboardFront.jpg")} width={400} format="webp"/>
+<MdImage alt="Esp Temp" src={import("./perfboardFront.jpg")} />
 
 Recently, I made an IoT temperature probe. It shows data physically over a seven
 segment display but it can also stream data over WiFi using MQTT.
@@ -25,8 +25,11 @@ wiring is fun... right?
 
 **hand wiring is fun, right...?**
 
-<Image alt="hand wiring is fun, right...?" src={import("./perboardBack.jpg")} width={400} format="webp"/>
+<MdImage
+  alt="hand wiring is fun, right...?"
+  src={import("./perboardBack.jpg")}
+/>
 
 **breadboarding**
 
-<Image alt="breadboarding" src={import("./breadboard.jpg")} width={400} format="webp"/>
+<MdImage alt="breadboarding" src={import("./breadboard.jpg")} />

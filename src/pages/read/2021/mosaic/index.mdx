@@ -5,7 +5,7 @@ slug: mosaic
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Mosaic
 
@@ -14,7 +14,7 @@ import { Image } from '@astrojs/image/components';
 - [github](https://github.com/ec965/mosaic)
 - [demo](https://mosaiorama.herokuapp.com/)
 
-<Image alt="Image Editor" src={import("./editor.png")} width={400} format="webp"/>
+<MdImage alt="Image Editor" src={import("./editor.png")} />
 
 Mosaic is a user based full stack web app made using MongoDB, Express.js,
 Node.js and React.js. On Mosaic, you can create mosaic style images from a base
@@ -39,20 +39,20 @@ JWT on the client side. Also I don't want to get sued by the EU.
 
 **content feed**
 
-<Image alt="Content Feed" src={import("./feed.png")} width={400} format="webp"/>
+<MdImage alt="Content Feed" src={import("./feed.png")} />
 
 **login**
 
-<Image alt="Login" src={import("./login.png")} width={400} format="webp"/>
+<MdImage alt="Login" src={import("./login.png")} />
 
 **post**
 
-<Image alt="Post" src={import("./post.png")} width={400} format="webp"/>
+<MdImage alt="Post" src={import("./post.png")} />
 
 **profile**
 
-<Image alt="Profile" src={import("./profile.png")} width={400} format="webp"/>
+<MdImage alt="Profile" src={import("./profile.png")} />
 
 **randomizer**
 
-<Image alt="Randomizer" src={import("./random.png")} width={400} format="webp"/>
+<MdImage alt="Randomizer" src={import("./random.png")} />

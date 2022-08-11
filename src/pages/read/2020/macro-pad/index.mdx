@@ -5,7 +5,7 @@ date: November 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from "@astrojs/image/components";
+import MdImage from "../../../../components/MdImage.astro";
 
 # Macro Pad
 
@@ -13,12 +13,7 @@ import { Image } from "@astrojs/image/components";
 
 - [github](https://github.com/ec965/dropout-numpad)
 
-<Image
-  width="400"
-  format="webp"
-  src={import("./complete.jpg")}
-  alt="macropad"
-/>
+<MdImage src={import("./complete.jpg")} alt="macropad" />
 
 I can't quite remember how I got into mechanical keyboards... but they sure are
 pretty. I have to find ways to use my Electrical Engineering degree somehow, so
@@ -32,31 +27,16 @@ solder. The ProMicro is also compatible with
 
 ### Rev 0.5
 
-<Image width="400" format="webp" src={import("./rev0.5.jpg")} alt="Rev 0.5" />
+<MdImage src={import("./rev0.5.jpg")} alt="Rev 0.5" />
 
 ### Rev 0.1
 
-<Image
-  width="400"
-  format="webp"
-  src={import("./pretty.jpg")}
-  alt="Rev 0.1 PCB w/ components"
-/>
+<MdImage src={import("./pretty.jpg")} alt="Rev 0.1 PCB w/ components" />
 
-<Image
-  width="400"
-  format="webp"
-  src={import("./populated.jpg")}
-  alt="Rev 0.1 Populated PCB"
-/>
+<MdImage src={import("./populated.jpg")} alt="Rev 0.1 Populated PCB" />
 
-<Image width="400" format="webp" src={import("./top.jpg")} alt="Rev 0.1 PCB" />
+<MdImage src={import("./top.jpg")} alt="Rev 0.1 PCB" />
 
 ### Rev 0.0
 
-<Image
-  width="400"
-  format="webp"
-  src={import("./pcbSchematic.png")}
-  alt="Rev 0 CAD design"
-/>
+<MdImage src={import("./pcbSchematic.png")} alt="Rev 0 CAD design" />

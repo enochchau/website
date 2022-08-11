@@ -5,7 +5,7 @@ slug: micromouse
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # MicroMouse,
 
@@ -17,6 +17,6 @@ MicroMouse is a world wide competition in the promotion of autonomous vehicles.
 Using IR transceivers to detect distance from walls, the mouse can navigate
 through a maze using it's microcontroller "brain".
 
-<Image src={import("./pretty.jpg")} alt="micromouse" width={400} format="webp" />
+<MdImage src={import("./pretty.jpg")} alt="micromouse" />
 
-<Image src={import("./top.png")} alt="top" width={400} format="webp" />
+<MdImage src={import("./top.png")} alt="top" />

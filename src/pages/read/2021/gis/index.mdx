@@ -5,7 +5,7 @@ slug: gis
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # GIS is Split
 
@@ -28,12 +28,12 @@ You may recognize the PCB art.
 
 **GIS is built!**
 
-<Image alt="gis built" src={import("./built.jpg")} width={400} format="webp"/>
+<MdImage alt="gis built" src={import("./built.jpg")} />
 
 **Back of GIS**
 
-<Image alt="gis back" src={import("./back.jpg")} width={400} format="webp"/>
+<MdImage alt="gis back" src={import("./back.jpg")} />
 
 **Front of GIS**
 
-<Image alt="gis front" src={import("./front.jpg")} width={400} format="webp"/>
+<MdImage alt="gis front" src={import("./front.jpg")} />

@@ -5,7 +5,7 @@ date: August 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Boulder Field
 
@@ -17,6 +17,6 @@ import { Image } from '@astrojs/image/components';
 Find some bouldering projects near you. (Requires a Mountain Project account.)
 This idea came about as an exercise to learn React.
 
-<Image alt="Bouldering Suggestions" src={import("./data.png")} format="webp" width="400" />
+<MdImage alt="Bouldering Suggestions" src={import("./data.png")} />
 
-<Image alt="Form" src={import("./form.png")} format="webp" width="400" />
+<MdImage alt="Form" src={import("./form.png")} /> 

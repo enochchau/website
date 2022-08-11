@@ -1,11 +1,13 @@
 ---
 interface Props {
-  page: string;
+  pageTitle: string;
 }
 
-const { page } = Astro.props as Props;
+const { pageTitle } = Astro.props as Props;
 
-const navItems = ["read", "create", "recipes", "about"];
+const navItems = ["read", "create", "about"];
+// TODO: "recipes",
+console.log(pageTitle);
 ---
 
 <nav>
@@ -14,7 +16,14 @@ const navItems = ["read", "create", "recipes", "about"];
     {
       navItems.map((item) => (
         <h3>
-          <a href={"/" + item} class={page === item ? "current-nav" : ""}>
+          <a
+            href={"/" + item}
+            class={
+              new RegExp(`^enoch - ${item}`).test(pageTitle)
+                ? "current-nav"
+                : ""
+            }
+          >
             {item}
           </a>
         </h3>

@@ -5,7 +5,7 @@ date: June 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Projector Buddy
 
@@ -23,6 +23,6 @@ My primary contribution was firmware development. I implemented freeRTOS
 firmware, updated the control algorithm, and created IR Receiver and IR Emitter
 functionality.
 
-<Image alt="topdown view" src={import('./topV2.jpg')} width="400" format="webp"/>
+<MdImage alt="topdown view" src={import('./topV2.jpg')} />
 
-<Image alt="side view" src={import('./side.jpg')} width="400" format="webp"/>
+<MdImage alt="side view" src={import('./side.jpg')} />

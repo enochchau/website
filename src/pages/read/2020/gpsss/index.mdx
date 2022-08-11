@@ -5,7 +5,7 @@ date: March 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # GPS Sound Sensor
 
@@ -25,8 +25,8 @@ teammates Minh Tam Chau, Sam Longo, and Kelwin Li.
 
 **GPSSS**
 
-<Image src={import("./1.jpg")} alt="GPSSS" width="400" format="webp"/>
+<MdImage src={import("./1.jpg")} alt="GPSSS"/>
 
 **sensor internals**
 
-<Image src={import("./2.jpg")} alt="Sensor Internals" width="400" format="webp"/>
+<MdImage src={import("./2.jpg")} alt="Sensor Internals"/>

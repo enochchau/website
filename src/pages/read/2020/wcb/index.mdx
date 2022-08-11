@@ -5,7 +5,7 @@ date: June 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Water Cooler Buddy
 
@@ -24,12 +24,12 @@ population and water cooler wiring.
 
 **main and interface PCB**
 
-<Image alt="Main and Interface PCB" src={import('./pcb.jpg')} width="400" format="webp"/>
+<MdImage alt="Main and Interface PCB" src={import('./pcb.jpg')}/>
 
 **watercooler**
 
-<Image alt="Watercooler" src={import('./outside.jpg')} width="400" format="webp"/>
+<MdImage alt="Watercooler" src={import('./outside.jpg')} />
 
 **demo user interface**
 
-<Image alt="Demo User Interface" src={import('./front.jpg')} width="400" format="webp"/>
+<MdImage alt="Demo User Interface" src={import('./front.jpg')}/>

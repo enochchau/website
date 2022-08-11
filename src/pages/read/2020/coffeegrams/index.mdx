@@ -5,7 +5,7 @@ date: December 2020
 layout: "../../../../layouts/Md.astro"
 ---
 
-import { Image } from '@astrojs/image/components';
+import MdImage from "../../../../components/MdImage.astro";
 
 # Coffee Grams
 
@@ -17,10 +17,10 @@ IoT Coffee Scale PCB design and LAMP stack webapp.
 
 ### rev 2
 
-<Image alt="PCB" src={import("./r2Schem.jpg")} format="webp" width="400" />
+<MdImage alt="PCB" src={import("./r2Schem.jpg")} />
 
-<Image alt="3-D Render of PCB" src={import("./r2Render.jpg")} format="webp" width="400" />
+<MdImage alt="3-D Render of PCB" src={import("./r2Render.jpg")} />
 
 ### raspberry pi prototype
 
-<Image alt="Raspberry Pi Prototype" src={import("./breadboard.jpg")} format="webp" width="400" />
+<MdImage alt="Raspberry Pi Prototype" src={import("./breadboard.jpg")} />

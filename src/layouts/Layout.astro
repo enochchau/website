@@ -6,7 +6,6 @@ export interface Props {
 }
 
 const { title } = Astro.props as Props;
-let page = title.substring("enoch - ".length);
 ---
 
 <!DOCTYPE html>
@@ -21,7 +20,7 @@ let page = title.substring("enoch - ".length);
   </head>
 
   <body>
-    <Nav page={page} />
+    <Nav pageTitle={title} />
     <div class="container">
       <slot />
     </div>
