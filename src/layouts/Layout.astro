@@ -24,6 +24,28 @@ const { title } = Astro.props as Props;
     <div class="container">
       <slot />
     </div>
+
+    <script is:inline>
+      let theme = localStorage.getItem("theme");
+      let root = document.documentElement;
+      let penguin = document.getElementById("penguin");
+      let darkTheme = "dark-theme";
+
+      if (!theme) theme = "light";
+
+      if (theme === "light") {
+        root.classList.remove(darkTheme);
+        if (penguin) {
+          penguin.classList.remove("invert");
+        }
+      } else {
+        root.classList.add(darkTheme);
+        if (penguin) {
+          penguin.classList.add("invert");
+        }
+      }
+    </script>
+
     <style>
       div.container {
         padding-bottom: 2vh;

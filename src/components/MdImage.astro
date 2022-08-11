@@ -7,16 +7,15 @@ interface Props {
   width?: number;
 }
 
-const { src, alt, width = 500 } = Astro.props as Props;
+const { src, alt } = Astro.props as Props;
 ---
 
-<div style={`max-width: ${width}px;`}>
-  <Image src={src} alt={alt} width={600} format="webp" />
+<div>
+  <Image src={src} alt={alt} width={800} format="webp" height={0} />
 </div>
 
 <style lang="scss">
   div {
-    max-width: 500px;
     > img {
       width: 100%;
       height: auto;

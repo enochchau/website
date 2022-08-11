@@ -7,11 +7,13 @@ import penguin from "../assets/penguin.png";
 <Layout title="enoch chau">
   <div class="title">
     <Image
+      id="penguin"
       src={penguin}
       format="webp"
       width={160}
       height={0}
       alt="penguin mascot"
+      onclick="swapTheme()"
     />
     <h1><strong>enoch chau</strong></h1>
     <h2>conversation enthusiast</h2>
@@ -24,6 +26,24 @@ import penguin from "../assets/penguin.png";
     </div>
   </div>
 </Layout>
+
+<script is:inline>
+  function swapTheme() {
+    let root = document.documentElement;
+    let penguin = document.getElementById("penguin");
+    let darkTheme = "dark-theme";
+
+    if (root.classList.contains(darkTheme)) {
+      root.classList.remove(darkTheme);
+      penguin.classList.remove("invert");
+      localStorage.setItem("theme", "light");
+    } else {
+      localStorage.setItem("theme", "dark");
+      root.classList.add(darkTheme);
+      penguin.classList.add("invert");
+    }
+  }
+</script>
 
 <style lang="scss">
   .title {
@@ -45,5 +65,9 @@ import penguin from "../assets/penguin.png";
     display: flex;
     justify-content: space-between;
     width: 10rem;
+  }
+
+  .invert {
+    filter: invert(100%);
   }
 </style>
