@@ -2,13 +2,16 @@
 title: HC2 IoT Sensor
 slug: hc2
 date: November 2019
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # HC2 IoT Sensor
 
 ## August 2019 - Novermber 2019
 
-- [**github**](https://github.com/ec965/HC2_arduino_python)
+- [github](https://github.com/ec965/HC2_arduino_python)
 
 I created fimrware libraries in Python (for Raspberry Pi) and Arduino to
 interface with the industry standard Rotronics HC2 temperature and humidity
@@ -17,4 +20,4 @@ private repository). Connections include WiFi, Email, and LoRa.
 
 **HC2, Moteino (LoRa), & Raspberry Pi**
 
-![HC2, Moteino (LoRa), & Raspberry Pi](/images/hc2.webp)
+<Image alt="HC2, Moteino (LoRa), & Raspberry Pi" src={import("./hc2.jpg")} width={400} format="webp"/>

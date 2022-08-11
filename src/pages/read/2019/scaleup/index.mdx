@@ -2,7 +2,10 @@
 title: Scale Up
 slug: scaleup
 date: October 2019
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # Scale Up
 
@@ -17,4 +20,4 @@ Scale Up can calculate caloric data based on weight of foods. Google Vision was
 used to find food types while the USDA Nutrition API to find caloric
 information. Checkout the DevPost for more infromation.
 
-![Scale Up](/images/scaleUp/labeled.webp)
+<Image alt="Scale Up" src={import("./labeled.jpg")} format="webp" width="500"/>
