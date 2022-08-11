@@ -27,13 +27,13 @@ let byYear = (await Astro.glob("./**/*.md*"))
   }, {});
 
 for (const years in byYear) {
-  byYear[years] = byYear[years].sort((a, b) => a.date.unix() - b.date.unix());
+  byYear[years] = byYear[years].sort((a, b) => b.date.unix() - a.date.unix());
 }
 
 let years = [2022, 2021, 2020, 2019];
 ---
 
-<Layout title="Enoch - Read">
+<Layout title="Enoch - Blog">
   {
     years.map((year) => (
       <>
