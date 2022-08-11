@@ -2,14 +2,17 @@
 title: Projector Buddy
 slug: projector-buddy
 date: June 2020
+layout: "../../../../layouts/Md.astro"
 ---
+
+import { Image } from '@astrojs/image/components';
 
 # Projector Buddy
 
 ## California Plug Load Center: March 2019 - June 2020
 
-- [**calplug**](http://calplug.org/)
-- [**calit2**](https://www.calit2.uci.edu/)
+- [calplug](http://calplug.org/)
+- [calit2](https://www.calit2.uci.edu/)
 
 Projector Buddy is an advanced energy system that controls a projectors
 electricity usage based on human presence in the room. Human activity is
@@ -20,6 +23,6 @@ My primary contribution was firmware development. I implemented freeRTOS
 firmware, updated the control algorithm, and created IR Receiver and IR Emitter
 functionality.
 
-![topdown view](/images/projectorBuddy/topV2.webp)
+<Image alt="topdown view" src={import('./topV2.jpg')} width="400" format="webp"/>
 
-![side view](/images/projectorBuddy/side.webp)
+<Image alt="side view" src={import('./side.jpg')} width="400" format="webp"/>
