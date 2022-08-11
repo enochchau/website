@@ -9,26 +9,57 @@ interface Props {
   };
 }
 
-let { content } = Astro.props;
+let { content } = Astro.props as Props;
 ---
 
 <Layout title={content.title}>
-  <slot />
+  <div class="md-container">
+    <slot />
+  </div>
 </Layout>
 
-<style>
-  :global(img),
-  :global(iframe),
-  :global(ul),
-  :global(p),
-  :global(video),
-  :global(h1),
-  :global(h2),
-  :global(h3),
-  :global(h4),
-  :global(h5),
-  :global(h6),
-  :global(ol) {
-    margin: 0.5rem 0;
+<style is:global lang="scss">
+  .md-container {
+    img,
+    iframe,
+    ul,
+    p,
+    video,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ol {
+      margin: 0.5rem 0;
+    }
+
+    p {
+      line-height: 1.725;
+    }
+
+    /* hide md language id */
+    div.language-id {
+      display: none;
+    }
+
+    code {
+      background-color: var(--background-secondary);
+      border-radius: 0.1rem;
+      padding: 0rem 0.2rem;
+    }
+
+    pre.shiki {
+      padding: 0.9rem;
+      border-radius: var(--border-radius);
+      overflow: auto;
+    }
+
+    div.code-container > code {
+      background-color: unset;
+      border-radius: unset;
+      padding: unset;
+    }
   }
 </style>

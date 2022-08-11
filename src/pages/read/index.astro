@@ -1,22 +1,66 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import dayjs from "dayjs";
 
-let years = [2021, 2020, 2019];
-let posts = (await Astro.glob("./**/*.md*")).sort(
-  (a, b) =>
-    new Date(a.frontmatter.date).getTime() -
-    new Date(b.frontmatter.date).getTime()
-);
+interface Post {
+  url: string;
+  title: string;
+  date: dayjs.Dayjs;
+  noDay: boolean;
+}
+
+let byYear = (await Astro.glob("./**/*.md*"))
+  .map((post) => ({
+    url: post.url,
+    title: post.frontmatter.title,
+    date: dayjs(post.frontmatter.date),
+    noDay: post.frontmatter.date.split(" ").length <= 2,
+  }))
+  .reduce<{ [year: string]: Post[] }>((byYear, post) => {
+    let year = post.date.get("year").toString();
+    if (byYear[year]) {
+      byYear[year].push(post);
+    } else {
+      byYear[year] = [post];
+    }
+    return byYear;
+  }, {});
+
+for (const years in byYear) {
+  byYear[years] = byYear[years].sort((a, b) => a.date.unix() - b.date.unix());
+}
+
+let years = [2022, 2021, 2020, 2019];
 ---
 
 <Layout title="enoch - read">
-  <ol>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
-        </li>
-      ))
-    }
-  </ol>
+  {
+    years.map((year) => (
+      <>
+        <h1>{year}</h1>
+        {byYear[year].map((post) => (
+          <div class="post">
+            <h4 class="title">
+              <a href={post.url}>{post.title}</a>
+            </h4>
+            <p class="date">
+              {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
+            </p>
+          </div>
+        ))}
+      </>
+    ))
+  }
 </Layout>
+
+<style lang="scss">
+  h1 {
+    margin: 1.25rem 0 0.4rem 0;
+  }
+  .post {
+    margin-bottom: 0.5rem;
+    .title {
+      line-height: 1.4;
+    }
+  }
+</style>

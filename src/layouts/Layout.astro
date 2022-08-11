@@ -22,8 +22,15 @@ let page = title.substring("enoch - ".length);
 
   <body>
     <Nav page={page} />
-    <slot />
-    <style lang="scss">
+    <div class="container">
+      <slot />
+    </div>
+    <style>
+      div.container {
+        padding-bottom: 2vh;
+      }
+    </style>
+    <style lang="scss" is:global>
       :root {
         --primary: #282c34;
         --secondary: #6f1cc5;
@@ -68,43 +75,43 @@ let page = title.substring("enoch - ".length);
         line-height: 1.2;
       }
 
-      :global(*) {
+      * {
         box-sizing: border-box;
       }
 
-      :global(h1) {
+      h1 {
         font-size: var(--font-size-xl);
       }
 
-      :global(h2) {
+      h2 {
         font-size: var(--font-size-lg);
       }
 
-      :global(h3) {
+      h3 {
         font-size: var(--font-size-md);
       }
 
-      :global(h4) {
+      h4 {
         font-size: var(--font-size-sm);
       }
 
-      :global(h5) {
+      h5 {
         font-size: var(--font-size-xs);
       }
 
-      :global(p) {
+      p {
         font-size: var(--font-size-xs);
       }
 
-      :global(code) {
+      code {
         font-family: var(--font-mono);
       }
 
-      :global(strong) {
+      strong {
         font-weight: bold;
       }
 
-      :global(a) {
+      a {
         text-decoration-color: var(--background);
         transition: text-decoration var(--hover-time) ease;
         color: var(--secondary);
@@ -115,12 +122,12 @@ let page = title.substring("enoch - ".length);
         }
       }
 
-      :global(ul) {
+      ul {
         list-style-type: disc;
         list-style-position: inside;
       }
 
-      :global(ol) {
+      ol {
         list-style-type: decimal;
         list-style-position: inside;
       }

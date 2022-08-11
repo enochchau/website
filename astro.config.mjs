@@ -5,5 +5,10 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [image(), mdx()]
+  integrations: [image(), mdx()],
+  markdown: {
+    shikiConfig: {
+      theme: "one-dark-pro",
+    },
+  },
 });
