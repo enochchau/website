@@ -13,7 +13,7 @@ interface Props {
 let { content } = Astro.props as Props;
 ---
 
-<Layout title={"Enoch - Read - " + content.title}>
+<Layout title={"Enoch - " + content.title} activeNav="blog">
   <div class="md-container">
     <h1>{content.title}</h1>
     {content.subtitle && <h3>{content.subtitle}</h3>}
