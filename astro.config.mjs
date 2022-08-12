@@ -11,4 +11,5 @@ export default defineConfig({
       theme: "one-dark-pro",
     },
   },
+  site: "https://enochchau.com",
 });

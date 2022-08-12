@@ -29,6 +29,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@astrojs/rss": "^1.0.0",
     "dayjs": "^1.11.4",
     "lodash-es": "^4.17.21"
   }
