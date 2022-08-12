@@ -1,15 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import type { Frontmatter } from "../../types";
 import dayjs from "dayjs";
+import type { MarkdownInstance } from "astro";
 
 interface Post {
-  url: string;
+  url?: string;
   title: string;
   date: dayjs.Dayjs;
   noDay: boolean;
 }
 
-let byYear = (await Astro.glob("./**/*.md*"))
+let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
   .map((post) => ({
     url: post.url,
     title: post.frontmatter.title,
