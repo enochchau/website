@@ -4,6 +4,7 @@ import Layout from "./Layout.astro";
 interface Props {
   content: {
     title: string;
+    subtitle?: string;
     slug: string;
     date: string;
   };
@@ -15,6 +16,7 @@ let { content } = Astro.props as Props;
 <Layout title={"Enoch - Read - " + content.title}>
   <div class="md-container">
     <h1>{content.title}</h1>
+    {content.subtitle && <h3>{content.subtitle}</h3>}
     <h4>{content.date}</h4>
     <slot />
   </div>
