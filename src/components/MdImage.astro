@@ -5,13 +5,14 @@ interface Props {
   src: string;
   alt: string;
   width?: number;
+  height?: number;
 }
 
-const { src, alt } = Astro.props as Props;
+const { src, alt, width = 800, height = 0 } = Astro.props as Props;
 ---
 
 <div>
-  <Image src={src} alt={alt} width={800} format="webp" height={0} />
+  <Image src={src} alt={alt} format="webp" width={width} height={height} />
 </div>
 
 <style lang="scss">

@@ -23,12 +23,12 @@ const { title } = Astro.props as Props;
   </head>
 
   <body>
-    <Nav pageTitle={title} />
     <div class="container">
+      <Nav pageTitle={title} />
       <slot />
     </div>
 
-    <script is:inline>
+    <script>
       let theme = localStorage.getItem("theme");
       let root = document.documentElement;
       let penguin = document.getElementById("penguin");
@@ -49,11 +49,14 @@ const { title } = Astro.props as Props;
       }
     </script>
 
-    <style>
-      div.container {
-        padding-bottom: 2vh;
+    <style lang="scss" is:global>
+      .container {
+        margin: 0px auto 2vh auto;
+        padding: 0 2vw;
+        max-width: 50rem;
       }
     </style>
+
     <style lang="scss" is:global>
       :root {
         --primary: #282c34;
@@ -94,8 +97,6 @@ const { title } = Astro.props as Props;
       }
 
       body {
-        margin: auto;
-        max-width: 50rem;
         line-height: 1.2;
       }
 

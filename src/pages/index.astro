@@ -13,7 +13,6 @@ import penguin from "../assets/penguin.png";
       width={160}
       height={0}
       alt="penguin mascot"
-      onclick="swapTheme()"
     />
     <h1><strong>enoch chau</strong></h1>
     <h2>conversation enthusiast</h2>
@@ -27,21 +26,24 @@ import penguin from "../assets/penguin.png";
   </div>
 </Layout>
 
-<script is:inline>
-  function swapTheme() {
-    let root = document.documentElement;
-    let penguin = document.getElementById("penguin");
-    let darkTheme = "dark-theme";
-
-    if (root.classList.contains(darkTheme)) {
-      root.classList.remove(darkTheme);
-      penguin.classList.remove("invert");
-      localStorage.setItem("theme", "light");
-    } else {
-      localStorage.setItem("theme", "dark");
-      root.classList.add(darkTheme);
-      penguin.classList.add("invert");
-    }
+<script>
+  let penguin = document.getElementById("penguin");
+  let root = document.documentElement;
+  let darkTheme = "dark-theme";
+  if (penguin) {
+    penguin.addEventListener("click", (e) => {
+      if (e.currentTarget instanceof Element) {
+        if (root.classList.contains(darkTheme)) {
+          root.classList.remove(darkTheme);
+          e.currentTarget.classList.remove("invert");
+          localStorage.setItem("theme", "light");
+        } else {
+          localStorage.setItem("theme", "dark");
+          root.classList.add(darkTheme);
+          e.currentTarget.classList.add("invert");
+        }
+      }
+    });
   }
 </script>
 

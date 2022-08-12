@@ -1,0 +1,56 @@
+---
+import { Image } from "@astrojs/image/components";
+
+interface ImageMeta {
+  src: string;
+  width: number;
+  height: number;
+  format: string;
+}
+let pics = (
+  await Astro.glob<{ default: ImageMeta }>("../assets/college-recipes/*.jpg")
+).map((p) => {
+  let alt = p.default.src.split("/").pop();
+  alt = (alt ?? "").split(".jpg")[0];
+  return {
+    ...p.default,
+    alt,
+  };
+});
+---
+
+<div class="grid">
+  {
+    pics.map(({ src, width, height, alt }) => (
+      <div class="frame">
+        <Image
+          src={src}
+          alt={alt}
+          width={600}
+          aspectRatio={width / height}
+          format="webp"
+          height={0}
+        />
+      </div>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  .frame {
+    &:nth-child(odd) {
+      margin-right: 1rem;
+    }
+    margin: 1rem 0;
+    width: 300px;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+</style>
