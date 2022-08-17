@@ -1,0 +1,76 @@
+---
+title: Choosing a Terminal Emulator
+slug: choosing-a-terminal
+date: 16 Aug 2022
+layout: "../../../layouts/Md.astro"
+---
+
+I'll admit it. I've been terminal hopping again.
+
+I use 3 computers: a 16inch Intel MacBook for work, a Windows desktop PC, and a Linux personal laptop running [Pop!_OS](https://pop.system76.com/).
+For the past year or so, I've been using [Alacritty](https://github.com/alacritty/alacritty) on Linux and MacOS and it works great.
+But my Linux laptop is aging and I've begun to do more and more development on WSL with my Windows desktop.
+I've been using [Windows Terminal](https://github.com/microsoft/terminal) but it's slow and there are much better options out there.
+
+On my search for a terminal emulator, I've set 3 requirements:
+
+1. __Fast__: this one speaks for itself
+2. __Cross platform__: I don't want to have to spend time re-configuring different terminals for different operating systems.
+3. __Doesn't need tabs or splits__: I use tmux for that.
+
+And I have a few bonuses:
+1. __Ligatures__: not a necessity but it's nice to have
+2. __Undercurl__: I use [Neovim](https://neovim.io/) as my editor and undercurl looks real nice.
+
+## [Alacritty](https://github.com/alacritty/alacritty)
+
+I've been using Alacritty on Linux and MacOS for the past year and it's great.
+Alacritty claims to be the fastest terminal emulator and in my experience I've found that to be true.
+That being said, they sacrifice certain niceties such as tabs, panes, and ligatures for performance.
+Undercurl is coming sometime soon but isn't in the stable release yet.
+
+All that is fine for my usage but the one thing that bugs me is mouse support for WSL.
+There's been [issues](https://github.com/alacritty/alacritty/issues/1663) with mouse support in WSL for some time now
+with no clear path to it getting fixed.
+
+## [Kitty](https://sw.kovidgoyal.net/kitty/)
+
+Kitty is cool. It was the first terminal to support undercurl.
+Kitty also includes ligatures, tabs, and splits.
+It's GPU accelerated and it feels a fast.
+Unfortunately, it only supports MacOS and Linux and I'm not willing to keep a separate terminal config just for Windows/WSL.
+
+## [Hyper](https://hyper.is/)
+
+I've tried Hyper once. That's about it.
+It's written in TypeScript with Electron which is an immediate 'no' for me.
+Electron apps are notorious for using lots of memory.
+And as a web dev, I know first hand: JavaScript is not fast.
+
+
+## [WezTerm](https://wezfurlong.org/wezterm/)
+
+WezTerm is a terminal emulator written in Rust that's cross platform.
+It supports ligatures, undercurl, splits, and tabs.
+From my usage, it doesn't feel as fast as Kitty or Alacritty but its still pretty fast.
+The best thing is that it works on all my target Operating Systems.
+There's even [built in support](https://wezfurlong.org/wezterm/config/lua/WslDomain.html?highlight=wsl#wsldomain) for WSL.
+That pretty checks all my boxes.
+
+## Other
+
+I also looked into using [st](https://st.suckless.org/) and [urxvt](https://wiki.archlinux.org/title/rxvt-unicode).
+Both are classic minimalist terminals for Linux.
+I've mostly heard of them being used with Arch and tiling window managers.
+I would have given them a shot but unfortunately, my cross platform needs restricts me somewhat in this regard.
+
+## Conclusion
+
+Well, I'm picking WezTerm. On WSL, it feels faster than Windows Terminal which is already a huge plus.
+With WezTerm's config written in Lua, I can pretty easily share my configs between Linux, MacOS, and Windows.
+
+Maybe I'll consider hopping again once Alacritty fixes mouse events in WSL and gets undercurl in stable.
+Who knows, maybe the speed difference between WezTerm and Alacirtty will convince me to have separate setups 
+for WSL and MacOS/Linux.
+
+For now, I'm content. Until next times terminal hopping.
