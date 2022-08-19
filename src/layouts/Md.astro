@@ -13,7 +13,11 @@ interface Props {
 let { content } = Astro.props as Props;
 ---
 
-<Layout title={"Enoch - " + content.title} activeNav="blog">
+<Layout
+  title={"Enoch - " + content.title}
+  activeNav=" blog"
+  description={content.subtitle}
+>
   <div class="md-container">
     <h1>{content.title}</h1>
     {content.subtitle && <h3>{content.subtitle}</h3>}
@@ -24,7 +28,6 @@ let { content } = Astro.props as Props;
 
 <style is:global lang="scss">
   .md-container {
-
     img,
     iframe,
     ul,
@@ -61,7 +64,7 @@ let { content } = Astro.props as Props;
       overflow: auto;
     }
 
-    div.code-container>code {
+    div.code-container > code {
       background-color: unset;
       border-radius: unset;
       padding: unset;
