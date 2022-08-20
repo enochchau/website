@@ -15,7 +15,7 @@ let { content } = Astro.props as Props;
 
 <Layout
   title={"Enoch - " + content.title}
-  activeNav=" blog"
+  activeNav="blog"
   description={content.subtitle}
 >
   <div class="md-container">
@@ -41,6 +41,15 @@ let { content } = Astro.props as Props;
     h6,
     ol {
       margin: 0.5rem 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0.8rem 0;
     }
 
     p {
@@ -74,6 +83,13 @@ let { content } = Astro.props as Props;
     ol {
       list-style-position: outside;
       padding-left: 1rem;
+    }
+
+    hr {
+      border: 1px solid var(--background-secondary);
+      border-bottom: 0;
+      border-left: 0;
+      border-right: 0;
     }
   }
 </style>
