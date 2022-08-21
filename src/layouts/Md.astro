@@ -1,16 +1,13 @@
 ---
 import Layout from "./Layout.astro";
+import type { Frontmatter } from "../types";
 
 interface Props {
-  content: {
-    title: string;
-    subtitle?: string;
-    slug: string;
-    date: string;
-  };
+  content: Frontmatter;
 }
 
-let { content } = Astro.props as Props;
+const { content } = Astro.props as Props;
+
 ---
 
 <Layout

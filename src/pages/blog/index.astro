@@ -9,15 +9,18 @@ interface Post {
   title: string;
   date: dayjs.Dayjs;
   noDay: boolean;
+  minutesRead: string;
 }
-
 let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
-  .map((post) => ({
-    url: post.url,
-    title: post.frontmatter.title,
-    date: dayjs(post.frontmatter.date),
-    noDay: post.frontmatter.date.split(" ").length <= 2,
-  }))
+  .map((post) => {
+    return {
+      url: post.url,
+      title: post.frontmatter.title,
+      date: dayjs(post.frontmatter.date),
+      noDay: post.frontmatter.date.split(" ").length <= 2,
+      minutesRead: post.frontmatter.minutesRead,
+    };
+  })
   .reduce<{ [year: string]: Post[] }>((byYear, post) => {
     let year = post.date.get("year").toString();
     if (byYear[year]) {
@@ -45,9 +48,12 @@ let years = [2022, 2021, 2020, 2019];
             <h4 class="title">
               <a href={post.url}>{post.title}</a>
             </h4>
-            <p class="date">
-              {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
-            </p>
+            <section>
+              <p class="date">
+                {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
+              </p>
+              <p class="readtime">{post.minutesRead}</p>
+            </section>
           </div>
         ))}
       </>
@@ -59,10 +65,19 @@ let years = [2022, 2021, 2020, 2019];
   h1 {
     margin: 1.25rem 0 0.4rem 0;
   }
+
   .post {
     margin-bottom: 0.5rem;
+
+    section {
+    }
+
     .title {
       line-height: 1.4;
     }
+  }
+
+  .readtime {
+    color: var(--grey);
   }
 </style>
