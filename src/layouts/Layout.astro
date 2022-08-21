@@ -76,6 +76,7 @@ const {
       :root {
         --primary: #282c34;
         --secondary: #6f1cc5;
+        --grey: #8f96a1;
         --background: #f0f0f0;
         --background-secondary: #ddd;
         --font-sans-serif: -apple-system, blinkmacsystemfont, avenir next,
@@ -94,7 +95,7 @@ const {
         --font-size-xs: 1rem;
 
         --hover-time: 0.15s;
-        --border-radius: 8px;
+        --border-radius: 0.3rem;
         --shadow-color: rgb(0 0 0 / 40%);
       }
 
@@ -172,6 +173,10 @@ const {
       ol {
         list-style-type: decimal;
         list-style-position: inside;
+      }
+
+      img {
+        border-radius: var(--border-radius);
       }
     </style>
   </body>
