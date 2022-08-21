@@ -1,19 +1,20 @@
 ---
 import Layout from "./Layout.astro";
+import type { Frontmatter } from "../types";
 
 interface Props {
-  content: {
-    title: string;
-    subtitle?: string;
-    slug: string;
-    date: string;
-  };
+  content: Frontmatter;
 }
 
-let { content } = Astro.props as Props;
+const { content } = Astro.props as Props;
+
 ---
 
-<Layout title={"Enoch - " + content.title} activeNav="blog">
+<Layout
+  title={"Enoch - " + content.title}
+  activeNav="blog"
+  description={content.subtitle}
+>
   <div class="md-container">
     <h1>{content.title}</h1>
     {content.subtitle && <h3>{content.subtitle}</h3>}
@@ -39,6 +40,15 @@ let { content } = Astro.props as Props;
       margin: 0.5rem 0;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0.8rem 0;
+    }
+
     p {
       line-height: 1.725;
     }
@@ -50,7 +60,7 @@ let { content } = Astro.props as Props;
 
     code {
       background-color: var(--background-secondary);
-      border-radius: 0.1rem;
+      border-radius: var(--border-radius);
       padding: 0rem 0.2rem;
     }
 
@@ -64,6 +74,19 @@ let { content } = Astro.props as Props;
       background-color: unset;
       border-radius: unset;
       padding: unset;
+    }
+
+    ul,
+    ol {
+      list-style-position: outside;
+      padding-left: 1rem;
+    }
+
+    hr {
+      border: 1px solid var(--background-secondary);
+      border-bottom: 0;
+      border-left: 0;
+      border-right: 0;
     }
   }
 </style>

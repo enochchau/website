@@ -3,4 +3,5 @@ export interface Frontmatter {
   date: string;
   subtitle?: string;
   slug: string;
+  minutesRead: string;
 }
