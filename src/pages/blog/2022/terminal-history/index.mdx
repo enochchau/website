@@ -1,0 +1,212 @@
+---
+title: Terminal History
+subtitle: Learning to Live in the Shell
+slug: terminal-history
+date: 25 Aug 2022
+layout: "../../../../layouts/Md.astro"
+---
+
+import MdImage from "../../../../components/MdImage.astro";
+
+I'm a terminal enthusiast.
+At this point, I've got a pretty nifty [shell setup](https://github.com/ec965/dotfiles).
+My workflow revolves around the command line, [tmux](https://github.com/tmux/tmux), and [Neovim](https://neovim.io/).
+And I love it.
+
+<MdImage src={import("./03_wsl_today.png")} alt="wsl, nvim, tmux" />
+
+But it wasn't always this way.
+My [dotfiles](https://github.com/ec965/dotfiles) have been a work in progress since I was first introduced to the terminal in University.
+
+## Intro to C
+
+I studied electrical engineering at UC Irvine.
+I get the feeling that non technical people think EE and CS are closely related but in practice this is far from the truth.
+Overall, I took just 2 programming courses over my entire four years (not counting Hardware Description Languages like Systems Verilog or VHDL).
+
+Every engineering student at UC Irvine must take an introductory programming course.
+Mine was EECS10: Intro to C.
+On our first day, our professor gave us two choices:
+
+1. [Code Blocks](https://www.codeblocks.org/)
+2. [Vim](https://www.vim.org/) on the [University Servers](http://eecs.uci.edu/)
+
+I looked briefly at Code Blocks but decided against it.
+IDE's are a bit intimidating for newbies.
+Too many bells and whistles.
+I don't need bells and whistles to confuse me when I don't know what's going on in the first place.
+
+So SSH and Vim it is.
+Being on Windows, I used PuTTY.
+
+<MdImage src={import("./01_putty.png")} alt="putty" />
+
+And coded up my first assignment.
+
+<MdImage
+  src={import("./02_first_assignment_in_vim.png")}
+  alt="first assignment in vim"
+/>
+
+It really doesn't get any more simple than a 'hello world'.
+
+Today I logged into the servers for the first time in a long time and this was my vimrc.
+But I'm pretty sure I didn't know what a vimrc was at this point, or at any point during these early years.
+
+<MdImage
+  src={import("./00_uci_server.png")}
+  alt="uci server terminal session"
+/>
+
+I was navigating in Vim using the arrow keys.
+I didn't even know you could open more than one file at a time.
+Looking back, I have no idea how I finished these assignments without a linter and LSP telling me what to do.
+Modern development tools have really spoiled me.
+
+Eventually, I discovered [MobaXTerm](https://mobaxterm.mobatek.net/) and used that in place of PuTTY.
+MobaXTerm has a built in FTP client so I switched from Vim to [Atom](https://atom.io/) and uploaded my assignments using FTP.
+
+Atom and the [Arduino IDE](https://www.arduino.cc/en/software) (god bless that abomination)
+were my preferred text editors for the rest of University, but eventually I came back to Vim.
+
+## Coffee Grams
+
+During the height of the pandemic in 2020, I had moved back home and needed desperately for something to fill my time.
+I decided I wanted to learn web development with the LAMP stack.
+Well, actually, I thought the only language you could use for servers was PHP.
+PHP is a good for learning web development but to be fair, I wouldn't want to write it anymore today.
+
+Having just returned from Spring break in Seattle, I was really getting into coffee.
+I wanted a web app that could track and share my [coffee gram](/blog/2020/coffeegrams/) ratios and tasting notes.
+
+All the LAMP stack web dev guides were for Linux (sorry, GNU/Linux) but I wasn't exactly thrilled to use Desktop Linux at this point in life.
+With a couple of old desktops sitting unused at home, I figured, why not run my own home server.
+So that's exactly what I did.
+I setup an Ubuntu server in the adjacent room and would SSH into it to do web development.
+And with SSH comes Vim.
+
+So I was back to Vim.
+
+What really inspired me to get good at Vim were some
+[older videos](https://youtu.be/gZCXaF-Lmco) by [chris@machine](https://www.youtube.com/c/ChrisAtMachine)
+where he turns Neovim into a more usable editor.
+
+I drilled myself to learn the proper key binds.
+Gone were the days of arrow key navigation.
+Hello hjkl.
+Every day, I'd pick a new key binding from the [cheatsheet](https://vim.rtorr.com/) and try to use it as much as possible.
+After a few weeks, I'd learned most of the important navigation and editing techniques.
+That's not to say I became a master.
+I still learn new things about Vim to this day.
+
+## The College [Dropout](https://github.com/ec965/dropout-numpad) and Software Engineering
+
+After my undergrad, I was slated to go to graduate school at UC Irvine for a
+[Masters in Embedded and Cyper-physical Systems](https://mecps.uci.edu/).
+I did go to graduate school for about a quarter.
+But god damn I hated that shit.
+
+<iframe
+  style="border-radius:12px"
+  src="https://open.spotify.com/embed/album/4Uv86qWpGTxf7fU7lG5X6F?utm_source=generator"
+  width="100%"
+  height="80"
+  frameBorder="0"
+  allowfullscreen=""
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+></iframe>
+
+Yeah, that's me.
+The college dropout.
+
+Closing one door inevitably leads to getting lost in a maze.
+I dunno, this isn't supposed to a good metaphor.
+This was not a happy time in my life.
+
+But one thing I knew: I love to code.
+So let's code some things.
+
+My brother was in the tail end of a coding bootcamp so I had someone who could guide me through some of the basics.
+YouTube filled me in on the rest.
+
+Web development is easy to learn.
+Not that the material is easy, but there's just so many resources online.
+There's like five thousand tutorials on how to setup an Express app.
+If you don't like the sound of this dudes voice, well, there's like 5 other dudes with tutorials just as good.
+
+I finally found out about [WSL](https://docs.microsoft.com/en-us/windows/wsl/about) and that was a game changer.
+No longer would I have to spin up my own home server or use Desktop Linux.
+
+I was still using the terminal but I had switched off Neovim to [VSCode](https://code.visualstudio.com/).
+I did toy around with [CoC](https://github.com/neoclide/coc.nvim) for a bit but ultimately, it was just too challenging.
+It's hard to setup Neovim to the same level of productivity that you get with VSCode for free.
+
+VSCode was my IDE for awhile. Of course, I used the [Vim extension](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) but any _real terminal enthusiast_ will tell you that emulation just isn't the same as the real thing.
+
+## VSCode
+
+Unfortunately, I have to briefly mention VSCode because that was my terminal and IDE for awhile.
+I used VSCode's embedded terminal all through my self taught bootcamp and into my first job as a Software Engineer.
+
+VSCode is a massively innovative piece of open source software.
+Protocols such as [LSP](https://microsoft.github.io/language-server-protocol/) and
+[DAP](https://microsoft.github.io/debug-adapter-protocol/) both originated from VSCode and were later
+turned into open standards that were ported to other editors.
+Additionally, CoC, Neovim's earliest language server implementation, was essentially a bridge between VSCode extensions and Vim.
+While I don't use VSCode anymore, I still appreciate what it's done for Editors and the JavaScript community.
+
+Who would have thought Microsoft would ever embrace open source as it has today.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/Vhh_GeBPOhs"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## JavaScript is Slow
+
+When I started at [Gatsby](https://gatsby.events), I was given a 13inch i5 MacBook.
+Well, I wasn't really given it.
+More like MZ had left it with Nate when he moved and
+I just happened to be able to pick it up that day instead of waiting a week for a different machine.
+That mother fucker MZ took the charger with him too.
+And of course they were sold out at the Apple store.
+
+I had to wait a full 3 days without a charger for Amazon to send me one.
+I used a fucking 12W phone charger for 3 days.
+Do you know how fucking slow a 12W charger is??
+
+Okay anyways.
+
+I used this i5 laptop for awhile but eventually, VSCode was just too slow.
+Running 5 Chrome tabs, VSCode, 10 NodeJS services, Mongo, and Redis locally was just too much for this little machine.
+By the way, that's like 16+ instances of [V8](https://v8.dev/) munching on my RAM.
+
+So I bit the bullet.
+I doubled down on iTerm2, Neovim, and CoC and it had never felt better to type
+on my NK Silk Black switches lubed with Krytox 205g0 (if you know, you know).
+I used this setup for awhile until Neovim 0.5 dropped and the hype shifted to the native LSP client.
+
+## The Present
+
+I am a hype beast.
+Where the hype goes I follow.
+When the hype is to use Lua plugins for Neovim, I use Lua plugins.
+When the hype is to use the native LSP client for Neovim, I use the native LSP client.
+
+Is your terminal slow?
+Well hop on the hype train to [Alacritty](https://alacritty.org/) town where we got the fastest terminals on this side of the Mississippi.
+
+Oh fuck, Alacritty doesn't have tabs or splits.
+Yeah... that's basically how I ended up using tmux.
+
+That brings us to today.
+I got a [smanging](https://www.youtube.com/watch?v=xt5ghXdq6Z0) setup that's fast, keyboard centric, and a joy to use.
+
+Sometimes I forget about the joy of programming but everyday I
+I get to tinker with my [dotfiles](https://github.com/ec965/dotfiles) is another day I remember why I love computers so much.
+Stay alive in the TTY.
