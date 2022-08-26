@@ -1,0 +1,24 @@
+---
+// props are any iframe html attributes
+const props = Astro.props;
+---
+
+<div>
+  <iframe {...props}></iframe>
+</div>
+
+<style lang="scss">
+  div {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+
+    > iframe {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+</style>
