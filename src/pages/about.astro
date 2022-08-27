@@ -24,11 +24,32 @@ import me from "../assets/me.jpg";
           >boulders
         </a>.
       </p>
+      <button id="see-contact">See contact</button>
+      <p id="email"></p>
     </article>
   </div>
 </Layout>
 
+<script>
+  let showContact = document.getElementById("see-contact") as HTMLButtonElement;
+  let emailP = document.getElementById("email") as HTMLParagraphElement;
+  showContact.onclick = () => {
+    if (!emailP.innerText) {
+      showContact.innerText = "Hide contact";
+      emailP.innerHTML =
+        '<a href="mailto: enoch965@gmail.com">enoch965@gmail.com</a>';
+    } else {
+      showContact.innerText = "Show contact";
+      emailP.innerHTML = "";
+    }
+  };
+</script>
+
 <style lang="scss">
+  button {
+    margin-top: 1rem;
+  }
+
   .about {
     display: flex;
     flex-wrap: wrap-reverse;
