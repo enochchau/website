@@ -20,7 +20,7 @@ let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
       date: dayjs(post.frontmatter.date),
       noDay: post.frontmatter.date.split(" ").length <= 2,
       minutesRead: post.frontmatter.minutesRead,
-      tags: post.frontmatter.tags ?? [],
+      tags: post.frontmatter.tags?.sort() ?? [],
     };
   })
   .reduce<{ [year: string]: Post[] }>((byYear, post) => {
@@ -96,8 +96,8 @@ let years = [2022, 2021, 2020, 2019];
 
   .tag {
     border-radius: var(--border-radius);
-    padding: 0rem 0.2rem;
+    padding: 0.1rem 0.3rem;
     background: var(--grey);
-    color: var(--primary);
+    color: var(--background);
   }
 </style>
