@@ -39,34 +39,34 @@ for (const years in byYear) {
 
 let years = [2022, 2021, 2020, 2019];
 ---
+
 <Layout title="Enoch - Blog" activeNav="blog">
   {
-  years.map((year) => (
-  <>
-    <h1>{year}</h1>
-    {byYear[year].map((post) => (
-    <div class="post">
-      <h4 class="title">
-        <a href={post.url}>{post.title}</a>
-      </h4>
-      <section>
-        <p class="date">
-          {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
-          <span class="readtime">{post.minutesRead}</span>
-        </p>
-        <p class="tags-container">
-          {post.tags?.map((tag) => (
-          <>
-            <span class="tag">{tag}</span>{" "}
-          </>
-          ))}
-        </p>
-          
-      </section>
-    </div>
-    ))}
-  </>
-  ))
+    years.map((year) => (
+      <>
+        <h1>{year}</h1>
+        {byYear[year].map((post) => (
+          <div class="post">
+            <h4 class="title">
+              <a href={post.url}>{post.title}</a>
+            </h4>
+            <section>
+              <p class="date">
+                {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
+              </p>
+              <p class="readtime">{post.minutesRead}</p>
+              <p class="tags-container">
+                {post.tags?.map((tag) => (
+                  <>
+                    <span class="tag">{tag}</span>{" "}
+                  </>
+                ))}
+              </p>
+            </section>
+          </div>
+        ))}
+      </>
+    ))
   }
 </Layout>
 
@@ -78,7 +78,8 @@ let years = [2022, 2021, 2020, 2019];
   .post {
     margin-bottom: 0.5rem;
 
-    section {}
+    section {
+    }
 
     .title {
       line-height: 1.4;
