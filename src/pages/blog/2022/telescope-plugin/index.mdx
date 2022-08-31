@@ -1,6 +1,6 @@
 ---
 title: Making a Telescope.nvim Extension
-slug: making-telescope-plugin
+slug: telescope-plugin
 date: 30 August 2022
 layout: "../../../../layouts/Md.astro"
 tags: ["dev"]
@@ -57,7 +57,7 @@ Setting up these ground rules helped me avoid getting blocked too early.
 
 Before I can get into creating a plugin, I need to figure out a way to extract a list of workspace packages.
 Yarn Berry comes with the handy [`yarn workspaces list`](https://yarnpkg.com/cli/workspaces/list#gatsby-focus-wrapper)
-command which gives pretty good output.
+command which gives an easily parsable output.
 
 ```sh
 ~/code/yarn-v2-workspace ❯ yarn workspaces list
@@ -264,9 +264,9 @@ pickers.new(opts, {
   -- mapping to change our cwd
   attach_mappings = function(prompt_bufnr, _)
     actions.select_default:replace(function()
-    actions.close(prompt_bufnr)
-    local selection = action_state.get_selected_entry()
-    vim.api.nvim_set_current_dir(selection.value)
+      actions.close(prompt_bufnr)
+      local selection = action_state.get_selected_entry()
+      vim.api.nvim_set_current_dir(selection.value)
     end)
   return true
   end,
