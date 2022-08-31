@@ -1,5 +1,6 @@
 # build output
 Session.vim
+Session.vim*
 dist/
 .output/
 

@@ -4,4 +4,5 @@ export interface Frontmatter {
   subtitle?: string;
   slug: string;
   minutesRead: string;
+  tags?: string[];
 }
