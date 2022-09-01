@@ -42,7 +42,7 @@ Must have been a shipping mistake on their end.
 
 The scroll wheel is smooth and not stepped.
 I liked stepped wheels.
-I'll probably end up using the 
+I'll probably end up using the
 [firmware option](https://github.com/qmk/qmk_firmware/tree/master/keyboards/ploopyco/trackball#drag-scroll)
 to use the trackball for scrolling.
 
@@ -65,15 +65,15 @@ All done!
 
 <MdImage src={import("./08_complete.jpg")} alt="complete" />
 
-I also setup my own [mouse keymap](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/keymap.c) 
+I also setup my own [mouse keymap](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/keymap.c)
 [config](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/config.h) through QMK.
 The default options make configuration really easy.
 
 One problem I did run into was that I couldn't get `LT` to work with `KC_BTN5`.
-The 
+The
 [demo keymap](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/drag_scroll/keymap.c)
 for drag scroll shows the 5th mouse button used as `LT(1, KC_BTN5)` but in practice this doesn't work.
-The QMK docs mention a [caveat](https://docs.qmk.fm/#/feature_layers?id=caveats) 
+The QMK docs mention a [caveat](https://docs.qmk.fm/#/feature_layers?id=caveats)
 around `LT` where you can only use keycodes in the [basic keycode set](https://docs.qmk.fm/#/keycodes_basic),
 which `KC_BTN5` is not a part of.
 This was a bit of a bummer since I really would have liked all 4 mouse buttons to always be tap functional
@@ -89,7 +89,7 @@ My hand precision and dexterity are shaky at best and it only gets worse after c
 Being a surgeon was ruled out real early in my life.
 
 I'll see if I stick with using this mouse as a daily driver.
-The location of the mouse buttons is very different from a traditional mouse so it will definitely take some time to get used to. 
+The location of the mouse buttons is very different from a traditional mouse so it will definitely take some time to get used to.
 I also keep accidentally touching the mouse wheel.
 
 I wonder if I'll be any good at FPS or League with this thing.
