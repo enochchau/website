@@ -9,9 +9,7 @@ export default function ContactButton() {
     <Show
       when={show()}
       fallback={
-        <button onclick={() => setShow((show) => !show)}>
-          Show Contact
-        </button>
+        <button onclick={() => setShow((show) => !show)}>Show Contact</button>
       }
     >
       <p>

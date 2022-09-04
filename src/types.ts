@@ -16,5 +16,5 @@ export interface BlogPost {
 }
 
 export interface ByYear {
-  [year: string]: BlogPost[]
+  [year: string]: BlogPost[];
 }
