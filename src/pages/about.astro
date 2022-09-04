@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ContactButton from '../components/ContactButton';
 import { Image } from "@astrojs/image/components";
 import me from "../assets/me.jpg";
 ---
@@ -35,29 +36,15 @@ import me from "../assets/me.jpg";
           <a href="https://github.com/ec965">github</a>
         </li>
       </ul>
-      <button id="see-contact">See contact</button>
-      <p id="email"></p>
+      <div class="contact-container">
+        <ContactButton client:idle/>
+      </div>
     </article>
   </div>
 </Layout>
 
-<script>
-  let showContact = document.getElementById("see-contact") as HTMLButtonElement;
-  let emailP = document.getElementById("email") as HTMLParagraphElement;
-  showContact.onclick = () => {
-    if (!emailP.innerText) {
-      showContact.innerText = "Hide contact";
-      emailP.innerHTML =
-        '<a href="mailto: enoch965@gmail.com">enoch965@gmail.com</a>';
-    } else {
-      showContact.innerText = "Show contact";
-      emailP.innerHTML = "";
-    }
-  };
-</script>
-
 <style lang="scss">
-  button,
+  div.contact-container,
   ul {
     margin-top: 1rem;
   }
