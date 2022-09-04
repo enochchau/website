@@ -32,7 +32,8 @@ export default function BlogToC(props: BlogToCProps) {
     const filteredByYear = Object.entries(props.byYear).reduce<ByYear>(
       (filtered, [year, posts]) => {
         const filteredPosts = posts.filter((post) => {
-          return filters().every((filter) => post.tags.includes(filter));
+          const tagSet = new Set(post.tags);
+          return filters().every((filter) => tagSet.has(filter));
         });
 
         if (filteredPosts.length > 0) {
@@ -54,7 +55,9 @@ export default function BlogToC(props: BlogToCProps) {
           </Tag>
           <For each={filters()}>
             {(filter) => (
-              <Tag onClick={() => removeFilter(filter)} selected>{filter} ×</Tag>
+              <Tag onClick={() => removeFilter(filter)} selected>
+                {filter} ×
+              </Tag>
             )}
           </For>
         </div>
@@ -64,34 +67,30 @@ export default function BlogToC(props: BlogToCProps) {
         .map((year) => (
           <>
             <h1>{year}</h1>
-            {filteredByYear()[year].filter((post) => {
-                if (filters().length === 0) return true;
-                return filters().every((filter) => post.tags.includes(filter));
-              })
-              .map((post) => (
-                <div class={styles.post}>
-                  <h4 class={styles.title}>
-                    <a href={post.url}>{post.title}</a>
-                  </h4>
-                  <section>
-                    <p>{post.date}</p>
-                    <p class={styles.readtime}>{post.minutesRead}</p>
-                    <div class={styles["tags-container"]}>
-                      {post.tags?.map((tag) => (
-                        <>
-                          <Tag
-                            title="click to filter posts"
-                            onClick={() => addFilter(tag)}
-                            selected={filters().includes(tag)}
-                          >
-                            {tag}
-                          </Tag>
-                        </>
-                      ))}
-                    </div>
-                  </section>
-                </div>
-              ))}
+            {filteredByYear()[year].map((post) => (
+              <div class={styles.post}>
+                <h4 class={styles.title}>
+                  <a href={post.url}>{post.title}</a>
+                </h4>
+                <section>
+                  <p>{post.date}</p>
+                  <p class={styles.readtime}>{post.minutesRead}</p>
+                  <div class={styles["tags-container"]}>
+                    {post.tags?.map((tag) => (
+                      <>
+                        <Tag
+                          title="click to filter posts"
+                          onClick={() => addFilter(tag)}
+                          selected={filters().includes(tag)}
+                        >
+                          {tag}
+                        </Tag>
+                      </>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            ))}
           </>
         ))}
     </div>
@@ -108,7 +107,7 @@ function Tag(props: TagProps) {
   return (
     <button
       title={props.title}
-      classList={{ [styles.tag]: true, [styles["selected"]]: props.selected}}
+      classList={{ [styles.tag]: true, [styles["selected"]]: props.selected }}
       onclick={props.onClick}
     >
       <p>{props.children}</p>
