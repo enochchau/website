@@ -63,16 +63,15 @@ const { content } = Astro.props as Props;
       padding: 0rem 0.2rem;
     }
 
-    pre.shiki {
+    pre.astro-code {
       padding: 0.9rem;
       border-radius: var(--border-radius);
       overflow: auto;
-    }
-
-    div.code-container > code {
-      background-color: unset;
-      border-radius: unset;
-      padding: unset;
+      > code {
+        background-color: unset;
+        border-radius: unset;
+        padding: unset;
+      }
     }
 
     ul,
