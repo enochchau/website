@@ -8,11 +8,7 @@ const remarkPlugins = [remarkReadingTime];
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    image(),
-    mdx(),
-    solid(),
-  ],
+  integrations: [image(), mdx(), solid()],
   markdown: {
     shikiConfig: {
       theme: "one-dark-pro",
