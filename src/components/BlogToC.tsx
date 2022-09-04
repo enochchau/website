@@ -1,9 +1,10 @@
 /** @jsxImportSource solid-js */
 import "solid-js";
-import styles from "./BlogToC.module.scss";
+
+import { createMemo, createSignal, For, JSX, Show } from "solid-js";
 
 import type { ByYear } from "../types";
-import { createMemo, createSignal, For, JSX, Show } from "solid-js";
+import styles from "./BlogToC.module.scss";
 
 export interface BlogToCProps {
   byYear: ByYear;

@@ -7,7 +7,7 @@ module.exports = {
     "prettier",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "simple-import-sort"],
   root: true,
   overrides: [
     {
@@ -26,4 +26,8 @@ module.exports = {
       env: { node: true },
     },
   ],
+  rules: {
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+  },
 };

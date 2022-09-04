@@ -1,9 +1,10 @@
 ---
+import type { MarkdownInstance } from "astro";
+import dayjs from "dayjs";
+
+import BlogToC from "../../components/BlogToC";
 import Layout from "../../layouts/Layout.astro";
 import type { ByYear, Frontmatter } from "../../types";
-import dayjs from "dayjs";
-import type { MarkdownInstance } from "astro";
-import BlogToC from "../../components/BlogToC";
 
 let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
   .map((post) => {
