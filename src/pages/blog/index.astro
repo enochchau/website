@@ -1,30 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import type { Frontmatter } from "../../types";
+import type { ByYear, Frontmatter } from "../../types";
 import dayjs from "dayjs";
 import type { MarkdownInstance } from "astro";
+import BlogToC from "../../components/BlogToC";
 
-interface Post {
-  url?: string;
-  title: string;
-  date: dayjs.Dayjs;
-  noDay: boolean;
-  minutesRead: string;
-  tags: string[];
-}
 let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
   .map((post) => {
+    let noDay = post.frontmatter.date.split(" ").length <= 2;
+    let dayObj = dayjs(post.frontmatter.date);
+
+    let date = dayObj.format(noDay ? "MMMM" : "MMMM DD");
+    let year = dayObj.get("year");
     return {
       url: post.url,
       title: post.frontmatter.title,
-      date: dayjs(post.frontmatter.date),
-      noDay: post.frontmatter.date.split(" ").length <= 2,
+      date,
+      year,
       minutesRead: post.frontmatter.minutesRead,
       tags: post.frontmatter.tags?.sort() ?? [],
     };
   })
-  .reduce<{ [year: string]: Post[] }>((byYear, post) => {
-    let year = post.date.get("year").toString();
+  .reduce<ByYear>((byYear, post) => {
+    let year = post.year;
     if (byYear[year]) {
       byYear[year].push(post);
     } else {
@@ -34,40 +32,14 @@ let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
   }, {});
 
 for (const years in byYear) {
-  byYear[years] = byYear[years].sort((a, b) => b.date.unix() - a.date.unix());
+  byYear[years] = byYear[years].sort(
+    (a, b) => dayjs(b.date).unix() - dayjs(a.date).unix()
+  );
 }
-
-let years = [2022, 2021, 2020, 2019];
 ---
 
 <Layout title="Enoch - Blog" activeNav="blog">
-  {
-    years.map((year) => (
-      <>
-        <h1>{year}</h1>
-        {byYear[year].map((post) => (
-          <div class="post">
-            <h4 class="title">
-              <a href={post.url}>{post.title}</a>
-            </h4>
-            <section>
-              <p class="date">
-                {post.date.format(post.noDay ? "MMMM" : "MMMM DD")}
-              </p>
-              <p class="readtime">{post.minutesRead}</p>
-              <p class="tags-container">
-                {post.tags?.map((tag) => (
-                  <>
-                    <span class="tag">{tag}</span>{" "}
-                  </>
-                ))}
-              </p>
-            </section>
-          </div>
-        ))}
-      </>
-    ))
-  }
+  <BlogToC client:load byYear={byYear} />
 </Layout>
 
 <style lang="scss">

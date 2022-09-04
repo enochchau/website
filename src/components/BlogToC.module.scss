@@ -1,0 +1,33 @@
+.post {
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  line-height: 1.4;
+}
+.readtime {
+  color: var(--grey);
+}
+
+.tags-container {
+  margin-top: 0.3rem;
+  >:not(:last-child) {
+    margin-right: 0.3rem;
+  }
+}
+
+.tag {
+  border-radius: var(--border-radius);
+  padding: 0.1rem 0.3rem;
+  background: var(--grey);
+  color: var(--background);
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.selected {
+  background: var(--background-secondary);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}

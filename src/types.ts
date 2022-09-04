@@ -6,3 +6,15 @@ export interface Frontmatter {
   minutesRead: string;
   tags?: string[];
 }
+
+export interface BlogPost {
+  url?: string;
+  title: string;
+  date: string;
+  minutesRead: string;
+  tags: string[];
+}
+
+export interface ByYear {
+  [year: string]: BlogPost[]
+}
