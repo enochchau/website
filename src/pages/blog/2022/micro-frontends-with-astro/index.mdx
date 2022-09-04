@@ -40,7 +40,7 @@ Since this is a shared app, we can have shared components such as a Navigation B
 </Layout>
 ```
 
-Our Astro app will have the following `pages/` routing structure:
+Our Astro app will have the following `pages/` [routing structure](https://docs.astro.build/en/core-concepts/routing/#static-routes):
 
 ```
 pages
@@ -51,18 +51,32 @@ pages
 ```
 
 After the initial server side rendering, we can hand client side routing over to the framework.
-Navigating to `/react` with allow us to render out React app's root.
-
+Navigating to `/react` will allow us to render the React app's root.
+Once the root is rendered, react-router will take over client side routing.
+There's only one issue.
 Astro renders all components to static HTML by default,
-the problem is that Astro doesn't really understand how to render react-router to static HTML.
+but Astro doesn't really understand how to render react-router to static HTML.
 
 <MdImage
   src={import("./react-router-ssr-fail.png")}
   alt="React router failed SSR"
 />
 
-To force Astro not to statically render our React component, we must use the
-[`client:only`](https://docs.astro.build/en/reference/directives-reference/#clientonly) directive.
+To fix this issue, we need to get Astro to skip SSR on this component
+by using the [`client:only`](https://docs.astro.build/en/reference/directives-reference/#clientonly) directive.
+
+```astro
+<ReactApp client:only="react" />
+```
+
+One more thing we need to do for proper routing is to tell Astro which routes should be handled
+by react-router.
+Using [dynamic routing](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes), we can
+specify a list of pages that should load our React app.
+Using the [`getStaticPaths()` function](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes),
+we can tell Astro which pages should be controlled by react-router, in this case, we want
+`/react` and `/react/page1` to be controlled client side.
+Now, if we navigate to `/react/page1` or `/react`, Astro will be able to correctly load the React app.
 
 ```astro
 ---
@@ -81,11 +95,6 @@ export function getStaticPaths() {
 </Layout>
 ```
 
-Notice that we have to define all our React apps routes using the [`getStaticPaths()` function](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes).
-This is so that Astro knows where to send our app if we load a sub route of `/react`.
-Now, if we navigate to `/react/page1` or `/react`, Astro will be able to correctly send us to the root of our React App.
-Once our React App is loaded, react-router will correctly render either the `/` or `/page1` routes on the client side.
-
 Within our app, we can use react-router to handle client side routing for our React App.
 
 ```javascript
@@ -103,6 +112,11 @@ export const routes = [
   { path: rootRoute + "/page1", element: <Page1 /> },
 ];
 
+function Routes() {
+  let element = useRoutes(routes);
+  return element;
+}
+
 export default function ReactApp() {
   return (
     <BrowserRouter>
@@ -111,18 +125,13 @@ export default function ReactApp() {
     </BrowserRouter>
   );
 }
-
-function Routes() {
-  let element = useRoutes(routes);
-  return element;
-}
 ```
 
 We've now configured one route in our MPA Astro app to load a React SPA.
 The [demo](https://github.com/ec965/micro-frontends-astro) code goes into more detail on the SolidJS part of the app,
 but it follows the same general outline.
 
-One downside of a MPA in general is that we can't use a client side store like Redux or MobX.
+One downside of a MPA is that we can't use a client side store like Redux or MobX.
 We can use a client side store within just our React app or just our SolidJS app but navigating between frameworks or
 Astro pages will not persist a client side store.
 This is a general issue with micro-frontends that [single-spa](https://single-spa.js.org/)
