@@ -7,7 +7,7 @@ tags: ["dev"]
 ---
 
 I've been developing a new app with [Fly.io](https://fly.io) that uses [Sqlite](https://www.sqlite.org) as it's database.
-Setting up Sqlite is pretty easy as the driver can be embedded in the application and the database itself is just a single file. 
+Setting up Sqlite is pretty easy as the driver can be embedded in the application and the database itself is just a single file.
 
 We could leave our Sqlite database in our Docker container but in order to persist data across deployments,
 we need to setup a volume.
@@ -25,3 +25,17 @@ Next, we need to mount our volume be specifying it in the `fly.toml` configurati
   source="database"
   destination="/mnt/database"
 ```
+
+## Outline
+
+1. how to setup a volume
+2. how I run migrations in my go app - using migrations lib and a seperate mirgation binary
+3. using the fly.io builder - works okay but how do i migrate by stuff?
+4. Build my own docker image that includes the migration binary
+5. expose everything on Env to easily configure
+6. makefile script that can run my migration for me
+
+### What Else?
+
+- idk how I'm going to get my data off this volume - hopefully fly implements something soon that lets me download the
+  contents of a volume
