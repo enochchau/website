@@ -1,0 +1,27 @@
+---
+title: Sqlite Migrations on Fly.io
+slug: sqlite-migrations-flyio
+date: 5 September 2022
+layout: "../../../layouts/Md.astro"
+tags: ["dev"]
+---
+
+I've been developing a new app with [Fly.io](https://fly.io) that uses [Sqlite](https://www.sqlite.org) as it's database.
+Setting up Sqlite is pretty easy as the driver can be embedded in the application and the database itself is just a single file. 
+
+We could leave our Sqlite database in our Docker container but in order to persist data across deployments,
+we need to setup a volume.
+I'm creating a volume called `database` that's 1GB in size.
+I'm using a 1GB volume as that's the largest size in the free tier.
+
+```sh
+fly volumes create database --size 1
+```
+
+Next, we need to mount our volume be specifying it in the `fly.toml` configuration file.
+
+```toml
+[mounts]
+  source="database"
+  destination="/mnt/database"
+```
