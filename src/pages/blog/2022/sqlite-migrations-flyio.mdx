@@ -1,0 +1,140 @@
+---
+title: Sqlite Migrations with Golang on Fly.io
+slug: sqlite-migrations-flyio
+date: 5 September 2022
+layout: "../../../layouts/Md.astro"
+tags: ["dev"]
+---
+
+I've been developing a [simple RSS reader](https://github.com/ec965/rss-server) in Go.
+Usually, for a small personal project like this, I'd use Heroku for a fast simple deployment.
+But with [Heroku's free tier being sunset](https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq),
+I've been looking for a replacement platform.
+I came to choose between two options:
+
+1. [Render](https://render.com/)
+2. [Fly.io](https://fly.io/)
+
+I'm pretty cheap, so for a toy app like this, I only considered free options.
+I don't need much compute but I do need some form of persistent storage.
+Both of these platforms have free PostgreSQL offerings but Fly.io's is much better.
+On the free plan, Render will [delete your data after 90 days](https://render.com/docs/free#free-postgresql-databases).
+On the other hand Fly.io offers [up to 3GB](https://fly.io/docs/about/pricing/) of persistent volume storage.
+Although I used PostgreSQL as a measurement for which provider to choose, I ultimately didn't use PostgreSQL.
+
+Developing locally with Sqlite is a breeze.
+The developer experience of having the entire database being a single file is too easy to pass up.
+After my initial prototype, I considered switching the database to PostgreSQL.
+This wouldn't have been too difficult with Go's (more or less) database agnostic `database/sql` library
+but I decided against it so I could maintain my simple local development workflow.
+
+[Setting up a Sqlite database](https://fly.io/docs/rails/advanced-guides/sqlite3/) on Fly.io is pretty easy.
+First I needed to create a persistent volume.
+Here, I'm creating a volume called "database" with a size of 1GB (the largest size available in the free tier.)
+
+```sh
+fly volumes create database --size 1
+```
+
+Next, I can mount my volume on my app by adding the following to the `fly.toml`.
+
+```toml
+[mounts]
+  source="database"
+  destination="/mnt/database"
+```
+
+Now, I can point my app to use this volume to create it's Sqlite database.
+
+```go
+package main
+
+import "database/sql"
+
+func main() {
+  db, err := sql.Open("sqlite3", "/mnt/database/rss-server.sqlite")
+  // ...
+}
+```
+
+Now our data will persist across deployments.
+
+## Deploy
+
+To deploy my app, I can either build my app with Fly.io's provided
+[build pack](https://fly.io/docs/getting-started/golang/) or write my own [Dockerfile](https://docs.docker.com/engine/reference/builder/).
+Initially, I went with the build pack since that seemed like the simplest and quickest thing to do.
+I got my app built and deployed by running a single CLI command.
+
+```sh
+flyctl launch
+```
+
+But after the deployment, attempting to ping the server returned this error:
+
+```
+no such table: rss_feeds
+```
+
+It seems that I overlooked that my Sqlite database hasn't been migrated yet!
+
+For local development, I've been using [golang-migrate/migrate](https://github.com/golang-migrate/migrate)
+as a library to write a migration binary.
+This works fine locally since I have my SQL files contained within the local repo but it starts to fall
+apart for the build pack.
+With the build pack, I can only deploy the single RSS server binary.
+Luckily, Fly.io allows you to [write your own Dockerfile](https://fly.io/docs/reference/builders/#dockerfile)
+for deployments.
+
+With my own Dockerfile, I now had a couple of choices to perform the migration:
+
+1. Package the Sqlite binary in my Dockerfile to run the migration SQL files.
+2. Package golang-migrate/migrate's CLI application to run the migrations.
+3. Package the migration binary I've been using locally along with my SQL migration files.
+
+I went with the third option as this is what was closet to my local development work flow.
+Adding a second binary along with the migration SQL files was easy to do with a builder image.
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+FROM golang:1.19-alpine as builder
+WORKDIR /opt/rss-server/
+# add gcc for CGO
+RUN apk add build-base
+COPY . .
+# build the main rss-server binary
+RUN go build
+# build the migration binary
+RUN go build -o migrate cmd/migrate/main.go
+
+FROM alpine:latest
+WORKDIR /opt
+# copy over the binaries we built in the last step
+COPY --from=builder /opt/rss-server/rss-server ./
+COPY --from=builder /opt/rss-server/migrate ./
+# don't forget to copy over the SQL migration files.
+COPY --from=builder /opt/rss-server/db/migrations ./db/migrations
+CMD ["./rss-server"]
+```
+
+With all that done, after a deployment, I can perform the migration by SSH-ing into the
+running container and running my migration binary.
+
+```sh
+flyctl ssh console -C "/opt/migrate"
+```
+
+One issue I see with using Sqlite is that I may have some difficulty extracting
+my data down the road.
+There's currently no way for me to get my Sqlite database off of Fly.io.
+I'd imagine, since SSH is possible, that SCP should be possible too but
+there's currently no indication in the docs.
+Fly.io is still pretty new so they might address this later down the line.
+Since this is still just a toy app, I'm not too concerned.
+
+The whole experience of deploying my app was very easy.
+Fly.io's `flyctl` CLI makes it easy to make updates to my app.
+Everything feels pretty close to the simple developer experience
+of [`git push heroku main`](https://devcenter.heroku.com/articles/git#deploy-your-code).
+I especially liked that I could build my own Docker image.
+In the future, I can see myself continuing to use Fly.io to deploy small personal projects.
