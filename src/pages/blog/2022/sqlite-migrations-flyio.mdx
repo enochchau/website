@@ -95,7 +95,7 @@ With my own Dockerfile, I now had a couple of choices to perform the migration:
 I went with the third option as this is what was closet to my local development work flow.
 Adding a second binary along with the migration SQL files was easy to do with a builder image.
 
-```Dockerfile
+```docker
 # syntax=docker/dockerfile:1
 FROM golang:1.19-alpine as builder
 WORKDIR /opt/rss-server/
