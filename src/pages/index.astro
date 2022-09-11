@@ -7,14 +7,16 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Enoch Chau">
   <div class="title">
-    <Image
-      id="penguin"
-      src={penguin}
-      format="webp"
-      width={160}
-      height={0}
-      alt="penguin mascot"
-    />
+    <a aria-label="Toggle dark mode" href="javascript:void 0">
+      <Image
+        id="penguin"
+        src={penguin}
+        format="webp"
+        width={160}
+        height={0}
+        alt="penguin mascot"
+      />
+    </a>
     <h1><strong>enoch chau</strong></h1>
     <h2>conversation enthusiast</h2>
     <h3>(humans and computers)</h3>
