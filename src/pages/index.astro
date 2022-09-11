@@ -28,20 +28,43 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-  let penguin = document.getElementById("penguin");
-  let root = document.documentElement;
-  let darkTheme = "dark-theme";
+  const penguin = document.getElementById("penguin");
+  const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+  darkMedia.addEventListener("change", () => {
+    localStorage.removeItem("theme");
+  });
+
+  function setLightTheme() {
+    const root = document.documentElement;
+    localStorage.setItem("theme", "light");
+    root.classList.add("light-theme");
+    root.classList.remove("dark-theme");
+  }
+
+  function setDarkTheme() {
+    const root = document.documentElement;
+    localStorage.setItem("theme", "dark");
+    root.classList.add("dark-theme");
+    root.classList.remove("light-theme");
+  }
+
   if (penguin) {
-    penguin.addEventListener("click", (e) => {
-      if (e.currentTarget instanceof Element) {
-        if (root.classList.contains(darkTheme)) {
-          root.classList.remove(darkTheme);
-          e.currentTarget.classList.remove("invert");
-          localStorage.setItem("theme", "light");
+    penguin.addEventListener("click", () => {
+      let theme = localStorage.getItem("theme");
+      if (typeof theme === "string") {
+        switch (theme) {
+          case "light":
+            setDarkTheme();
+            break;
+          case "dark":
+            setLightTheme();
+            break;
+        }
+      } else {
+        if (darkMedia.matches) {
+          setLightTheme();
         } else {
-          localStorage.setItem("theme", "dark");
-          root.classList.add(darkTheme);
-          e.currentTarget.classList.add("invert");
+          setDarkTheme();
         }
       }
     });
@@ -68,9 +91,5 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     justify-content: space-between;
     width: 10rem;
-  }
-
-  .invert {
-    filter: invert(100%);
   }
 </style>

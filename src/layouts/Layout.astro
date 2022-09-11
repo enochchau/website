@@ -44,24 +44,29 @@ const {
     </div>
 
     <script>
-      let theme = localStorage.getItem("theme");
       let root = document.documentElement;
-      let penguin = document.getElementById("penguin");
-      let darkTheme = "dark-theme";
-
-      if (!theme) theme = "light";
-
-      if (theme === "light") {
-        root.classList.remove(darkTheme);
-        if (penguin) {
-          penguin.classList.remove("invert");
-        }
-      } else {
-        root.classList.add(darkTheme);
-        if (penguin) {
-          penguin.classList.add("invert");
+      function readTheme() {
+        let theme = localStorage.getItem("theme");
+        switch (theme) {
+          case "light":
+            root.classList.add("light-theme");
+            root.classList.remove("dark-theme");
+            break;
+          case "dark":
+            root.classList.add("dark-theme");
+            root.classList.remove("light-theme");
+            break;
+          case null:
+            root.classList.remove("light-theme");
+            root.classList.remove("dark-theme");
+            break;
         }
       }
+
+      readTheme()
+
+      // listen to theme changes from other tabs
+      window.addEventListener("storage", readTheme);
     </script>
 
     <style lang="scss" is:global>
@@ -73,12 +78,29 @@ const {
     </style>
 
     <style lang="scss" is:global>
-      :root {
+      @mixin dark-theme {
+        --background: #1a1b1d;
+        --background-secondary: #444;
+        --primary: #f0f0f0;
+        --secondary: #a86be7;
+        #penguin {
+          filter: invert(100%);
+        }
+      }
+
+      @mixin light-theme {
         --primary: #282c34;
         --secondary: #6f1cc5;
         --grey: #8f96a1;
         --background: #f0f0f0;
         --background-secondary: #ddd;
+        #penguin {
+          filter: unset;
+        }
+      }
+
+      :root {
+        @include light-theme;
         --font-sans-serif: -apple-system, blinkmacsystemfont, avenir next,
           avenir, segoe ui, helvetica neue, helvetica, cantarell, ubuntu, roboto,
           noto, arial, sans-serif;
@@ -99,11 +121,17 @@ const {
         --shadow-color: rgb(0 0 0 / 40%);
       }
 
+      @media (prefers-color-scheme: dark) {
+        :root {
+          @include dark-theme;
+        }
+      }
+
       .dark-theme {
-        --background: #1a1b1d;
-        --background-secondary: #444;
-        --primary: #f0f0f0;
-        --secondary: #a86be7;
+        @include dark-theme;
+      }
+      .light-theme {
+        @include light-theme;
       }
 
       html {
