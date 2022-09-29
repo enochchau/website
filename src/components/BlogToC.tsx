@@ -1,16 +1,68 @@
 /** @jsxImportSource solid-js */
 import "solid-js";
 
-import { createMemo, createSignal, For, JSX, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  JSX,
+  onMount,
+  Show,
+} from "solid-js";
 
 import type { ByYear } from "../types";
 import styles from "./BlogToC.module.scss";
 
+const FILTER_PARAM = "f";
+
+/**
+ * Get the filter query param in the URL
+ * @returns filter query param
+ */
+function getFilterParam() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const filterParam = searchParams.get(FILTER_PARAM);
+  return filterParam?.split(",") ?? [];
+}
+
+/**
+ * Set the filter query param in the URL
+ * @param value - filter param value
+ */
+function setFilterParam(value: string) {
+  const url = new URL(window.location as unknown as string);
+  if (!value) url.searchParams.delete(FILTER_PARAM);
+  else url.searchParams.set(FILTER_PARAM, value);
+  history.replaceState(null, "", url);
+}
+
 export interface BlogToCProps {
   byYear: ByYear;
+  defaultFilters?: string[];
 }
 export default function BlogToC(props: BlogToCProps) {
-  const [filters, setFilters] = createSignal<string[]>([]);
+  const [filters, setFilters] = createSignal(props.defaultFilters ?? []);
+
+  // skip the first effect running so we don't collide with onMount
+  createEffect((startEffect) => {
+    let currFilteres = filters();
+
+    if (startEffect) {
+      // update the url search params when filters change
+      setFilterParam(currFilteres.join(","));
+    }
+
+    return true;
+  }, false);
+
+  onMount(() => {
+    // check the url search params and update filters on mount
+    // this is the equivalent of `useLayoutEffect`
+    queueMicrotask(() => {
+      setFilters(getFilterParam());
+    });
+  });
 
   const addFilter = (filter: string) => {
     setFilters((filters) => {
