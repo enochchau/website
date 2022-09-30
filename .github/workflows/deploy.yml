@@ -1,9 +1,11 @@
-name: deploy-website
+name: Deploy
+
 on:
   push:
     branches:
       - release
-      - main # remove later
+      - main
+
 jobs:
   deploy-website:
     runs-on: ubuntu-latest
@@ -21,3 +23,8 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run check
       - run: pnpm run build
+      - uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages publish --project-name=website
