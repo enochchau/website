@@ -46,7 +46,7 @@ export default function BlogToC(props: BlogToCProps) {
 
   // skip the first effect running so we don't collide with onMount
   createEffect((startEffect) => {
-    let currFilteres = filters();
+    const currFilteres = filters();
 
     if (startEffect) {
       // update the url search params when filters change
