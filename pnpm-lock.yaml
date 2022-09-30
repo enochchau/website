@@ -1,17 +1,17 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/image': ^0.5.1
-  '@astrojs/mdx': ^0.11.2
-  '@astrojs/rss': ^1.0.1
+  '@astrojs/image': ^0.5.0
+  '@astrojs/mdx': ^0.11.1
+  '@astrojs/rss': ^1.0.0
   '@astrojs/solid-js': ^1.1.0
   '@types/lodash-es': ^4.17.6
-  '@typescript-eslint/eslint-plugin': ^5.38.1
-  '@typescript-eslint/parser': ^5.38.1
-  astro: ^1.3.1
-  astro-eslint-parser: ^0.6.2
+  '@typescript-eslint/eslint-plugin': ^5.36.1
+  '@typescript-eslint/parser': ^5.36.1
+  astro: ^1.1.5
+  astro-eslint-parser: ^0.6.0
   dayjs: ^1.11.5
-  eslint: ^8.24.0
+  eslint: ^8.23.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-astro: ^0.18.0
   eslint-plugin-simple-import-sort: ^8.0.0
@@ -19,10 +19,10 @@ specifiers:
   prettier: ^2.7.1
   prettier-plugin-astro: ^0.5.4
   reading-time: ^1.5.0
-  sass: ^1.55.0
-  solid-js: ^1.5.7
+  sass: ^1.54.8
+  solid-js: ^1.5.4
   solid-styled-components: ^0.28.4
-  typescript: ^4.8.4
+  typescript: ^4.8.2
   typescript-plugin-css-modules: ^3.4.0
 
 dependencies:
