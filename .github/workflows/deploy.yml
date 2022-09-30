@@ -23,7 +23,8 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run check
       - run: pnpm run build
-      - uses: cloudflare/wrangler-action@2.0.0
+      - if: github.ref == 'refs/heads/release'
+        uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
