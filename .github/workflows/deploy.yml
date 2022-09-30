@@ -1,5 +1,5 @@
 name: deploy-website
-on: 
+on:
   push:
     branches:
       - release
@@ -13,11 +13,11 @@ jobs:
         with:
           version: latest
       - uses: actions/setup-node@v3
-        with: 
-          node-version: '16'
-          cache: 'pnpm'
+        with:
+          node-version: "16"
+          cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - run: pnpm run fmt:check
       - run: pnpm run lint
       - run: pnpm run check
       - run: pnpm run build
-

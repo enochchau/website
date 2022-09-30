@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "fmt": "prettier -w --cache --plugin-search-dir=. .",
+    "fmt:check": "prettier -c --cache --plugin-search-dir=. .",
     "lint": "eslint src/ --cache --fix",
     "check": "astro check"
   },
