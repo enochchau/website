@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - release
-      - main
 
 jobs:
   deploy-website:
@@ -23,8 +22,7 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run check
       - run: pnpm run build
-      - if: github.ref == 'refs/heads/release'
-        uses: cloudflare/wrangler-action@2.0.0
+      - uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
