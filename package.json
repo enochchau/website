@@ -11,7 +11,8 @@
     "fmt": "prettier -w --cache --plugin-search-dir=. .",
     "fmt:check": "prettier -c --cache --plugin-search-dir=. .",
     "lint": "eslint src/ --cache --fix",
-    "check": "astro check"
+    "check": "astro check",
+    "tags": "rg '^tags:' --no-filename -N | sed 's/^tags: //' | jq -s 'flatten|unique'"
   },
   "devDependencies": {
     "@astrojs/image": "^0.8.1",
