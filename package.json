@@ -10,7 +10,7 @@
     "astro": "astro",
     "fmt": "prettier -w --cache --plugin-search-dir=. .",
     "fmt:check": "prettier -c --cache --plugin-search-dir=. .",
-    "lint": "eslint src/ --cache --fix",
+    "lint": "eslint src/ --cache --fix --cache-strategy content",
     "check": "astro check",
     "tags": "rg '^tags:' --no-filename -N | sed 's/^tags: //' | jq -s 'flatten|unique'"
   },
