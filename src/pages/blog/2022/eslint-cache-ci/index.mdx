@@ -63,7 +63,7 @@ jobs:
         with:
           path: |
             ~/.cache/eslint/
-          key: \${{ runner.os }}-node-\${{ hashFiles('**/package-lock.json', '**/.eslintrc.js') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/.eslintrc.js') }}
       - name: Install
         run: npm ci
       - name: Lint

@@ -193,7 +193,7 @@ configureServer(server) {
   server.middlewares.use((req, res, next) => {
     if (
       typeof req.url === "string" &&
-      new RegExp(`\${fileName}$`).test(req.url)
+      new RegExp(`${fileName}$`).test(req.url)
     ) {
       if (!items && opts.mode === "meta") {
         const devServerModuleIds = Array.from(
