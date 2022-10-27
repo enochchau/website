@@ -13,9 +13,9 @@ export const get = () =>
         link: post.url,
         title: post.frontmatter.title,
         pubDate: post.frontmatter.date,
+        description: post.frontmatter.preview
       }))
       .sort(
         (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
-      ),
-    stylesheet: "/rss/pretty-feed-v3.xsl",
+      )
   });

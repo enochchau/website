@@ -14,6 +14,8 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-astro: ^0.19.0
   eslint-plugin-simple-import-sort: ^8.0.0
+  hast-util-to-html: ^8.0.3
+  mdast-util-to-hast: ^12.2.4
   mdast-util-to-string: ^3.1.0
   prettier: ^2.7.1
   prettier-plugin-astro: ^0.5.4
@@ -40,6 +42,8 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.24.0
   eslint-plugin-astro: 0.19.0_eslint@8.24.0
   eslint-plugin-simple-import-sort: 8.0.0_eslint@8.24.0
+  hast-util-to-html: 8.0.3
+  mdast-util-to-hast: 12.2.4
   mdast-util-to-string: 3.1.0
   prettier: 2.7.1
   prettier-plugin-astro: 0.5.5
