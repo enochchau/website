@@ -21,12 +21,12 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .eslintcache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml', '**/.eslintrc.cjs') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml', '.eslintrc.cjs') }}
       - name: Cache Prettier
         uses: actions/cache@v3
         with:
           path: node_modules/.cache/prettier
-          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml', '**/.prettierrc.cjs') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml', '.prettierrc.cjs') }}
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: latest
