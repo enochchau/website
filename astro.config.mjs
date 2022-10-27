@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 
-import { rehypePreview } from './rehype-preview.mjs'
+import { rehypePreview } from "./rehype-preview.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
 const remarkPlugins = [remarkReadingTime];
@@ -22,7 +22,7 @@ export default defineConfig({
       theme: "one-dark-pro",
     },
     remarkPlugins,
-    rehypePlugins: [rehypePreview]
+    rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",
 });
