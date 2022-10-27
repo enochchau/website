@@ -5,7 +5,7 @@ interface Props {
 
 const { activeNav } = Astro.props as Props;
 
-const navItems = ["blog", "create", "about"];
+const navItems = ["blog", "create", "about", "rss.xml"];
 // TODO: "recipes",
 ---
 
@@ -16,7 +16,7 @@ const navItems = ["blog", "create", "about"];
       navItems.map((item) => (
         <h3>
           <a href={"/" + item} class={activeNav === item ? "current-nav" : ""}>
-            {item}
+            {item === "rss.xml" ? "rss" : item}
           </a>
         </h3>
       ))
