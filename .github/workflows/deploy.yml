@@ -17,15 +17,13 @@ jobs:
         with:
           path: node_modules/.astro/image
           key: ${{ runner.os }}-astro-images
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: latest
       - name: Setup NodeJS 16
         uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "pnpm"
+      - name: Install pnpm
+        run: npm i -g pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Check formatting
