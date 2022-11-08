@@ -6,19 +6,18 @@ interface Props {
 const { activeNav } = Astro.props as Props;
 
 const navItems = ["blog", "create", "about", "rss.xml"];
-// TODO: "recipes",
 ---
 
 <nav>
-  <h3><a href="/">enoch chau</a></h3>
+  <h2 class="title"><a href="/">enoch chau</a></h2>
   <div class="items" id="nav-items">
     {
       navItems.map((item) => (
-        <h3>
+        <h4>
           <a href={"/" + item} class={activeNav === item ? "current-nav" : ""}>
             {item === "rss.xml" ? "rss" : item}
           </a>
-        </h3>
+        </h4>
       ))
     }
   </div>
@@ -37,7 +36,7 @@ const navItems = ["blog", "create", "about", "rss.xml"];
     justify-content: space-between;
   }
 
-  h3 {
+  h4 {
     font-weight: bold;
 
     > a {
@@ -50,6 +49,29 @@ const navItems = ["blog", "create", "about", "rss.xml"];
 
     > * {
       margin-left: 0.7rem;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    color: var(--primary);
+    text-shadow: 1px 1px var(--text-shadow-color), 2px 2px var(--text-shadow-color),
+      3px 3px var(--text-shadow-color), 4px 4px var(--text-shadow-color),
+      5px 5px var(--text-shadow-color);
+
+    &:hover {
+      color: var(--text-shadow-color);
+      text-shadow: 1px 1px var(--primary), 2px 2px var(--primary),
+        3px 3px var(--primary), 4px 4px var(--primary), 5px 5px var(--primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
     }
   }
 </style>
