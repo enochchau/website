@@ -55,11 +55,13 @@ const navItems = ["blog", "create", "about", "rss.xml"];
   .title {
     font-weight: bold;
     color: var(--primary);
-    text-shadow: 1px 1px var(--text-shadow-color), 2px 2px var(--text-shadow-color),
-      3px 3px var(--text-shadow-color), 4px 4px var(--text-shadow-color),
-      5px 5px var(--text-shadow-color);
+    text-shadow: 1px 1px var(--text-shadow-color),
+      2px 2px var(--text-shadow-color), 3px 3px var(--text-shadow-color),
+      4px 4px var(--text-shadow-color), 5px 5px var(--text-shadow-color);
+    transition: var(--hover-time);
 
     &:hover {
+      transition: var(--hover-time);
       color: var(--text-shadow-color);
       text-shadow: 1px 1px var(--primary), 2px 2px var(--primary),
         3px 3px var(--primary), 4px 4px var(--primary), 5px 5px var(--primary);
