@@ -16,16 +16,6 @@ jobs:
         with:
           path: node_modules/.astro/image
           key: ${{ runner.os }}-astro-images
-      - name: Cache Eslint
-        uses: actions/cache@v3
-        with:
-          path: .eslintcache
-          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml', '.eslintrc.cjs') }}
-      - name: Cache Prettier
-        uses: actions/cache@v3
-        with:
-          path: node_modules/.cache/prettier
-          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml', '.prettierrc.cjs') }}
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: latest
@@ -36,10 +26,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Check formatting
-        run: pnpm run fmt:check
-      - name: Lint
-        run: pnpm run lint
       - name: Check astro
         run: pnpm run check
       - name: Build
