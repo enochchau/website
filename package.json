@@ -12,7 +12,8 @@
     "fmt:check": "prettier -c --cache --plugin-search-dir=. .",
     "lint": "eslint src/ --cache --fix --cache-strategy content",
     "check": "astro check",
-    "tags": "rg '^tags:' --no-filename -N | sed 's/^tags: //' | jq -s 'flatten|unique'"
+    "tags": "node ./scripts/tags.js | sort -n -k2 --reverse",
+    "tags:alpha": "node ./scripts/tags.js | sort" 
   },
   "devDependencies": {
     "@astrojs/image": "^0.11.4",
