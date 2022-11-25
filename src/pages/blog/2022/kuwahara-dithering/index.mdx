@@ -15,7 +15,7 @@ import MdImage from "../../../../components/MdImage.astro";
 I've been interested in dithering ever since I came across
 [an article in Low Tech Magazine](https://solar.lowtechmagazine.com/2018/09/how-to-build-a-lowtech-website.html)
 on how they made their website more energy efficient.
-In order to reduce network payload when serving images, they dither all their images
+In order to reduce network payload size when serving images, they dither all their images
 which reduces file size while preserving some level of image quality.
 
 More recently, I watched a video called ['The Kuwahara Filter'](https://youtu.be/LDhN-JK3U9g?list=LL)
@@ -63,7 +63,7 @@ I got the following images from that original 4Chan thread.
 With the 4Chan dithering recipe, I could combine it with the Kuwahara filter to get some interesting results.
 The 4Chan recipe has instructions for PhotoShop but I have non-existent PhotoShop skills.
 I opted to use [ImageMagick](https://imagemagick.org/) instead.
-ImageMagick is program that can easily do a whole myraid of image transformations
+ImageMagick is a program that can easily do a whole myraid of image transformations
 from the command line.
 
 # Experimentation
@@ -81,7 +81,7 @@ The final ImageMagick script is:
 
 ```bash
 convert $INPUT \
-    \( -resize 50% )\
+    \( -resize 50% )\ \
     \( -kuwahara 1 \) \
     \( -ordered-dither o8x8,3 -colors 8 \) \
     \( -interpolate Nearest -filter Box \) \
@@ -97,7 +97,7 @@ To summarize:
 2. Run the Kuwahara filter
 3. Use ordered dithering with 8 colors
 4. Interpolate pixels using the nearest neighbor algorithm with a Box filter
-5. Upscale back to the original size
+5. Upscale back to the original image size
 
 Here's an example of the filter on the image that I'm currently using as my desktop wallpaper.
 
