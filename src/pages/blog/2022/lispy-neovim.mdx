@@ -51,7 +51,7 @@ that are built-in to Neovim:
 5. `all-in-one` - tries looking everywhere since everything else failed
 
 What Hotpot (and Fennel) do is they add a new loader that can resolve Fennel files.
-For Hotpot, this loader is [injected as the first loader](https://github.com/rktjmp/hotpot.nvim/blob/562e3e0e04c092c43a9cddffae4c9a748afb186f/fnl/hotpot.fnl#L30)
+For Hotpot, this loader is [injected as the first loader](https://github.com/rktjmp/hotpot.nvim/blob/562e3e0e04c092c43a9cddffae4c9a748afb186f/fnl/hotpot.fnl#L17)
 which means that it gives the highest priority to resolving Fennel files over Lua files
 whenever `require` is called.
 
