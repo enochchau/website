@@ -1,5 +1,5 @@
 ---
-title: Lispy Neovim
+title: Researching Lispy Neovim
 slug: lispy-neovim
 date: 25 November 2022
 layout: "../../../layouts/Md.astro"
@@ -8,13 +8,14 @@ tags: ["dev"]
 
 Since around Neovim 0.5, Lua was added as an alternative configuration language
 to Vimscript.
-Vimscript's not bad but I think anyone who has written any will tell you that
+Vimscript isn't bad but I think anyone who has written Vimscript will tell you that
 Lua is an easier language to learn.
-[Fennel](https://fennel-lang.org/) is a Lisp that compiles to Lua.
+[Fennel](https://fennel-lang.org/) is a Lisp that compiles to Lua which
+means you can also use it in Neovim (sort of).
 Every now and then, there's a post that comes up on [hn](https://news.ycombinator.com/)
-about Lisp which was my inspiration for originally learning Fennel.
+about Lisp. These posts were my original inspiration for learning Fennel.
 I've dabbled a bit with Fennel before and I'm back at it again.
-Namely, I want to create my own Fennel adapter plugin for Neovim.
+Specifically, I want to create my own Fennel adapter plugin for Neovim.
 
 There's currently three implementations of Fennel for Neovim that I know of.
 
@@ -24,17 +25,16 @@ There's currently three implementations of Fennel for Neovim that I know of.
 
 All of these plugins basically do the same thing.
 They add Fennel as a first class language to Neovim which includes features such
-as being able to automatically source Fennel files, a built in repl, and
-automatic compilation.
+as writing config files in Fennel, a built in repl, and automatic compilation.
 
 I've been exploring the source code for Hotpot and Tangerine.
 Both plugins use different implementations to achieve more or less the same feature set.
 Mostly, I'm interested in finding strategies for automatic compilation of Fennel
-to Lua as well as Fennel <-> Lua interop.
+to Lua.
 
 # Hotpot
 
-Hotpot comes pretty close to how Fennel recommends implementing support.
+Hotpot comes pretty close to how the Fennel docs recommend implementing Fennel support.
 Fennel provides some [builtin functions](https://fennel-lang.org/api#use-luas-built-in-require-function)
 that allow you to automatically source Fennel files.
 It does this by adding a package loader specifically for Fennel files.
@@ -44,13 +44,13 @@ to look for the file you want.
 There's [5 of them](https://github.com/lewis6991/impatient.nvim/blob/d3dd30ff0b811756e735eb9020609fa315bfbbcc/lua/impatient.lua#L424-L429)
 that are built-in to Neovim:
 
-1. `package.preload` - predefined package location store in a table.
-2. `vim._load_package` - Neovim's run-time path resolution
+1. `package.preload` - predefined package locations stored in a table
+2. `vim._load_package` - Neovim's run-time path
 3. `package.path` - default paths to look through for Lua modules
 4. `package.cpath` - default paths to look through for C modules
 5. `all-in-one` - tries looking everywhere since everything else failed
 
-What Hotpot (and Fennel) do is, they add a new loader that can resolve Fennel files.
+What Hotpot (and Fennel) do is they add a new loader that can resolve Fennel files.
 For Hotpot, this loader is [injected as the first loader](https://github.com/rktjmp/hotpot.nvim/blob/562e3e0e04c092c43a9cddffae4c9a748afb186f/fnl/hotpot.fnl#L30)
 which means that it gives the highest priority to resolving Fennel files over Lua files
 whenever `require` is called.
@@ -77,21 +77,19 @@ recompile Fennel to Lua anytime the source Fennel code has changed.
 
 The main difference between Hotpot and Fennel's default package loader implementation
 is that Fennel doesn't implement this caching functionality.
-Having a cache means that Fennel files aren't recompiled on every startup unless
-absolutely needed which improves overall startup time.
+For Hotpot, having a cache means that Fennel files aren't recompiled on every startup unless
+absolutely necessary, thereby improving overall startup time.
 
 # Tangerine
 
 In comparison, Tangerine has a more simple approach to keeping compiled Lua
 files up to date.
 Tangerine implements a series of [hooks](https://github.com/udayvir-singh/tangerine.nvim/blob/e23caf681bb2f7fc6d409c2228678f2d4b5a8910/fnl/tangerine/vim/hooks.fnl)
-into the Neovim editing life cycle that detect when a Neovim related Fennel file has changed
-and recompiles it.
-The hooks attach to the `VimEnter` and `BufWritePost` events to check when to recompile
-Fennel source files.
-Tangerine will diff the last modified time of the source Fennel file against the
-compiled Lua file to decide whether a file should be recompiled.
-Every related file's timestamp is checked whenever the hook is run.
+into the Neovim editing life cycle.
+The hooks attach to the `VimEnter` and `BufWritePost` events.
+These events will trigger an autocommand that diffs all Fennel source files against
+their compiled Lua counterparts and recompiles the ones that are stale.
+Every Fennel source file's timestamp is checked whenever the hook is run.
 
 On start, Tangerine injects the path that it uses for compiled Lua files
 into the `package.path`.
@@ -103,19 +101,24 @@ This works pretty well since every file is checked whenever you start Neovim.
 
 # Brainstorming
 
-Both of these implementations use interesting tactics to keep Neovim fast
+Both of these implementations use interesting tactics to keep Neovim's startup fast
 and compiled Lua files up to date.
 The thing I don't like about both of them though is that there's always some
 startup time associated with checking the validity of compiled Lua files.
 Currently, I'm opting to use a [Makefile](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/Makefile)
 that I have to manually run after editing Fennel files.
-While I don't get the seamless experience of edit -> restart -> see changes
+While I don't get the seamless experience of:
+
+```
+edit -> restart editor -> see changes
+```
+
 when I edit my Neovim configs, I think it's a small price to pay to save a few
 milliseconds on every startup where I'm not editing my configs.
 
 One fun thing I was able to do was to use Neovim itself as a Fennel compiler.
-I added this line at the top of my `init.lua` that checks if I'm running Neovim in
-Fennel compiler mode.
+I added this line at the [top of my `init.lua`](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/init.lua#L3-L6)
+that checks if I'm running Neovim in Fennel compiler mode.
 
 ```lua
 if vim.env["FENNEL_COMPILE"] then
@@ -124,8 +127,12 @@ if vim.env["FENNEL_COMPILE"] then
 end
 ```
 
-The `bulb` module loads the `fennel.lua` compiler API that I access through a
-user command called `FnlCompile`.
+The `bulb` module loads the `fennel.lua` compiler API.
+I only load `bulb` and `fennel.lua` when Neovim is in Fennel compiler mode
+so that I don't slow down my startup times when I'm using Neovim normally.
+`bulb` provides a user command called `FnlCompile` that compiles Fennel files.
+It's a simple function that just loads a file as a byte stream, compiles it,
+then writes the output.
 
 ```lua
 vim.api.nvim_create_user_command("FnlCompile", function(t)
@@ -151,18 +158,20 @@ FENNEL_COMPILE=true nvim --headless -c 'FnlCompile fnl/enoch/helpers.fnl lua/eno
 There's two main benefits of running the Fennel compiler through Neovim.
 First, it allows my configs to be fully portable.
 I don't have to rely on the host computer having an installed copy of Fennel.
+In addition, the compiler is always run through Neovim's builtin LuaJIT which is
+much faster than the standard Lua 5.1 implementation.
 
 Second, and more importantly, it allows me to use Neovim builtin functions in macros.
 Since Fennel version 1.0, the compiler is sandboxed by default meaning that
-builtin functions such as `io` or `os` can't be used in macros.
-This also includes Neovim builtin functions.
-But I couldn't turn down the sweet sweet power of compile time madness to I just
-turned off compiler sandboxing so I could execute whatever arbitrary code I want
-at compile time.
-This isn't very safe, but I am the only person who will be editing my configs
+builtin functions such as `io`, `os`, or any Neovim provided functions such as `vim.api` can't be used in macros.
+But I couldn't turn down the sweet sweet power of [compile time madness](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/fnl/enoch/quotes.fnl#L1-L23)
+so I just turned off compiler sandboxing.
+This isn't very secure, but I'm the only person who will be editing my configs
 so I'm not too concerned.
 
 I'm not sure where I'll go next with my Fennel adventures.
+I'll probably start on implementing a repl of sorts that's similar to how
+Vimscript and Lua can be executed in Neovim's command line.
 Ideally, I want to package up my Fennel compilation implementation into a Neovim plugin
 so perhaps I will eventually ditch the Makefile.
 It was really interesting learning about Lua's module resolution algorithm
