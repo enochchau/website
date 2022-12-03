@@ -10,25 +10,47 @@
 }
 
 .tags-container {
-  margin-top: 0.3rem;
+  margin: 1rem 0 0.3rem 0;
 
   > :not(:last-child) {
     margin-right: 0.3rem;
   }
 }
 
-.tag {
-  border-radius: var(--border-radius);
-  padding: 0.1rem 0.3rem;
+@mixin default-tag-color {
   background: var(--grey);
   color: var(--background);
-  outline: none;
-  border: none;
-  cursor: pointer;
+  border: 1px solid transparent;
 }
 
-.selected {
+@mixin invert-tag-color {
   background: var(--background-secondary);
   color: var(--primary);
   border: 1px solid var(--primary);
+}
+
+.tag {
+  border-radius: var(--border-radius);
+  padding: 0.1rem 0.3rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--hover-time) ease;
+  @include default-tag-color;
+}
+
+.tag:hover,
+.selected {
+  @include invert-tag-color;
+}
+
+.selected {
+  cursor: unset;
+}
+
+.chosen-filter {
+  cursor: pointer;
+  &:hover {
+    @include default-tag-color;
+  }
 }

@@ -103,12 +103,12 @@ export default function BlogToC(props: BlogToCProps) {
     <div>
       <Show when={filters().length > 0}>
         <div class={styles["tags-container"]}>
-          <Tag onClick={() => setFilters([])} selected>
+          <Tag onClick={() => setFilters([])} selected chosen>
             clear all
           </Tag>
           <For each={filters()}>
             {(filter) => (
-              <Tag onClick={() => removeFilter(filter)} selected>
+              <Tag onClick={() => removeFilter(filter)} selected chosen>
                 {filter} ×
               </Tag>
             )}
@@ -154,13 +154,18 @@ interface TagProps {
   children: JSX.Element;
   onClick?: JSX.EventHandler<HTMLSpanElement, MouseEvent>;
   selected?: boolean;
+  chosen?: boolean; // chosen at the top of the toc
   title?: string;
 }
 function Tag(props: TagProps) {
   return (
     <button
-      title={props.title}
-      classList={{ [styles.tag]: true, [styles["selected"]]: props.selected }}
+      title={!props.selected ? props.title : undefined}
+      classList={{
+        [styles.tag]: true,
+        [styles["selected"]]: props.selected,
+        [styles["chosen-filter"]]: props.chosen,
+      }}
       onclick={props.onClick}
     >
       <p>{props.children}</p>
