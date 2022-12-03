@@ -102,7 +102,7 @@ export default function BlogToC(props: BlogToCProps) {
   return (
     <div>
       <Show when={filters().length > 0}>
-        <div class={styles["tags-container"]}>
+        <div class={styles["chosen-container"]}>
           <Tag onClick={() => setFilters([])} selected chosen>
             clear all
           </Tag>
