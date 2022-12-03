@@ -1,48 +1,22 @@
 ---
-import { Image } from "@astrojs/image/components";
-
+import CreateNav from "../../components/CreateNav.astro";
 import Layout from "../../layouts/Layout.astro";
-import averii from "./averii.webp";
-import face from "./face.webp";
-import pot from "./pot.webp";
 ---
 
 <Layout title="Enoch - Create" activeNav="create">
-  <div class="img-container">
-    <Image src={pot} alt="Pot - 2018" width={800} format="webp" height={0} />
+  <div class="center">
+    <h1><strong>creative endevours</strong></h1>
+    <CreateNav />
   </div>
-  <div class="img-container">
-    <Image src={face} alt="Face - 2018" width={800} format="webp" height={0} />
-  </div>
-  <div class="img-container">
-    <Image
-      src={averii}
-      alt="Averii - 2017"
-      width={800}
-      format="webp"
-      height={0}
-    />
-  </div>
-  <iframe
-    id="tunes"
-    allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/258832097&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-    width="100%"
-    height="450"></iframe>
 </Layout>
 
 <style lang="scss">
-  .img-container {
-    margin: 1rem 0rem;
-    height: 90vh;
+  .center {
+    margin-top: 120px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    > img {
-      border: 1rem solid black;
-      width: auto;
-      height: 100%;
-    }
+    gap: 1rem;
   }
 </style>

@@ -1,0 +1,42 @@
+---
+import { Image } from "@astrojs/image/components";
+
+import Create from '../../../layouts/Create.astro'
+import averii from "./averii.webp";
+import face from "./face.webp";
+import pot from "./pot.webp";
+---
+
+<Create title="Visual" description="Selected visual works from 2016 to 2018">
+  <div class="img-container">
+    <Image src={pot} alt="Pot - 2018" width={800} format="webp" height={0} />
+  </div>
+  <div class="img-container">
+    <Image src={face} alt="Face - 2018" width={800} format="webp" height={0} />
+  </div>
+  <div class="img-container">
+    <Image
+      src={averii}
+      alt="Averii - 2017"
+      width={800}
+      format="webp"
+      height={0}
+    />
+  </div>
+</Create>
+
+<style lang="scss">
+  .img-container {
+    margin: 1rem 0rem;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      border: 1rem solid black;
+      width: auto;
+      height: 100%;
+    }
+  }
+</style>

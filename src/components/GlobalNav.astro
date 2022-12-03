@@ -1,47 +1,34 @@
 ---
+import PageNav from "./PageNav.astro";
+
 interface Props {
   activeNav: string | undefined;
 }
 
 const { activeNav } = Astro.props as Props;
 
-const navItems = ["blog", "create", "about", "rss.xml"];
+const navItems = [
+  {
+    label: "blog",
+    value: "blog",
+  },
+  { label: "create", value: "create" },
+  { label: "about", value: "about" },
+  { label: "rss", value: "rss.xml" },
+];
 ---
 
 <nav>
   <h2 class="title"><a href="/">enoch chau</a></h2>
-  <div class="items" id="nav-items">
-    {
-      navItems.map((item) => (
-        <h4>
-          <a href={"/" + item} class={activeNav === item ? "current-nav" : ""}>
-            {item === "rss.xml" ? "rss" : item}
-          </a>
-        </h4>
-      ))
-    }
-  </div>
+  <PageNav items={navItems} active={activeNav} />
 </nav>
 
 <style lang="scss">
-  .current-nav {
-    text-decoration: underline;
-    text-decoration-color: var(--secondary);
-  }
-
   nav {
     margin: 2vh 0 2vh 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-  }
-
-  h4 {
-    font-weight: bold;
-
-    > a {
-      color: var(--primary);
-    }
   }
 
   .items {

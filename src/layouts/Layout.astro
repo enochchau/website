@@ -1,5 +1,5 @@
 ---
-import Nav from "../components/Nav.astro";
+import GlobalNav from "../components/GlobalNav.astro";
 
 export interface Props {
   title: string;
@@ -40,7 +40,7 @@ const {
 
   <body>
     <div class="container">
-      <Nav activeNav={activeNav} />
+      <GlobalNav activeNav={activeNav} />
       <slot />
     </div>
 

@@ -1,0 +1,42 @@
+---
+interface Props {
+  active?: string;
+  items: {label: string, value: string}[];
+}
+
+const { active, items } = Astro.props as Props;
+---
+
+<nav>
+  {
+    items.map((item) => (
+      <h4>
+        <a
+          href={"/" + item.value}
+          class={active === item.label ? "current-nav" : ""}
+        >
+          {item.label}
+        </a>
+      </h4>
+    ))
+  }
+</nav>
+
+<style lang="scss">
+  .current-nav {
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+  }
+
+  h4 {
+    font-weight: bold;
+    > a {
+      color: var(--primary);
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 0.7rem;
+  }
+</style>
