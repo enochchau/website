@@ -77,11 +77,11 @@ That way, the cache will bust if we make any changes to our Eslint config or upd
 The first run will still take the same amount of time as before since we have not yet built our cache.
 This run took about 11s.
 
-<MdImage alt="initial eslint CI run" src={import("./without-cache.png")} />
+<MdImage alt="initial eslint CI run" src={import("./without-cache.webp")} />
 
 Subsequent runs will be much faster. This run took about 1s.
 
-<MdImage alt="subsequent eslint CI run" src={import("./with-cache.png")} />
+<MdImage alt="subsequent eslint CI run" src={import("./with-cache.webp")} />
 
 You can find all the code used in this demo in [this repository](https://github.com/ec965/eslint-gh-actions-cache).
 

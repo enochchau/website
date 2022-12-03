@@ -8,10 +8,10 @@ interface ImageMeta {
   format: string;
 }
 let pics = (
-  await Astro.glob<{ default: ImageMeta }>("../assets/college-recipes/*.jpg")
+  await Astro.glob<{ default: ImageMeta }>("../assets/college-recipes/*.webp")
 ).map((p) => {
   let alt = p.default.src.split("/").pop();
-  alt = (alt ?? "").split(".jpg")[0];
+  alt = (alt ?? "").split(".webp")[0];
   return {
     ...p.default,
     alt,
