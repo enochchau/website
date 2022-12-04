@@ -1,0 +1,103 @@
+---
+title: Using Neovim as a Fennel Compiler
+slug: using-neovim-as-a-fennel-compiler
+date: 3 December 2022
+layout: "../../../layouts/Md.astro"
+tags: ["dev"]
+---
+
+I've been doing [Advent of Code](https://adventofcode.com/2022) this year in [Fennel](https://fennel-lang.org).
+(I'm updating my answers every day in [a GitHub repo](https://github.com/ec965/adventofcode2022).)
+I use a few different computers day to day and I need to setup each computer with 
+the proper Lua libraries and Fennel compiler.
+For speed, I want to run the Fennel compiler under LuaJIT and I also want to have
+access to the [`inspect.lua`](https://github.com/kikito/inspect.lua) library for debugging.
+I got everything working alright on MacOS but on Linux, Fennel wasn't detecting
+luarocks libraries.
+That's when I realized I don't actually need an extra program to compile and run Fennel.
+I already have everything I need built directly into Neovim.
+
+Running Fennel scripts through Neovim gives me access to all of Neovim's builtin APIs.
+This is a fantastic environment for debugging and development since a lot of 
+helper functions already exist. For example `vim.inspect` implements the same
+functionality as `inspect.lua` and Neovim even provides a short hand for
+printing `vim.inspect`'s results using `vim.pretty_print`.
+
+I already partly setup Neovim as a Fennel compiler in a [previous blog post](/blog/2022/lispy-neovim).
+The implementation I originally came up with worked well for compiling a file to output
+but what if I want to write that output to stdout instead?
+Naively, I initially thought I could just use the `print()` function.
+
+```lua
+command("FnlCompile", function(t)
+    if debug.traceback ~= fennel.traceback then
+        debug.traceback = fennel.traceback
+    end
+
+    local in_path, out_path = unpack(vim.fn.split(t.args, " "))
+    assert(in_path, "missing input path")
+
+    local stream = open_stream(in_path)
+    local out = fnl_compile(stream)
+
+    if out_path ~= nil then
+        local file = assert(io.open(out_path, "w"))
+        file:write(out)
+        file:close()
+    else
+        -- if no file path is provided lets just print the contents
+        print(out) 
+    end
+end, { nargs = 1 })
+```
+
+<div style="margin: 1rem"/>
+
+```bash
+FENNEL_COMPILE=true nvim --headless -c "FnlCompile test.fnl" +q
+```
+
+But then I ran into an issue: `print` doesn't print to stdout when this command is run.
+No matter how I redirected the output, I couldn't get
+the it to print to stdout.
+A quick search, helped me find this [GitHub issue](https://github.com/neovim/neovim/issues/4772#issuecomment-219962823).
+I found that, you have to explicitly write your output to `/dev/stdout`.
+My fix was to create a helper function for printing to stdout.
+
+```lua
+local function print_stdout(message)
+    message = vim.fn.split(message, "\n")
+    vim.fn.writefile(message, "/dev/stdout")
+end
+```
+
+Now I can print the results of compilation directly to stdout.
+
+I also need to setup a way to run individual Fennel scripts in the Neovim environment.
+The Fennel compiler API includes 
+[a function for evaluation of Fennel files](https://fennel-lang.org/api#evaluate-a-file-of-fennel).
+I can expose this function using a simple Neovim command.
+
+```lua
+command("FnlRun", function(t)
+    local in_path = unpack(vim.fn.split(t.args, " "))
+    assert(in_path, "missing input path")
+
+    local out = fennel.dofile(in_path)
+    -- print an extra newline to seperate script output from from the printed return values
+    print("\n") 
+    print_stdout(vim.inspect(out))
+end, { nargs = 1 })
+```
+
+Now I can run a Fennel script using:
+
+```bash
+FENNEL_COMPILE=true nvim --headless -c "FnlRun test.fnl" +q
+```
+
+This provides a very nice DX. 
+My goal for using Fennel in Advent of Code is to practice writing future Neovim plugins.
+I no longer have to setup Fennel, Lua, or luarocks.
+I have my entire compile and run cycle going through Neovim which I already
+have installed on all my systems.
