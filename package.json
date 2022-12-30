@@ -41,6 +41,7 @@
     "typescript-plugin-css-modules": "^4.1.1"
   },
   "dependencies": {
-    "dayjs": "^1.11.7"
+    "dayjs": "^1.11.7",
+    "remark-gfm": "^3.0.1"
   }
 }

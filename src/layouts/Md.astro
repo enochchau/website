@@ -90,5 +90,20 @@ const { content } = Astro.props as Props;
     em {
       font-style: italic;
     }
+
+    th {
+      font-weight: bold;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid;
+      padding: 0.5rem;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
   }
 </style>
