@@ -6,13 +6,21 @@ interface Props {
   alt: string;
   width?: number;
   height?: number;
+  aspectRatio?: number;
 }
 
-const { src, alt, width = 800, height = 0 } = Astro.props as Props;
+const { src, alt, width = 800, height = 0, aspectRatio } = Astro.props as Props;
 ---
 
 <div>
-  <Image src={src} alt={alt} format="webp" width={width} height={height} />
+  <Image
+    src={src}
+    alt={alt}
+    format="webp"
+    width={width}
+    height={height}
+    aspectRatio={aspectRatio}
+  />
 </div>
 
 <style lang="scss">
