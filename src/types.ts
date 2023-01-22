@@ -1,4 +1,5 @@
 export interface Frontmatter {
+  draft?: boolean;
   title: string;
   date: string;
   subtitle?: string;
