@@ -6,7 +6,7 @@ tags: ["dev"]
 
 I've been doing [Advent of Code](https://adventofcode.com/2022) this year in [Fennel](https://fennel-lang.org).
 (I'm updating my answers every day in [a GitHub repo](https://github.com/ec965/adventofcode2022).)
-I use a few different computers day to day and I need to setup each computer with 
+I use a few different computers day to day and I need to setup each computer with
 the proper Lua libraries and Fennel compiler.
 For speed, I want to run the Fennel compiler under LuaJIT and I also want to have
 access to the [`inspect.lua`](https://github.com/kikito/inspect.lua) library for debugging.
@@ -16,7 +16,7 @@ That's when I realized I don't actually need an extra program to compile and run
 I already have everything I need built directly into Neovim.
 
 Running Fennel scripts through Neovim gives me access to all of Neovim's builtin APIs.
-This is a fantastic environment for debugging and development since a lot of 
+This is a fantastic environment for debugging and development since a lot of
 helper functions already exist. For example `vim.inspect` implements the same
 functionality as `inspect.lua` and Neovim even provides a short hand for
 printing `vim.inspect`'s results using `vim.pretty_print`.
@@ -44,12 +44,12 @@ command("FnlCompile", function(t)
         file:close()
     else
         -- if no file path is provided lets just print the contents
-        print(out) 
+        print(out)
     end
 end, { nargs = 1 })
 ```
 
-<div style="margin: 1rem"/>
+<div style="margin: 1rem" />
 
 ```bash
 FENNEL_COMPILE=true nvim --headless -c "FnlCompile test.fnl" +q
@@ -72,7 +72,7 @@ end
 Now I can print the results of compilation directly to stdout.
 
 I also need to setup a way to run individual Fennel scripts in the Neovim environment.
-The Fennel compiler API includes 
+The Fennel compiler API includes
 [a function for evaluation of Fennel files](https://fennel-lang.org/api#evaluate-a-file-of-fennel).
 I can expose this function using a simple Neovim command.
 
@@ -83,7 +83,7 @@ command("FnlRun", function(t)
 
     local out = fennel.dofile(in_path)
     -- print an extra newline to seperate script output from from the printed return values
-    print("\n") 
+    print("\n")
     print_stdout(vim.inspect(out))
 end, { nargs = 1 })
 ```
@@ -94,7 +94,7 @@ Now I can run a Fennel script using:
 FENNEL_COMPILE=true nvim --headless -c "FnlRun test.fnl" +q
 ```
 
-This provides a very nice DX. 
+This provides a very nice DX.
 My goal for using Fennel in Advent of Code is to practice writing future Neovim plugins.
 I no longer have to setup Fennel, Lua, or luarocks.
 I have my entire compile and run cycle going through Neovim which I already

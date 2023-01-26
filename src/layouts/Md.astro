@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 
 interface Props {
-  content: CollectionEntry<'blog'>;
+  content: CollectionEntry<"blog">;
 }
 
 const { content } = Astro.props as Props;
@@ -109,7 +109,7 @@ const { data } = content;
     }
 
     blockquote {
-      margin: 1rem; 
+      margin: 1rem;
       padding-left: 1rem;
       opacity: 0.8;
       border-left: 2px solid var(--secondary);

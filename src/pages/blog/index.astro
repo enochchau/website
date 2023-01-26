@@ -13,28 +13,28 @@ const blogEntries = await getCollection(
 );
 
 const byYear = blogEntries.reduce((byYear, entry) => {
-    let noDay = entry.data.date.split(" ").length <= 2;
-    let dayObj = dayjs(entry.data.date);
+  let noDay = entry.data.date.split(" ").length <= 2;
+  let dayObj = dayjs(entry.data.date);
 
-    let date = dayObj.format(noDay ? "MMMM" : "MMMM DD");
-    let year = dayObj.get("year");
+  let date = dayObj.format(noDay ? "MMMM" : "MMMM DD");
+  let year = dayObj.get("year");
 
-    let metadata = {
-      url: `/${entry.collection}/${entry.slug}`,
-      title: entry.data.title,
-      date,
-      tags: entry.data.tags?.sort() ?? [],
-      readingTime: getReadingTime(entry.body).text
-    };
+  let metadata = {
+    url: `/${entry.collection}/${entry.slug}`,
+    title: entry.data.title,
+    date,
+    tags: entry.data.tags?.sort() ?? [],
+    readingTime: getReadingTime(entry.body).text,
+  };
 
-    if (byYear[year]) {
-      byYear[year].push(metadata);
-    } else {
-      byYear[year] = [metadata];
-    }
+  if (byYear[year]) {
+    byYear[year].push(metadata);
+  } else {
+    byYear[year] = [metadata];
+  }
 
-    return byYear;
-  }, {} as ByYear)
+  return byYear;
+}, {} as ByYear);
 
 for (const years in byYear) {
   byYear[years] = byYear[years].sort(
