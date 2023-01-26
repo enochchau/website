@@ -1,37 +1,40 @@
 ---
-import type { MarkdownInstance } from "astro";
+import { getCollection } from "astro:content";
 import dayjs from "dayjs";
+import getReadingTime from "reading-time";
 
 import BlogToC from "../../components/BlogToC";
 import Layout from "../../layouts/Layout.astro";
-import type { ByYear, Frontmatter } from "../../types";
+import type { ByYear } from "../../types";
 
-let byYear = (await Astro.glob<MarkdownInstance<Frontmatter>>("./**/*.md*"))
-  .filter(post => !post.frontmatter.draft)
-  .map((post) => {
-    let noDay = post.frontmatter.date.split(" ").length <= 2;
-    let dayObj = dayjs(post.frontmatter.date);
+const blogEntries = await getCollection(
+  "blog",
+  ({ data }) => data.draft !== true
+);
+
+const byYear = blogEntries.reduce((byYear, entry) => {
+    let noDay = entry.data.date.split(" ").length <= 2;
+    let dayObj = dayjs(entry.data.date);
 
     let date = dayObj.format(noDay ? "MMMM" : "MMMM DD");
     let year = dayObj.get("year");
-    return {
-      url: post.url,
-      title: post.frontmatter.title,
+
+    let metadata = {
+      url: `/${entry.collection}/${entry.slug}`,
+      title: entry.data.title,
       date,
-      year,
-      minutesRead: post.frontmatter.minutesRead,
-      tags: post.frontmatter.tags?.sort() ?? [],
+      tags: entry.data.tags?.sort() ?? [],
+      readingTime: getReadingTime(entry.body).text
     };
-  })
-  .reduce<ByYear>((byYear, post) => {
-    let year = post.year;
+
     if (byYear[year]) {
-      byYear[year].push(post);
+      byYear[year].push(metadata);
     } else {
-      byYear[year] = [post];
+      byYear[year] = [metadata];
     }
+
     return byYear;
-  }, {});
+  }, {} as ByYear)
 
 for (const years in byYear) {
   byYear[years] = byYear[years].sort(

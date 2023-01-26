@@ -1,0 +1,37 @@
+---
+title: Macro Pad
+date: November 2020
+tags: ["hardware", "keyboard"]
+---
+
+import MdImage from "../../../../components/MdImage.astro";
+
+- [github](https://github.com/ec965/dropout-numpad)
+
+<MdImage src={import("./complete.webp")} alt="macropad" />
+
+I can't quite remember how I got into mechanical keyboards... but they sure are
+pretty. I have to find ways to use my Electrical Engineering degree somehow, so
+I figured it'd be fun to make my own keyboard. I'm currently using a 60%
+keyboard and I was feeling the need for a numpad.
+
+My design uses a [ProMicro](https://www.sparkfun.com/products/12640) as the
+controller because I wanted the whole thing to be relatively easy to hand
+solder. The ProMicro is also compatible with
+[QMK](https://github.com/qmk/qmk_firmware), an open source keyboard firmware.
+
+### Rev 0.5
+
+<MdImage src={import("./rev0.5.webp")} alt="Rev 0.5" />
+
+### Rev 0.1
+
+<MdImage src={import("./pretty.webp")} alt="Rev 0.1 PCB w/ components" />
+
+<MdImage src={import("./populated.webp")} alt="Rev 0.1 Populated PCB" />
+
+<MdImage src={import("./top.webp")} alt="Rev 0.1 PCB" />
+
+### Rev 0.0
+
+<MdImage src={import("./pcbSchematic.webp")} alt="Rev 0 CAD design" />

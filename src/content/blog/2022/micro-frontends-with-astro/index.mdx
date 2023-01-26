@@ -1,0 +1,145 @@
+---
+title: Micro Frontends with Astro
+date: 3 September 2022
+tags: ["dev"]
+---
+
+import MdImage from "../../../../components/MdImage.astro";
+
+- [github](https://github.com/ec965/micro-frontends-astro)
+- [demo](https://ec965.github.io/micro-frontends-astro/)
+
+Not too long ago, I rebuilt this website using Astro.
+[Astro](https://astro.build/) is a new multi-page app (MPA) framework that just hit 1.0 recently.
+The neat part of Astro is that it can
+[render components from different frameworks](https://docs.astro.build/en/core-concepts/framework-components/) within the same app.
+It defaults to rendering everything as static HTML which is then hydrated by isolated "islands" of JavaScript.
+Using this multi-framework capability, we can use Astro to build a [micro-frontend](https://micro-frontends.org/) application.
+
+Say we have a team of engineers that all work on an online storefront.
+There might be a team that builds the shopping part of the site.
+This part of the app shows the catalog of items.
+A catalog can better utilize SSR since there isn't much dynamic rendering needed to display each item.
+The shop team could be using Astro components with React components to build their SSR rendered pages.
+
+Another part of our storefront could be for real time data visualization of what customers are viewing.
+This team might need to build a performance intensive table and graph with frequent updates.
+They could use a framework like [SolidJS](https://www.solidjs.com/) or [Svelte](https://svelte.dev/)
+for faster render times.
+
+For this [demo](https://github.com/ec965/micro-frontends-astro),
+we will be building a part React, part SoildJS mixed micro-frontend.
+Since this is a shared app, we can have shared components such as a Navigation Bar rendered with Astro.
+
+```astro
+<Layout>
+  <NavigationBar />
+  <ReactApp />
+</Layout>
+```
+
+Our Astro app will have the following `pages/` [routing structure](https://docs.astro.build/en/core-concepts/routing/#static-routes):
+
+```
+pages
+| - react
+|     | - [...route].astro
+| - solid
+      | - [...route].astro
+```
+
+After the initial server side rendering, we can hand client side routing over to the framework.
+Navigating to `/react` will allow us to render the React app's root.
+Once the root is rendered, react-router will take over client side routing.
+There's only one issue.
+Astro renders all components to static HTML by default,
+but Astro doesn't really understand how to render react-router to static HTML.
+
+<MdImage
+  src={import("./react-router-ssr-fail.webp")}
+  alt="React router failed SSR"
+/>
+
+To fix this issue, we need to get Astro to skip SSR on this component
+by using the [`client:only`](https://docs.astro.build/en/reference/directives-reference/#clientonly) directive.
+
+```astro
+<ReactApp client:only="react" />
+```
+
+One more thing we need to do for proper routing is to tell Astro which routes should be handled
+by react-router.
+Using [dynamic routing](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes), we can
+specify a list of pages that should load our React app.
+Using the [`getStaticPaths()` function](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes),
+we can tell Astro which pages should be controlled by react-router, in this case, we want
+`/react` and `/react/page1` to be controlled client side.
+Now, if we navigate to `/react/page1` or `/react`, Astro will be able to correctly load the React app.
+
+```astro
+---
+import Layout from "../../layouts/Layout.astro";
+import NavigationBar from "../../components/NavigationBar.astro";
+import React from "../../components/ReactApp";
+export function getStaticPaths() {
+  // we need to define all the possible react routes so astro knows to redirect here
+  return [{ params: { route: undefined } }, { params: { route: "page1" } }];
+}
+---
+
+<Layout title="React">
+  <NaviationBar />
+  <ReactApp client:only="react" />
+</Layout>
+```
+
+Within our app, we can use react-router to handle client side routing for our React App.
+
+```javascript
+/** @jsxImportSource react */
+import React from "react";
+import { useRoutes, BrowserRouter } from "react-router-dom";
+
+let rootRoute = "/react";
+
+export const routes = [
+  {
+    path: rootRoute,
+    element: <Root />,
+  },
+  { path: rootRoute + "/page1", element: <Page1 /> },
+];
+
+function Routes() {
+  let element = useRoutes(routes);
+  return element;
+}
+
+export default function ReactApp() {
+  return (
+    <BrowserRouter>
+      <h1>The rest of this page is rendered by React</h1>
+      <Routes />
+    </BrowserRouter>
+  );
+}
+```
+
+We've now configured one route in our MPA Astro app to load a React SPA.
+The [demo](https://github.com/ec965/micro-frontends-astro) code goes into more detail on the SolidJS part of the app,
+but it follows the same general outline.
+
+One downside of a MPA is that we can't use a client side store like Redux or MobX.
+We can use a client side store within just our React app or just our SolidJS app but navigating between frameworks or
+Astro pages will not persist a client side store.
+This is a general issue with micro-frontends that [single-spa](https://single-spa.js.org/)
+can [explain better](https://single-spa.js.org/docs/recommended-setup/#state-management).
+But this would be a problem anyways with traditional methods of creating mixed frontends.
+
+Traditionally, we could create a structure like this by using a proxy like NGINX to send the client different
+bundles depending on the route.
+Each bundle would have to be contained in a separate repository, built separately, and deployed separately.
+The benefit that Astro provides is that we can keep all our bundles in the same repository.
+We can also build the entire application with a single build command.
+We don't have to setup any special network rules or additional infrastructure.
+All our code is contained in a single MPA and easily handled by any of Astro's [deployment methods](https://docs.astro.build/en/guides/deploy/).

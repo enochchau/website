@@ -127,7 +127,7 @@ export default function BlogToC(props: BlogToCProps) {
                 </h4>
                 <section>
                   <p>{post.date}</p>
-                  <p class={styles.readtime}>{post.minutesRead}</p>
+                  <p class={styles.readtime}>{post.readingTime}</p>
                   <div class={styles["tags-container"]}>
                     {post.tags?.map((tag) => (
                       <>
