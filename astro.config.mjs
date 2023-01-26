@@ -2,12 +2,9 @@ import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
-import remarkGfm from 'remark-gfm'
 
 import { rehypePreview } from "./rehype-preview.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
-
-const remarkPlugins = [remarkReadingTime, remarkGfm];
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,10 +16,12 @@ export default defineConfig({
     solid(),
   ],
   markdown: {
+    gfm: true,
     shikiConfig: {
       theme: "one-dark-pro",
     },
-    remarkPlugins,
+    extendDefaultPlugins: true,
+    remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",

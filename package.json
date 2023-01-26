@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "reading-time": "^1.5.0",
-    "dayjs": "^1.11.7",
-    "remark-gfm": "^3.0.1"
+    "dayjs": "^1.11.7"
   }
 }
