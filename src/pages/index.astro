@@ -32,16 +32,15 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const penguin = document.getElementById("penguin");
   const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+  const root = document.documentElement;
+
   darkMedia.addEventListener("change", () => {
-    const root = document.documentElement;
     localStorage.removeItem("theme");
     root.classList.remove("light-theme");
     root.classList.remove("dark-theme");
   });
 
   function setLightTheme() {
-    const root = document.documentElement;
-    // default is dark
     if (darkMedia.matches) {
       localStorage.setItem("theme", "light");
       root.classList.add("light-theme");
@@ -54,8 +53,6 @@ import Layout from "../layouts/Layout.astro";
   }
 
   function setDarkTheme() {
-    const root = document.documentElement;
-    // default is dark
     if (!darkMedia.matches) {
       localStorage.setItem("theme", "dark");
       root.classList.add("dark-theme");
