@@ -1,22 +1,11 @@
 ---
-import { Image } from "@astrojs/image/components";
-
-import penguin from "../assets/penguin.webp";
+import Mascot from "../components/Mascot.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Enoch Chau">
   <div class="title">
-    <a aria-label="Toggle dark mode" href="javascript:void 0">
-      <Image
-        id="penguin"
-        src={penguin}
-        format="webp"
-        width={160}
-        height={0}
-        alt="penguin mascot"
-      />
-    </a>
+    <Mascot />
     <h1><strong>enoch chau</strong></h1>
     <h2>conversation enthusiast</h2>
     <h3>(humans and computers)</h3>
@@ -28,64 +17,6 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
 </Layout>
-
-<script>
-  const penguin = document.getElementById("penguin");
-  const darkMedia = matchMedia("(prefers-color-scheme: dark)");
-  const root = document.documentElement;
-
-  darkMedia.addEventListener("change", () => {
-    localStorage.removeItem("theme");
-    root.classList.remove("light-theme");
-    root.classList.remove("dark-theme");
-  });
-
-  function setLightTheme() {
-    if (darkMedia.matches) {
-      localStorage.setItem("theme", "light");
-      root.classList.add("light-theme");
-      root.classList.remove("dark-theme");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
-    }
-  }
-
-  function setDarkTheme() {
-    if (!darkMedia.matches) {
-      localStorage.setItem("theme", "dark");
-      root.classList.add("dark-theme");
-      root.classList.remove("light-theme");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
-    }
-  }
-
-  if (penguin) {
-    penguin.addEventListener("click", () => {
-      let theme = localStorage.getItem("theme");
-      if (typeof theme === "string") {
-        switch (theme) {
-          case "light":
-            setDarkTheme();
-            break;
-          case "dark":
-            setLightTheme();
-            break;
-        }
-      } else {
-        if (darkMedia.matches) {
-          setLightTheme();
-        } else {
-          setDarkTheme();
-        }
-      }
-    });
-  }
-</script>
 
 <style lang="scss">
   .title {
@@ -103,12 +34,5 @@ import Layout from "../layouts/Layout.astro";
   .links {
     gap: 1rem;
     display: flex;
-  }
-
-  #penguin:hover {
-    transform: scale(1.1);
-  }
-  #penguin {
-    transition: transform 800ms;
   }
 </style>

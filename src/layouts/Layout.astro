@@ -5,12 +5,14 @@ export interface Props {
   title: string;
   description?: string;
   activeNav?: "blog" | "create" | "about";
+  hideNav?: boolean;
 }
 
 const {
   title,
   activeNav,
   description = "Enoch's Website",
+  hideNav,
 } = Astro.props as Props;
 ---
 
@@ -40,7 +42,7 @@ const {
 
   <body>
     <div class="container">
-      <GlobalNav activeNav={activeNav} />
+      {!hideNav && <GlobalNav activeNav={activeNav} />}
       <slot />
     </div>
 

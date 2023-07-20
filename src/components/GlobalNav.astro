@@ -1,4 +1,5 @@
 ---
+import NavTitle from "./NavTitle.astro";
 import PageNav from "./PageNav.astro";
 
 interface Props {
@@ -19,7 +20,7 @@ const navItems = [
 ---
 
 <nav>
-  <h2 class="title"><a href="/">enoch chau</a></h2>
+  <NavTitle />
   <PageNav items={navItems} active={activeNav} />
 </nav>
 
@@ -34,29 +35,5 @@ const navItems = [
   .items {
     display: flex;
     gap: 0.7rem;
-  }
-
-  .title {
-    font-weight: bold;
-    color: var(--primary);
-    text-shadow: 1px 1px var(--text-shadow-color),
-      2px 2px var(--text-shadow-color), 3px 3px var(--text-shadow-color),
-      4px 4px var(--text-shadow-color), 5px 5px var(--text-shadow-color);
-
-    &:hover {
-      transition: var(--hover-time);
-      color: var(--text-shadow-color);
-      text-shadow: 1px 1px var(--primary), 2px 2px var(--primary),
-        3px 3px var(--primary), 4px 4px var(--primary), 5px 5px var(--primary);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      &:hover {
-        color: inherit;
-        text-decoration: none;
-      }
-    }
   }
 </style>

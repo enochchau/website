@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+
+import ButtonLink from "../components/ButtonLink.astro";
+import Mascot from "../components/Mascot.astro";
+import NavTitle from "../components/NavTitle.astro";
+import Layout from "../layouts/Layout.astro";
+
+let blogEntries = await getCollection(
+  "blog",
+  ({ data }) => data.draft !== true
+);
+
+blogEntries = blogEntries.sort(
+  (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix()
+);
+
+let latest = {
+  url: `/${blogEntries[0].collection}/${blogEntries[0].slug}`,
+  title: blogEntries[0].data.title,
+};
+---
+
+<Layout title="Enoch - Links" hideNav={true}>
+  <div class="container">
+    <NavTitle class="pad" />
+    <ButtonLink class="pad" href={latest.url}>Latest Blog Post</ButtonLink>
+    <ButtonLink class="pad" href="https://www.youtube.com/watch?v=2ReVhP7BZ1A">
+      Latest YouTube Video
+    </ButtonLink>
+    <ButtonLink class="pad" href="/blog">Blog</ButtonLink>
+    <ButtonLink
+      class="pad"
+      href="https://www.youtube.com/channel/UC8WzolokXeJKN2d4dMrjPlA"
+    >
+      YouTube
+    </ButtonLink>
+    <ButtonLink class="pad" href="https://www.instagram.com/uhhuhhuny/">
+      Instagram
+    </ButtonLink>
+    <Mascot />
+  </div>
+</Layout>
+
+<style lang="scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .pad {
+    padding: 8px;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+</style>
