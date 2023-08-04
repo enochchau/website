@@ -77,18 +77,19 @@
     "Desert Tiger Stripe":
       "https://cdn.shopify.com/s/files/1/0581/7001/files/IMG_9895_1_240x240.jpg?v=1637094271",
   };
-  let r = document.getElementById("colors");
+  /* eslint-disable @typescript-eslint/no-non-null-assertion */
+  let r = document.getElementById("colors")!;
+  let dice = document.getElementById("dice")!;
+  let stage = document.getElementById("stage")!;
+  let savedColors = document.getElementById("saved-colors")!;
+  let save = document.getElementById("save")!;
+  /* eslint-enable @typescript-eslint/no-non-null-assertion */
 
   Object.entries(j).forEach(([k, v]) => {
     let d = document.createElement("div");
     d.innerHTML = `<p>${k}</p><img src="${v}" alt="${k}" width="200px" height="200px"></img>`;
     r.append(d);
   });
-
-  let dice = document.getElementById("dice");
-  let stage = document.getElementById("stage");
-  let savedColors = document.getElementById("saved-colors");
-  let save = document.getElementById("save");
 
   let gameHandler = () => {
     // pick 3 random items from j
