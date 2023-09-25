@@ -1,12 +1,11 @@
-/** @jsxImportSource solid-js */
 import "solid-js";
 
+import type { JSX } from "solid-js";
 import {
   createEffect,
   createMemo,
   createSignal,
   For,
-  JSX,
   onMount,
   Show,
 } from "solid-js";
@@ -94,7 +93,7 @@ export default function BlogToC(props: BlogToCProps) {
         }
         return filtered;
       },
-      {}
+      {},
     );
     return filteredByYear;
   });

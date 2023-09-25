@@ -5,7 +5,7 @@ export function remarkReadingTime() {
   return function (tree, file) {
     const textOnPage = toString(tree, { includeHTML: false }).replace(
       /import .* from ".*";/g,
-      ""
+      "",
     );
     const readingTime = getReadingTime(textOnPage);
     file.data.astro.frontmatter.readingTime = readingTime.text;

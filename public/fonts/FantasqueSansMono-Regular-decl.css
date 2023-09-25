@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Fantasque Sans Mono";
-  src: url("FantasqueSansMono-Regular.woff2") format("woff2"),
+  src:
+    url("FantasqueSansMono-Regular.woff2") format("woff2"),
     url("FantasqueSansMono-Regular.woff") format("woff"),
     /* Firefox >= 3.6, any other modern browser */
       url("FantasqueSansMono-Regular.ttf") format("truetype"),
