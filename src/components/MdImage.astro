@@ -1,15 +1,14 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 
 interface Props {
   src: string;
   alt: string;
   width?: number;
   height?: number;
-  aspectRatio?: number;
 }
 
-const { src, alt, width = 800, height = 0, aspectRatio } = Astro.props as Props;
+const { src, alt, width = 800, height = 0 } = Astro.props as Props;
 ---
 
 <div>
@@ -19,7 +18,6 @@ const { src, alt, width = 800, height = 0, aspectRatio } = Astro.props as Props;
     format="webp"
     width={width}
     height={height}
-    aspectRatio={aspectRatio}
   />
 </div>
 

@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 
 interface ImageMeta {
   src: string;
@@ -21,13 +21,12 @@ let pics = (
 
 <div class="grid">
   {
-    pics.map(({ src, width, height, alt }) => (
+    pics.map(({ src, alt }) => (
       <div class="frame">
         <Image
           src={src}
           alt={alt}
           width={600}
-          aspectRatio={width / height}
           format="webp"
           height={0}
         />
