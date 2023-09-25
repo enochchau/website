@@ -3,7 +3,10 @@ import getReadingTime from "reading-time";
 
 export function remarkReadingTime() {
   return function (tree, file) {
-    const textOnPage = toString(tree).replace(/import .* from ".*";/g, "");
+    const textOnPage = toString(tree, { includeHTML: false }).replace(
+      /import .* from ".*";/g,
+      ""
+    );
     const readingTime = getReadingTime(textOnPage);
     file.data.astro.frontmatter.readingTime = readingTime.text;
   };
