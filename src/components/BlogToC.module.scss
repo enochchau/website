@@ -83,11 +83,6 @@ $tag-padding: 0.1rem 0.3rem;
   }
 }
 
-.year-match > a:hover ,
-.year-nomatch > a {
-  @include invert-tag-color;
-}
-
 .year-match > a,
 .year-nomatch > a:hover {
   @include invert-tag-color;
