@@ -3,7 +3,7 @@ import rss from "@astrojs/rss";
 
 import { getBlogEntries } from "../util/getBlogEntries";
 
-export const get = async () => {
+export const GET = async () => {
   const blogEntries = await getBlogEntries()
 
   const items: RSSOptions["items"] = [];
