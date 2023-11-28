@@ -1,16 +1,13 @@
 ---
-import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 
 import ButtonLink from "../components/ButtonLink.astro";
 import Mascot from "../components/Mascot.astro";
 import NavTitle from "../components/NavTitle.astro";
 import Layout from "../layouts/Layout.astro";
+import { getBlogEntries } from "../util/getBlogEntries";
 
-let blogEntries = await getCollection(
-  "blog",
-  ({ data }) => data.draft !== true
-);
+let blogEntries = await getBlogEntries()
 
 blogEntries = blogEntries.sort(
   (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix()

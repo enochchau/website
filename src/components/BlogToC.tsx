@@ -30,7 +30,7 @@ function getFilterParam() {
  * @param value - filter param value
  */
 function setFilterParam(value: string) {
-  const url = new URL(window.location as unknown as string);
+  const url = new URL(window.location.href);
   if (!value) url.searchParams.delete(FILTER_PARAM);
   else url.searchParams.set(FILTER_PARAM, value);
   history.replaceState(null, "", url);
@@ -38,6 +38,7 @@ function setFilterParam(value: string) {
 
 export interface BlogToCProps {
   byYear: ByYear;
+  year?: string;
   defaultFilters?: string[];
 }
 export default function BlogToC(props: BlogToCProps) {
@@ -79,11 +80,18 @@ export default function BlogToC(props: BlogToCProps) {
 
   const filteredByYear = createMemo(() => {
     const hasFilters = filters().length > 0;
-    if (!hasFilters) return props.byYear;
+    if (!hasFilters && !props.year) return props.byYear;
 
     const filteredByYear = Object.entries(props.byYear).reduce<ByYear>(
       (filtered, [year, posts]) => {
+        if (props.year && props.year !== year) {
+          return filtered;
+        }
+
+        // filter by tags
         const filteredPosts = posts.filter((post) => {
+          if (filters().length === 0) return true;
+
           const tagSet = new Set(post.tags);
           return filters().every((filter) => tagSet.has(filter));
         });
@@ -102,13 +110,24 @@ export default function BlogToC(props: BlogToCProps) {
     <div>
       <Show when={filters().length > 0}>
         <div class={styles["chosen-container"]}>
-          <Tag onClick={() => setFilters([])} selected chosen>
+          <Tag
+            onClick={() => {
+              setFilters([]);
+            }}
+            selected
+            chosen
+          >
             clear all
           </Tag>
           <For each={filters()}>
             {(filter) => (
-              <Tag onClick={() => removeFilter(filter)} selected chosen>
-                {filter} ×
+              <Tag
+                onClick={() => removeFilter(filter)}
+                selected
+                chosen
+                closable
+              >
+                {filter}
               </Tag>
             )}
           </For>
@@ -118,7 +137,11 @@ export default function BlogToC(props: BlogToCProps) {
         .sort((a, b) => parseInt(b) - parseInt(a))
         .map((year) => (
           <>
-            <h1>{year}</h1>
+            <YearHeader
+              year={year}
+              matches={props.year === year}
+              filters={filters()}
+            />
             {filteredByYear()[year].map((post) => (
               <div class={styles.post}>
                 <h4 class={styles.title}>
@@ -155,6 +178,7 @@ interface TagProps {
   selected?: boolean;
   chosen?: boolean; // chosen at the top of the toc
   title?: string;
+  closable?: boolean;
 }
 function Tag(props: TagProps) {
   return (
@@ -167,7 +191,38 @@ function Tag(props: TagProps) {
       }}
       onclick={props.onClick}
     >
-      <p>{props.children}</p>
+      <p>
+        {props.children} {props.closable && "×"}
+      </p>
     </button>
+  );
+}
+
+interface YearHeaderProps {
+  year: string;
+  matches?: boolean;
+  filters: string[];
+}
+function YearHeader(props: YearHeaderProps) {
+  const href = createMemo(() => {
+    let href = !props.matches ? `/blog/${props.year}` : "/blog";
+    if (props.filters.length > 0) {
+      href += `?${FILTER_PARAM}=${encodeURIComponent(props.filters.join(","))}`;
+    }
+    return href;
+  });
+
+  return (
+    <h1
+      classList={{
+        [styles.year]: true,
+        [styles["year-match"]]: props.matches,
+        [styles["year-nomatch"]]: !props.matches,
+      }}
+    >
+      <a href={href()}>
+        {props.year} {props.matches && "×"}
+      </a>
+    </h1>
   );
 }

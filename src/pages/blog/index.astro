@@ -1,15 +1,18 @@
 ---
-import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 
 import BlogToC from "../../components/BlogToC";
 import Layout from "../../layouts/Layout.astro";
 import type { ByYear } from "../../types";
+import { getBlogEntries } from "../../util/getBlogEntries";
 
-const blogEntries = await getCollection(
-  "blog",
-  ({ data }) => data.draft !== true
-);
+interface Props {
+  year?: string;
+}
+
+const { year } = Astro.props as Props;
+
+const blogEntries = await getBlogEntries();
 
 const byYear: ByYear = {};
 
@@ -27,7 +30,7 @@ for (const entry of blogEntries) {
     title: entry.data.title,
     date,
     tags: entry.data.tags?.sort() ?? [],
-    readingTime: remarkPluginFrontmatter.readingTime
+    readingTime: remarkPluginFrontmatter.readingTime,
   };
 
   if (byYear[year]) {
@@ -39,13 +42,13 @@ for (const entry of blogEntries) {
 
 for (const years in byYear) {
   byYear[years] = byYear[years].sort(
-    (a, b) => dayjs(b.date).unix() - dayjs(a.date).unix()
+    (a, b) => dayjs(b.date).unix() - dayjs(a.date).unix(),
   );
 }
 ---
 
 <Layout title="Enoch - Blog" activeNav="blog">
-  <BlogToC client:load byYear={byYear} />
+  <BlogToC client:load byYear={byYear} year={year} />
 </Layout>
 
 <style lang="scss">

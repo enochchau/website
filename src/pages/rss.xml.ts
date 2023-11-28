@@ -1,12 +1,10 @@
 import type { RSSOptions } from "@astrojs/rss";
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
+
+import { getBlogEntries } from "../util/getBlogEntries";
 
 export const get = async () => {
-  const blogEntries = await getCollection(
-    "blog",
-    ({ data }) => data.draft !== true,
-  );
+  const blogEntries = await getBlogEntries()
 
   const items: RSSOptions["items"] = [];
 

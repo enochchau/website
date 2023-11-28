@@ -1,3 +1,6 @@
+$tag-gap: 0.4rem;
+$tag-padding: 0.1rem 0.3rem;
+
 .post {
   margin-bottom: 0.5rem;
 }
@@ -14,13 +17,13 @@
 }
 
 .tags-container {
-  margin-top: 0.4rem;
+  margin-top: $tag-gap;
 }
 
 .tags-container,
 .chosen-container {
   display: flex;
-  gap: 0.4rem;
+  gap: $tag-gap;
 }
 
 @mixin default-tag-color {
@@ -39,7 +42,7 @@
 
 .tag {
   border-radius: var(--border-radius);
-  padding: 0.1rem 0.3rem;
+  padding: $tag-padding;
   outline: none;
   border: none;
   cursor: pointer;
@@ -60,4 +63,32 @@
   &:hover {
     @include default-tag-color;
   }
+}
+
+.year {
+  margin-top: $tag-gap;
+  font-weight: bold;
+
+  > a {
+    text-decoration: none;
+    padding: $tag-padding;
+    color: inherit;
+    background-color: inherit;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.year-match > a:hover ,
+.year-nomatch > a {
+  @include invert-tag-color;
+}
+
+.year-match > a,
+.year-nomatch > a:hover {
+  @include invert-tag-color;
 }

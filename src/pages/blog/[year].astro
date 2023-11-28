@@ -1,0 +1,25 @@
+---
+import { getBlogEntries } from "../../util/getBlogEntries";
+import Blog from "./index.astro";
+
+export async function getStaticPaths() {
+  let blogEntries = await getBlogEntries();
+
+  let dedupeYears = new Set<number>();
+  blogEntries.forEach((entry) => {
+    let year = new Date(entry.data.date).getFullYear();
+    dedupeYears.add(year);
+  });
+
+  const years = Array.from(dedupeYears);
+  const staticPaths = years.map((year) => {
+    return { params: { year }, props: { year } };
+  });
+
+  return staticPaths;
+}
+
+const { year } = Astro.props;
+---
+
+<Blog year={year + ""} />
