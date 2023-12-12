@@ -11,21 +11,11 @@ interface Props {
 const { src, alt, width = 800, height = 0 } = Astro.props as Props;
 ---
 
-<div>
-  <Image
-    src={src}
-    alt={alt}
-    format="webp"
-    width={width}
-    height={height}
-  />
-</div>
+<Image src={src} alt={alt} format="webp" width={width} height={height} />
 
 <style lang="scss">
-  div {
-    > img {
-      width: 100%;
-      height: auto;
-    }
+  img {
+    width: 100%;
+    height: auto;
   }
 </style>
