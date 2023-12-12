@@ -63,13 +63,13 @@ All done!
 
 <MdImage src={import("./08_complete.webp")} alt="complete" />
 
-I also setup my own [mouse keymap](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/keymap.c)
-[config](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/config.h) through QMK.
+I also setup my own [mouse keymap](https://github.com/enochchau/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/keymap.c)
+[config](https://github.com/enochchau/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/ec965/config.h) through QMK.
 The default options make configuration really easy.
 
 One problem I did run into was that I couldn't get `LT` to work with `KC_BTN5`.
 The
-[demo keymap](https://github.com/ec965/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/drag_scroll/keymap.c)
+[demo keymap](https://github.com/enochchau/qmk_firmware/blob/d872a5d7681fde8ce52713bc3a8c71779f47d28f/keyboards/ploopyco/trackball/keymaps/drag_scroll/keymap.c)
 for drag scroll shows the 5th mouse button used as `LT(1, KC_BTN5)` but in practice this doesn't work.
 The QMK docs mention a [caveat](https://docs.qmk.fm/#/feature_layers?id=caveats)
 around `LT` where you can only use keycodes in the [basic keycode set](https://docs.qmk.fm/#/keycodes_basic),

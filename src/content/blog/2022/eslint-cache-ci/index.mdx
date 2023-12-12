@@ -6,7 +6,7 @@ tags: ["dev"]
 
 import MdImage from "../../../../components/MdImage.astro";
 
-- [github](https://github.com/ec965/eslint-gh-actions-cache)
+- [github](https://github.com/enochchau/eslint-gh-actions-cache)
 
 At [Gatsby](http://gatsby.events), we have a monorepo that contains all our internal packages.
 Our CI pipeline will lint, type check, test, and build our entire system.
@@ -81,6 +81,6 @@ Subsequent runs will be much faster. This run took about 1s.
 
 <MdImage alt="subsequent eslint CI run" src={import("./with-cache.webp")} />
 
-You can find all the code used in this demo in [this repository](https://github.com/ec965/eslint-gh-actions-cache).
+You can find all the code used in this demo in [this repository](https://github.com/enochchau/eslint-gh-actions-cache).
 
 After implementing an eslint cache for our monorepo at Gatsby, our lint times went from about 2 minutes to 6 seconds with a cache hit.

@@ -103,7 +103,7 @@ Both of these implementations use interesting tactics to keep Neovim's startup f
 and compiled Lua files up to date.
 The thing I don't like about both of them though is that there's always some
 startup time associated with checking the validity of compiled Lua files.
-Currently, I'm opting to use a [Makefile](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/Makefile)
+Currently, I'm opting to use a [Makefile](https://github.com/enochchau/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/Makefile)
 that I have to manually run after editing Fennel files.
 While I don't get the seamless experience of:
 
@@ -115,7 +115,7 @@ when I edit my Neovim configs, I think it's a small price to pay to save a few
 milliseconds on every startup where I'm not editing my configs.
 
 One fun thing I was able to do was to use Neovim itself as a Fennel compiler.
-I added this line at the [top of my `init.lua`](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/init.lua#L3-L6)
+I added this line at the [top of my `init.lua`](https://github.com/enochchau/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/init.lua#L3-L6)
 that checks if I'm running Neovim in Fennel compiler mode.
 
 ```lua
@@ -162,7 +162,7 @@ much faster than the standard Lua 5.1 implementation.
 Second, and more importantly, it allows me to use Neovim builtin functions in macros.
 Since Fennel version 1.0, the compiler is sandboxed by default meaning that
 builtin functions such as `io`, `os`, or any Neovim provided functions such as `vim.api` can't be used in macros.
-But I couldn't turn down the sweet sweet power of [compile time madness](https://github.com/ec965/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/fnl/enoch/quotes.fnl#L1-L23)
+But I couldn't turn down the sweet sweet power of [compile time madness](https://github.com/enochchau/dotfiles/blob/52a20c56831084fa4480198ededea3122a567e34/roles/nvim/files/fnl/enoch/quotes.fnl#L1-L23)
 so I just turned off compiler sandboxing.
 This isn't very secure, but I'm the only person who will be editing my configs
 so I'm not too concerned.
