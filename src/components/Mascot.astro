@@ -1,13 +1,15 @@
 ---
 import { Image } from "astro:assets";
 
-import penguin from "../assets/penguin.webp";
+import penguinSvg from '../assets/penguin.svg'
+
+// import penguin from "../assets/penguin.webp";
 ---
 
 <a aria-label="Toggle dark mode" href="javascript:void 0">
   <Image
     id="penguin"
-    src={penguin}
+    src={penguinSvg}
     format="webp"
     width={160}
     height={0}
