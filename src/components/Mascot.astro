@@ -1,20 +1,9 @@
 ---
-import { Image } from "astro:assets";
-
-import penguinSvg from '../assets/penguin.svg'
-
-// import penguin from "../assets/penguin.webp";
+import penguinSvg from "../assets/penguin.svg?raw";
 ---
 
-<a aria-label="Toggle dark mode" href="javascript:void 0">
-  <Image
-    id="penguin"
-    src={penguinSvg}
-    format="webp"
-    width={160}
-    height={0}
-    alt="penguin mascot"
-  />
+<a aria-label="Toggle dark mode" href="javascript:void 0" id="penguin">
+  <Fragment set:html={penguinSvg} />
 </a>
 
 <script>
@@ -81,5 +70,8 @@ import penguinSvg from '../assets/penguin.svg'
   }
   #penguin {
     transition: transform 800ms;
+  }
+  a {
+    width: 160px;
   }
 </style>
