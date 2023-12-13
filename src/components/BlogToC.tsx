@@ -191,9 +191,7 @@ function Tag(props: TagProps) {
       }}
       onclick={props.onClick}
     >
-      <p>
-        {props.children} {props.closable && "×"}
-      </p>
+      {props.children} {props.closable && "×"}
     </button>
   );
 }

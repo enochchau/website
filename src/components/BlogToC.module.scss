@@ -1,5 +1,5 @@
-$tag-gap: 0.4rem;
-$tag-padding: 0.1rem 0.3rem;
+$tag-gap: 0.6rem;
+$tag-padding: 0.2rem 0.3rem;
 
 .post {
   margin-bottom: 0.5rem;
@@ -7,17 +7,19 @@ $tag-padding: 0.1rem 0.3rem;
 
 .title {
   line-height: 1.4;
+  font-weight: bold;
+  font-family: var(--font-sans-serif);
 }
 .readtime {
   color: var(--grey);
 }
 
 .chosen-container {
-  margin: 1rem 0 0.3rem 0;
+  margin: $tag-gap 0rem;
 }
 
 .tags-container {
-  margin-top: $tag-gap;
+  margin-top: 0.3rem;
 }
 
 .tags-container,
@@ -27,25 +29,20 @@ $tag-padding: 0.1rem 0.3rem;
 }
 
 @mixin default-tag-color {
-  background: var(--grey);
-  color: var(--background);
-  border: 1px solid transparent;
+  background: var(--background-secondary);
+  color: var(--primary);
 }
 
 @mixin invert-tag-color {
-  background: var(--background-secondary);
-  color: var(--primary);
-  border: 1px solid var(--primary);
-
+  background: var(--grey2);
   transition: var(--hover-time) ease;
 }
 
 .tag {
-  border-radius: var(--border-radius);
   padding: $tag-padding;
   outline: none;
-  border: none;
   cursor: pointer;
+  font-weight: normal;
   @include default-tag-color;
 }
 
@@ -66,14 +63,15 @@ $tag-padding: 0.1rem 0.3rem;
 }
 
 .year {
-  margin: $tag-gap 0 0.3rem;
-  font-weight: bold;
+  margin: $tag-gap 0rem;
+  display: block;
+  height: fit-content;
 
   > a {
-    text-decoration: none;
     padding: $tag-padding;
-    color: inherit;
     background-color: inherit;
+    text-decoration: none;
+    color: inherit;
     border: 1px solid transparent;
     border-radius: var(--border-radius);
 

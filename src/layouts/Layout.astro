@@ -16,7 +16,7 @@ const {
 } = Astro.props as Props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -72,18 +72,22 @@ const {
       window.addEventListener("storage", readTheme);
     </script>
 
-    <style lang="scss" is:global>
+    <style lang="scss">
       .container {
         margin: 0px auto 2vh auto;
-        padding: 0 2vw;
         max-width: 50rem;
+        @media (max-width: 50rem) {
+          padding: 0 2vw;
+        }
       }
     </style>
 
     <style lang="scss" is:global>
       @mixin dark-theme {
-        --background: #1a1b1d;
         --background-secondary: #444;
+        --background: #1a1b1d;
+        --grey2: #777777;
+        --grey: #8f96a1;
         --primary: #f0f0f0;
         --secondary: #a86be7;
         #penguin {
@@ -92,10 +96,12 @@ const {
       }
 
       @mixin light-theme {
+        --background-secondary: #ddd;
+        --background: #f0f0f0;
+        --grey2: #a2a3a8;
+        --grey: #777777;
         --primary: #282c34;
         --secondary: #6f1cc5;
-        --background: #f0f0f0;
-        --background-secondary: #ddd;
         #penguin {
           filter: unset;
         }
@@ -123,7 +129,6 @@ const {
         --shadow-color: rgb(0 0 0 / 40%);
 
         --text-shadow-color: #a86be7;
-        --grey: #8f96a1;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -149,7 +154,9 @@ const {
         line-height: 1.2;
       }
 
-      * {
+      *,
+      *:before,
+      *:after {
         box-sizing: border-box;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -188,13 +195,19 @@ const {
       }
 
       a {
-        text-decoration-color: var(--background);
         color: var(--secondary);
+        text-decoration: none;
 
         &:hover {
           transition: var(--hover-time) ease;
           text-decoration: underline;
           text-decoration-color: var(--primary);
+        }
+        &:active  {
+          color: var(--primary);
+        }
+        &:visited {
+          color: var(--grey);
         }
       }
 
@@ -210,6 +223,17 @@ const {
 
       img {
         border-radius: var(--border-radius);
+      }
+
+      button {
+        border-radius: var(--border-radius);
+        border: none;
+        font-size: var(--font-size-xs);
+        padding: 0.7rem;
+        font-weight: bold;
+        background: var(--background-secondary);
+        color: var(--primary);
+        letter-spacing: 0.07rem;
       }
     </style>
   </body>
