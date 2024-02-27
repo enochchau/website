@@ -19,7 +19,9 @@ export const GET = async () => {
     });
   }
 
-  items.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+  items.sort(
+    (a, b) => (b.pubDate?.getTime() ?? 0) - (a.pubDate?.getTime() ?? 0),
+  );
 
   return rss({
     title: "Enoch's Blog",
