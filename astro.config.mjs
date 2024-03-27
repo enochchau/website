@@ -5,6 +5,7 @@ import { defineConfig } from "astro/config";
 import { rehypePreview } from "./rehype-preview.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), solid()],
@@ -17,4 +18,16 @@ export default defineConfig({
     rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",
+  image: {
+    service: {
+      entrypoint: './sharpService.mjs',
+      config: {
+        path: '/blog/', 
+        defaults: {
+          width: 800,
+          format: 'webp'
+        }
+      }
+    }
+  },
 });
