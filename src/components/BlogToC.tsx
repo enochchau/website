@@ -108,14 +108,14 @@ export default function BlogToC(props: BlogToCProps) {
     return filteredByYear;
   });
 
-  // navigate back to root `/blog` if we're on a filter subpath like `/blog/dev`
+  // navigate back to root `/blog` if we're on a filtered subpath like `/blog/dev`
   createEffect(() => {
     if (filters().length === 0) {
-      const [blog, ...rest] = window.location.pathname
+      const [blog, dev] = window.location.pathname
         .split("/")
         .filter((part) => part);
 
-      if (rest.length > 0) {
+      if (dev === 'dev') {
         window.location.href = "/" + blog;
       }
     }
