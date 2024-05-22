@@ -43,7 +43,7 @@ import penguinSvg from "../assets/penguin.svg?raw";
 
   if (penguin) {
     penguin.addEventListener("click", () => {
-      let theme = localStorage.getItem("theme");
+      const theme = localStorage.getItem("theme");
       if (typeof theme === "string") {
         switch (theme) {
           case "light":

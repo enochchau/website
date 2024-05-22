@@ -12,105 +12,105 @@
 <div id="saved-colors"></div>
 <div id="colors" class="flex"></div>
 <script>
-  let j = {
-    RED: "https://cdn.shopify.com/s/files/1/0581/7001/files/red_e5409681-c00d-4b46-8d84-7114da0facfc_480x480.jpg?v=1666612722",
-    BRICK:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/Brick_480x480.jpg?v=1666613029",
-    BURGUNDY:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/burgundy_480x480.jpg?v=1666629751",
-    RUST: "https://cdn.shopify.com/s/files/1/0581/7001/files/Rust_1_480x480.jpg?v=1666612691",
-    "BLAZE ORANGE":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_orange_480x480.jpg?v=1666612823",
-    ORANGE:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/orange_480x480.jpg?v=1666630452",
-    YELLOW:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/yellow_480x480.jpg?v=1666612630",
-    "NEON YELLOW":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_yellow_480x480.jpg?v=1666612789",
-    GOLD: "https://cdn.shopify.com/s/files/1/0581/7001/files/gold_480x480.jpg?v=1666612944",
-    "NEON GREEN":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_green_480x480.jpg?v=1666612843",
-    MINT: "https://cdn.shopify.com/s/files/1/0581/7001/files/mint_green_480x480.jpg?v=1666612903",
-    KELLY:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/kelly_green_480x480.jpg?v=1666612919",
-    FOREST:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/forest_green_480x480.jpg?v=1666612972",
-    OLIVE:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/olive_green_1_480x480.jpg?v=1666630232",
-    TEAL: "https://cdn.shopify.com/s/files/1/0581/7001/files/teal_480x480.jpg?v=1666630267",
-    "BABY BLUE":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/baby_blue_1_480x480.jpg?v=1666614386",
-    ICE: "https://cdn.shopify.com/s/files/1/0581/7001/files/ice_blue_480x480.jpg?v=1666612931",
-    "NEON BLUE":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_blue_480x480.jpg?v=1666612856",
-    ROYAL:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/royal_blue_480x480.jpg?v=1666612708",
-    NAVY: "https://cdn.shopify.com/s/files/1/0581/7001/files/navy_blue_480x480.jpg?v=1666612887",
-    PEACH:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/peach_1_480x480.jpg?v=1666612762",
-    "NEON PINK":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/Neon_Pink_1_480x480.jpg?v=1666612802",
-    FUCHSIA:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/fuscia_480x480.jpg?v=1666612959",
-    PURPLE:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/purple_480x480.jpg?v=1666612735",
-    PLUM: "https://cdn.shopify.com/s/files/1/0581/7001/files/plum_480x480.jpg?v=1666612747",
-    "SAND TAN":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/sand_tan_480x480.jpg?v=1666612672",
-    "DARK TAN":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/dark_tan_480x480.jpg?v=1666612988",
-    BROWN:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/brown_480x480.jpg?v=1666613001",
-    BLACK:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/black_480x480.jpg?v=1666613056",
-    CHARCOAL:
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/charcoal_480x480.jpg?v=1666630341",
-    "Marpat Camo":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/marpat-camo-large_1_240x240.jpg?v=1637090657",
-    "Covert Camo":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/IMG_8718_240x240.jpg?v=1637090741",
-    "Digital Camo":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/digital-camo-large_240x240.jpg?v=1637090776",
-    "Woodland Camo":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/woodland-camo-large_240x240.jpg?v=1637090819",
-    "Duck Hunter Camo":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/duck-hunter-camo-large_240x240.jpg?v=1637094214",
-    "Desert Tiger Stripe":
-      "https://cdn.shopify.com/s/files/1/0581/7001/files/IMG_9895_1_240x240.jpg?v=1637094271",
-  };
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
-  let r = document.getElementById("colors")!;
-  let dice = document.getElementById("dice")!;
-  let stage = document.getElementById("stage")!;
-  let savedColors = document.getElementById("saved-colors")!;
-  let save = document.getElementById("save")!;
-  /* eslint-enable @typescript-eslint/no-non-null-assertion */
+  const j = {
+  RED: "https://cdn.shopify.com/s/files/1/0581/7001/files/red_e5409681-c00d-4b46-8d84-7114da0facfc_480x480.jpg?v=1666612722",
+  BRICK:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/Brick_480x480.jpg?v=1666613029",
+  BURGUNDY:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/burgundy_480x480.jpg?v=1666629751",
+  RUST: "https://cdn.shopify.com/s/files/1/0581/7001/files/Rust_1_480x480.jpg?v=1666612691",
+  "BLAZE ORANGE":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_orange_480x480.jpg?v=1666612823",
+  ORANGE:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/orange_480x480.jpg?v=1666630452",
+  YELLOW:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/yellow_480x480.jpg?v=1666612630",
+  "NEON YELLOW":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_yellow_480x480.jpg?v=1666612789",
+  GOLD: "https://cdn.shopify.com/s/files/1/0581/7001/files/gold_480x480.jpg?v=1666612944",
+  "NEON GREEN":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_green_480x480.jpg?v=1666612843",
+  MINT: "https://cdn.shopify.com/s/files/1/0581/7001/files/mint_green_480x480.jpg?v=1666612903",
+  KELLY:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/kelly_green_480x480.jpg?v=1666612919",
+  FOREST:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/forest_green_480x480.jpg?v=1666612972",
+  OLIVE:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/olive_green_1_480x480.jpg?v=1666630232",
+  TEAL: "https://cdn.shopify.com/s/files/1/0581/7001/files/teal_480x480.jpg?v=1666630267",
+  "BABY BLUE":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/baby_blue_1_480x480.jpg?v=1666614386",
+  ICE: "https://cdn.shopify.com/s/files/1/0581/7001/files/ice_blue_480x480.jpg?v=1666612931",
+  "NEON BLUE":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/neon_blue_480x480.jpg?v=1666612856",
+  ROYAL:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/royal_blue_480x480.jpg?v=1666612708",
+  NAVY: "https://cdn.shopify.com/s/files/1/0581/7001/files/navy_blue_480x480.jpg?v=1666612887",
+  PEACH:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/peach_1_480x480.jpg?v=1666612762",
+  "NEON PINK":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/Neon_Pink_1_480x480.jpg?v=1666612802",
+  FUCHSIA:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/fuscia_480x480.jpg?v=1666612959",
+  PURPLE:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/purple_480x480.jpg?v=1666612735",
+  PLUM: "https://cdn.shopify.com/s/files/1/0581/7001/files/plum_480x480.jpg?v=1666612747",
+  "SAND TAN":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/sand_tan_480x480.jpg?v=1666612672",
+  "DARK TAN":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/dark_tan_480x480.jpg?v=1666612988",
+  BROWN:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/brown_480x480.jpg?v=1666613001",
+  BLACK:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/black_480x480.jpg?v=1666613056",
+  CHARCOAL:
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/charcoal_480x480.jpg?v=1666630341",
+  "Marpat Camo":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/marpat-camo-large_1_240x240.jpg?v=1637090657",
+  "Covert Camo":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/IMG_8718_240x240.jpg?v=1637090741",
+  "Digital Camo":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/digital-camo-large_240x240.jpg?v=1637090776",
+  "Woodland Camo":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/woodland-camo-large_240x240.jpg?v=1637090819",
+  "Duck Hunter Camo":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/duck-hunter-camo-large_240x240.jpg?v=1637094214",
+  "Desert Tiger Stripe":
+    "https://cdn.shopify.com/s/files/1/0581/7001/files/IMG_9895_1_240x240.jpg?v=1637094271",
+};
+   
+  const r = document.getElementById("colors")!;
+  const dice = document.getElementById("dice")!;
+  const stage = document.getElementById("stage")!;
+  const savedColors = document.getElementById("saved-colors")!;
+  const save = document.getElementById("save")!;
+   
 
   Object.entries(j).forEach(([k, v]) => {
-    let d = document.createElement("div");
+    const d = document.createElement("div");
     d.innerHTML = `<p>${k}</p><img src="${v}" alt="${k}" width="200px" height="200px"></img>`;
     r.append(d);
   });
 
-  let gameHandler = () => {
-    // pick 3 random items from j
-    let items = Object.entries(j)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    let newHTML = "";
-    items.forEach(([k, v]) => {
-      newHTML += `<div><p>${k}</p><img src="${v}" alt="${k}" width="200px" height="200px"></img></div>`;
-    });
-    stage.innerHTML = newHTML;
-  };
+  const gameHandler = () => {
+  // pick 3 random items from j
+  const items = Object.entries(j)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+  let newHTML = "";
+  items.forEach(([k, v]) => {
+    newHTML += `<div><p>${k}</p><img src="${v}" alt="${k}" width="200px" height="200px"></img></div>`;
+  });
+  stage.innerHTML = newHTML;
+};
   gameHandler();
   dice.onclick = gameHandler;
   save.onclick = () => {
-    let d = document.createElement("div");
+    const d = document.createElement("div");
     d.style.cssText =
       "display: flex; flex-wrap: wrap; width: 100%; justify-content: center; align-items: center;";
     d.innerHTML = stage.innerHTML;
-    let b = document.createElement("button");
+    const b = document.createElement("button");
     b.innerHTML = "X";
     b.onclick = () => {
       d.remove();

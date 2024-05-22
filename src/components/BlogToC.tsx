@@ -111,7 +111,7 @@ export default function BlogToC(props: BlogToCProps) {
   // navigate back to root `/blog` if we're on a filter subpath like `/blog/dev`
   createEffect(() => {
     if (filters().length === 0) {
-      let [blog, ...rest] = window.location.pathname
+      const [blog, ...rest] = window.location.pathname
         .split("/")
         .filter((part) => part);
 
