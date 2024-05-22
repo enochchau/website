@@ -4,10 +4,29 @@ import { defineConfig } from "astro/config";
 
 import { rehypePreview } from "./rehype-preview";
 import { remarkReadingTime } from "./remark-reading-time";
+import sitemap from "@astrojs/sitemap";
+
+const site = "https://enochchau.com";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), solid()],
+  integrations: [
+    mdx(),
+    solid(),
+    sitemap({
+      filter: (page) => {
+        return ![
+          "/blog/dev/",
+          "/create/",
+          "/create/collect/",
+          "/create/sound/",
+          "/create/visual/",
+          "/links/",
+          "/organic_color_picker/",
+        ].some((p) => site + p === page);
+      },
+    }),
+  ],
   markdown: {
     gfm: true,
     shikiConfig: {
@@ -16,5 +35,5 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypePreview],
   },
-  site: "https://enochchau.com",
+  site
 });
