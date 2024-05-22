@@ -10,17 +10,24 @@ const { class: className } = Astro.props;
 <style lang="scss">
   .title {
     font-weight: bold;
-    color: var(--primary);
-    text-shadow: 1px 1px var(--text-shadow-color),
-      2px 2px var(--text-shadow-color), 3px 3px var(--text-shadow-color),
-      4px 4px var(--text-shadow-color), 5px 5px var(--text-shadow-color);
+    color: var(--nav-title-color);
+    text-shadow:
+      1px 1px var(--nav-title-shadow),
+      2px 2px var(--nav-title-shadow),
+      3px 3px var(--nav-title-shadow),
+      4px 4px var(--nav-title-shadow),
+      5px 5px var(--nav-title-shadow);
 
     transition: var(--hover-time);
     &:hover {
       transition: var(--hover-time);
-      color: var(--text-shadow-color);
-      text-shadow: 1px 1px var(--primary), 2px 2px var(--primary),
-        3px 3px var(--primary), 4px 4px var(--primary), 5px 5px var(--primary);
+      color: var(--nav-title-shadow);
+      text-shadow:
+        1px 1px var(--nav-title-color),
+        2px 2px var(--nav-title-color),
+        3px 3px var(--nav-title-color),
+        4px 4px var(--nav-title-color),
+        5px 5px var(--nav-title-color);
     }
 
     a {

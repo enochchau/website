@@ -1,4 +1,5 @@
 ---
+import penguinSvg from "../assets/penguin.svg";
 import GlobalNav from "../components/GlobalNav.astro";
 
 export interface Props {
@@ -34,9 +35,11 @@ const {
       href="/rss.xml"
     />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content="//enochchau.com" />
+    <meta name="title" property="og:title" content={title} />
+    <meta name="description" property="og:description" content={description} />
+    <meta name="image" property="og:image" content={penguinSvg.src}>
+    <meta name="author" content="Enoch Chau">
+    <meta property="og:url" content={`https://enochchau.com${Astro.url.pathname}`} />
     <title>{title}</title>
   </head>
 
@@ -93,6 +96,8 @@ const {
         #penguin {
           filter: invert(100%);
         }
+        --nav-title-color: var(--primary);
+        --nav-title-shadow: var(--secondary);
       }
 
       @mixin light-theme {
@@ -105,6 +110,8 @@ const {
         #penguin {
           filter: unset;
         }
+        --nav-title-color: var(--primary);
+        --nav-title-shadow: var(--grey2);
       }
 
       :root {
@@ -127,8 +134,6 @@ const {
         --hover-time: 0.15s;
         --border-radius: 0.3rem;
         --shadow-color: rgb(0 0 0 / 40%);
-
-        --text-shadow-color: #a86be7;
       }
 
       @media (prefers-color-scheme: dark) {
