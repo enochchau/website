@@ -115,7 +115,7 @@ export default function BlogToC(props: BlogToCProps) {
         .split("/")
         .filter((part) => part);
 
-      if (dev === 'dev') {
+      if (dev === "dev") {
         window.location.href = "/" + blog;
       }
     }

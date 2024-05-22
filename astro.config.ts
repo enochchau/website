@@ -35,5 +35,5 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypePreview],
   },
-  site
+  site,
 });
