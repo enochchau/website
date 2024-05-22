@@ -5,6 +5,8 @@ date: June 2020
 tags: ["dev", "hardware"]
 ---
 
+import MdImage from "../../../../components/MdImage.astro";
+
 - [calplug](http://calplug.org/)
 - [calit2](https://www.calit2.uci.edu/)
 
@@ -18,12 +20,12 @@ population and water cooler wiring.
 
 **main and interface PCB**
 
-![Main and Interface PCB](./pcb.webp)
+<MdImage alt="Main and Interface PCB" src={import("./pcb.webp")} />
 
 **watercooler**
 
-![Watercooler](./outside.webp)
+<MdImage alt="Watercooler" src={import("./outside.webp")} />
 
 **demo user interface**
 
-![Demo User Interface](./front.webp)
+<MdImage alt="Demo User Interface" src={import("./front.webp")} />

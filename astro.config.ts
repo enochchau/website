@@ -1,7 +1,6 @@
 import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
-import { visit } from "unist-util-visit";
 
 import { rehypePreview } from "./rehype-preview";
 import { remarkReadingTime } from "./remark-reading-time";
@@ -15,14 +14,14 @@ export default defineConfig({
       theme: "one-dark-pro",
     },
     remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [rehypePreview, rehypeDataBlog],
+    rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",
   image: {
     service: {
-      entrypoint: "./sharpService.ts",
+      entrypoint: "./sharpService.mjs",
       config: {
-        tag: "data-blog",
+        path: "/blog/",
         defaults: {
           width: 800,
           format: "webp",
@@ -31,19 +30,3 @@ export default defineConfig({
     },
   },
 });
-
-/**
- * Use rehype to insert `[data-blog="true"]` attribute on `<img />` nodes.
- * The custom image service uses this to apply default transforms.
- */
-function rehypeDataBlog() {
-  return function (tree: any, file: any) {
-    if (file.history[0].includes("content/blog")) {
-      visit(tree, "element", (node) => {
-        if (node.tagName === "img") {
-          node.properties = { ...node.properties, ["data-blog"]: true };
-        }
-      });
-    }
-  };
-}
