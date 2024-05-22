@@ -2,8 +2,8 @@ import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 
-import { rehypePreview } from "./rehype-preview.mjs";
-import { remarkReadingTime } from "./remark-reading-time.mjs";
+import { rehypePreview } from "./rehype-preview";
+import { remarkReadingTime } from "./remark-reading-time";
 
 // https://astro.build/config
 export default defineConfig({

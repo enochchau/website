@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { execSync } = require("child_process");
+import { execSync } from "child_process";
 
 let tags = {};
 let res = execSync("grep -r --no-filename '^tags:' src").toString().split("\n");

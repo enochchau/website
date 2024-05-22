@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "website",
   "version": "0.0.1",
   "private": true,
@@ -8,8 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fmt": "prettier -w --cache --plugin-search-dir=. .",
-    "fmt:check": "prettier -c --cache --plugin-search-dir=. .",
+    "fmt": "prettier -w --cache .",
+    "fmt:check": "prettier -c --cache .",
     "lint": "eslint src/ --cache --fix --cache-strategy content",
     "check": "astro check",
     "tags": "node ./scripts/tags.js | sort -n -k2 --reverse",
@@ -20,7 +21,7 @@
     "@astrojs/mdx": "^3.0.0",
     "@astrojs/rss": "^4.0.6",
     "@astrojs/solid-js": "^4.2.0",
-    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@eslint/js": "^9.3.0",
     "@typescript-eslint/parser": "^7.10.0",
     "astro": "^4.8.6",
     "astro-eslint-parser": "^1.0.2",
@@ -37,6 +38,7 @@
     "sharp": "^0.33.4",
     "solid-js": "1.8.17",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.10.0",
     "typescript-plugin-css-modules": "^5.1.0"
   },
   "dependencies": {
