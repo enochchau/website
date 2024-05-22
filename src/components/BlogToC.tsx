@@ -59,9 +59,11 @@ export default function BlogToC(props: BlogToCProps) {
   onMount(() => {
     // check the url search params and update filters on mount
     // this is the equivalent of `useLayoutEffect`
-    queueMicrotask(() => {
-      setFilters(getFilterParam());
-    });
+    if (!props.defaultFilters) {
+      queueMicrotask(() => {
+        setFilters(getFilterParam());
+      });
+    }
   });
 
   const addFilter = (filter: string) => {
@@ -104,6 +106,16 @@ export default function BlogToC(props: BlogToCProps) {
       {},
     );
     return filteredByYear;
+  });
+
+  // navigate back to root `/blog` if we're on a filter subpath like `/blog/dev`
+  createEffect(() => {
+    if (filters().length === 0) {
+      let [_, blog, ...rest] = window.location.pathname.split("/");
+      if (rest.length > 0) {
+        window.location.href = "/" + blog;
+      }
+    }
   });
 
   return (

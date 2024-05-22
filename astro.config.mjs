@@ -17,9 +17,6 @@ export default defineConfig({
     rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",
-  redirects: {
-    "/dev": "/blog?f=dev",
-  },
   image: {
     service: {
       entrypoint: "./sharpService.mjs",

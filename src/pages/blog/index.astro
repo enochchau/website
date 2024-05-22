@@ -8,9 +8,10 @@ import { getBlogEntries } from "../../util/getBlogEntries";
 
 interface Props {
   year?: string;
+  defaultFilters?: string[];
 }
 
-const { year } = Astro.props as Props;
+const { year, defaultFilters } = Astro.props as Props;
 
 const blogEntries = await getBlogEntries();
 
@@ -48,7 +49,12 @@ for (const years in byYear) {
 ---
 
 <Layout title="Enoch - Blog" activeNav="blog">
-  <BlogToC client:load byYear={byYear} year={year} />
+  <BlogToC
+    client:load
+    byYear={byYear}
+    year={year}
+    defaultFilters={defaultFilters}
+  />
 </Layout>
 
 <style lang="scss">
