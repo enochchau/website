@@ -7,10 +7,10 @@ import NavTitle from "../components/NavTitle.astro";
 import Layout from "../layouts/Layout.astro";
 import { getBlogEntries } from "../util/getBlogEntries";
 
-let blogEntries = await getBlogEntries()
+let blogEntries = await getBlogEntries();
 
 blogEntries = blogEntries.sort(
-  (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix()
+  (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix(),
 );
 
 let latest = {

@@ -37,9 +37,12 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="title" property="og:title" content={title} />
     <meta name="description" property="og:description" content={description} />
-    <meta name="image" property="og:image" content={penguinSvg.src}>
-    <meta name="author" content="Enoch Chau">
-    <meta property="og:url" content={`https://enochchau.com${Astro.url.pathname}`} />
+    <meta name="image" property="og:image" content={penguinSvg.src} />
+    <meta name="author" content="Enoch Chau" />
+    <meta
+      property="og:url"
+      content={`https://enochchau.com${Astro.url.pathname}`}
+    />
     <title>{title}</title>
   </head>
 
@@ -208,7 +211,7 @@ const {
           text-decoration: underline;
           text-decoration-color: var(--primary);
         }
-        &:active  {
+        &:active {
           color: var(--primary);
         }
         &:visited {
