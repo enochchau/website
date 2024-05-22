@@ -17,16 +17,4 @@ export default defineConfig({
     rehypePlugins: [rehypePreview],
   },
   site: "https://enochchau.com",
-  image: {
-    service: {
-      entrypoint: "./sharpService.mjs",
-      config: {
-        path: "/blog/",
-        defaults: {
-          width: 800,
-          format: "webp",
-        },
-      },
-    },
-  },
 });
