@@ -36,13 +36,19 @@ function setFilterParam(value: string) {
   history.replaceState(null, "", url);
 }
 
+function buildFilterQueryParams(filters: string[]) {
+  if (filters.length === 0) return "";
+  return `?${FILTER_PARAM}=${encodeURIComponent(filters.join(","))}`;
+}
+
 export interface BlogToCProps {
   byYear: ByYear;
-  year?: string;
-  defaultFilters?: string[];
+  initialYear?: string;
+  initialFilters?: string[];
 }
 export default function BlogToC(props: BlogToCProps) {
-  const [filters, setFilters] = createSignal(props.defaultFilters ?? []);
+  const [activeYear, setActiveYear] = createSignal(props.initialYear);
+  const [filters, setFilters] = createSignal(props.initialFilters ?? []);
 
   // skip the first effect running so we don't collide with onMount
   createEffect((startEffect) => {
@@ -59,7 +65,7 @@ export default function BlogToC(props: BlogToCProps) {
   onMount(() => {
     // check the url search params and update filters on mount
     // this is the equivalent of `useLayoutEffect`
-    if (!props.defaultFilters) {
+    if (!props.initialFilters) {
       queueMicrotask(() => {
         setFilters(getFilterParam());
       });
@@ -82,21 +88,22 @@ export default function BlogToC(props: BlogToCProps) {
 
   const filteredByYear = createMemo(() => {
     const hasFilters = filters().length > 0;
-    if (!hasFilters && !props.year) return props.byYear;
+    if (!hasFilters && !activeYear()) return props.byYear;
 
     const filteredByYear = Object.entries(props.byYear).reduce<ByYear>(
       (filtered, [year, posts]) => {
-        if (props.year && props.year !== year) {
+        if (activeYear() && activeYear() !== year) {
           return filtered;
         }
 
         // filter by tags
-        const filteredPosts = posts.filter((post) => {
-          if (filters().length === 0) return true;
-
-          const tagSet = new Set(post.tags);
-          return filters().every((filter) => tagSet.has(filter));
-        });
+        const filteredPosts =
+          filters().length > 0
+            ? posts.filter((post) => {
+                const tagSet = new Set(post.tags);
+                return filters().every((filter) => tagSet.has(filter));
+              })
+            : posts;
 
         if (filteredPosts.length > 0) {
           filtered[year] = filteredPosts;
@@ -116,7 +123,7 @@ export default function BlogToC(props: BlogToCProps) {
         .filter((part) => part);
 
       if (dev === "dev") {
-        window.location.href = "/" + blog;
+        window.history.pushState("/blog/dev", "", "/" + blog);
       }
     }
   });
@@ -148,43 +155,66 @@ export default function BlogToC(props: BlogToCProps) {
           </For>
         </div>
       </Show>
-      {Object.keys(filteredByYear())
-        .sort((a, b) => parseInt(b) - parseInt(a))
-        .map((year) => (
-          <>
-            <YearHeader
-              year={year}
-              matches={props.year === year}
-              filters={filters()}
-            />
-            <ul class={styles["post-list"]}>
-              {filteredByYear()[year].map((post) => (
-                <li class={styles.post}>
-                  <a href={post.url} class={styles["title-group"]}>
-                    <h4 class={styles.title}>{post.title}</h4>
-                    <p class={styles["date"]}>{post.date}</p>
-                    <p class={styles.readtime}>{post.readingTime}</p>
-                  </a>
-                  <div>
-                    <div class={styles["tags-container"]}>
-                      {post.tags?.map((tag) => (
-                        <>
-                          <Tag
-                            title="click to filter posts"
-                            onClick={() => addFilter(tag)}
-                            selected={filters().includes(tag)}
-                          >
-                            {tag}
-                          </Tag>
-                        </>
-                      ))}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </>
-        ))}
+      <For
+        each={Object.entries(filteredByYear()).sort(
+          ([a], [b]) => parseInt(b) - parseInt(a),
+        )}
+      >
+        {([year, posts]) => {
+          const matches = activeYear() === year;
+          return (
+            <>
+              <YearHeader
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.history.pushState(
+                    { matches, year },
+                    "",
+                    e.currentTarget.href,
+                  );
+
+                  if (matches) {
+                    setActiveYear();
+                  } else {
+                    setActiveYear(year);
+                  }
+                }}
+                year={year}
+                matches={matches}
+                filters={filters()}
+              />
+              <ul class={styles["post-list"]}>
+                <For each={posts}>
+                  {(post) => (
+                    <li class={styles.post}>
+                      <a href={post.url} class={styles["title-group"]}>
+                        <h4 class={styles.title}>{post.title}</h4>
+                        <p class={styles["date"]}>{post.date}</p>
+                        <p class={styles.readtime}>{post.readingTime}</p>
+                      </a>
+                      <div>
+                        <div class={styles["tags-container"]}>
+                          <For each={post.tags}>
+                            {(tag) => (
+                              <Tag
+                                title="click to filter posts"
+                                onClick={() => addFilter(tag)}
+                                selected={filters().includes(tag)}
+                              >
+                                {tag}
+                              </Tag>
+                            )}
+                          </For>
+                        </div>
+                      </div>
+                    </li>
+                  )}
+                </For>
+              </ul>
+            </>
+          );
+        }}
+      </For>
     </div>
   );
 }
@@ -217,13 +247,12 @@ interface YearHeaderProps {
   year: string;
   matches?: boolean;
   filters: string[];
+  onClick: JSX.EventHandler<HTMLAnchorElement, MouseEvent>;
 }
 function YearHeader(props: YearHeaderProps) {
   const href = createMemo(() => {
     let href = !props.matches ? `/blog/${props.year}` : "/blog";
-    if (props.filters.length > 0) {
-      href += `?${FILTER_PARAM}=${encodeURIComponent(props.filters.join(","))}`;
-    }
+    href += buildFilterQueryParams(props.filters);
     return href;
   });
 
@@ -235,7 +264,7 @@ function YearHeader(props: YearHeaderProps) {
         [styles["year-nomatch"]]: !props.matches,
       }}
     >
-      <a href={href()}>
+      <a href={href()} onClick={props.onClick}>
         {props.year} {props.matches && "×"}
       </a>
     </h1>
