@@ -9,27 +9,8 @@ $tag-padding: 4px 6px;
   padding-bottom: 16px;
 }
 
-.title {
-  font-weight: bold;
-  font-family: var(--font-sans-serif);
-}
-
-.title-group {
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
+@mixin link-hover-el {
   position: relative;
-  width: fit-content;
-  color: var(--primary);
-
-  &:hover {
-    text-decoration: none;
-    color: var(--secondary);
-    &:after {
-      height: 100%;
-    }
-  }
-
   &:after {
     transition: all var(--hover-time) ease-out;
     content: " ";
@@ -42,6 +23,42 @@ $tag-padding: 4px 6px;
     padding: 0 4px 4px 4px;
     box-sizing: content-box;
     left: -4px;
+  }
+  &:hover:after {
+    height: 100%;
+  }
+}
+
+.title {
+  font-weight: bold;
+  font-family: var(--font-sans-serif);
+  @media (max-width: 800px) {
+    @include link-hover-el;
+    &:after {
+      bottom: 0px;
+    }
+  }
+}
+
+.title-group {
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  width: fit-content;
+  color: var(--primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--secondary);
+  }
+
+  @media (min-width: 800px) {
+    @include link-hover-el;
   }
 }
 
@@ -56,7 +73,7 @@ $tag-padding: 4px 6px;
 }
 
 .tags-container {
-  padding-top: 6px;
+  padding-top: 8px;
   gap: $tag-gap;
   display: flex;
 }
