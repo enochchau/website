@@ -157,30 +157,32 @@ export default function BlogToC(props: BlogToCProps) {
               matches={props.year === year}
               filters={filters()}
             />
-            {filteredByYear()[year].map((post) => (
-              <div class={styles.post}>
-                <h4 class={styles.title}>
-                  <a href={post.url}>{post.title}</a>
-                </h4>
-                <section>
-                  <p>{post.date}</p>
-                  <p class={styles.readtime}>{post.readingTime}</p>
-                  <div class={styles["tags-container"]}>
-                    {post.tags?.map((tag) => (
-                      <>
-                        <Tag
-                          title="click to filter posts"
-                          onClick={() => addFilter(tag)}
-                          selected={filters().includes(tag)}
-                        >
-                          {tag}
-                        </Tag>
-                      </>
-                    ))}
+            <ul class={styles["post-list"]}>
+              {filteredByYear()[year].map((post) => (
+                <li class={styles.post}>
+                  <a href={post.url} class={styles["title-group"]}>
+                    <h4 class={styles.title}>{post.title}</h4>
+                    <p class={styles["date"]}>{post.date}</p>
+                    <p class={styles.readtime}>{post.readingTime}</p>
+                  </a>
+                  <div>
+                    <div class={styles["tags-container"]}>
+                      {post.tags?.map((tag) => (
+                        <>
+                          <Tag
+                            title="click to filter posts"
+                            onClick={() => addFilter(tag)}
+                            selected={filters().includes(tag)}
+                          >
+                            {tag}
+                          </Tag>
+                        </>
+                      ))}
+                    </div>
                   </div>
-                </section>
-              </div>
-            ))}
+                </li>
+              ))}
+            </ul>
           </>
         ))}
     </div>

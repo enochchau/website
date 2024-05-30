@@ -1,32 +1,64 @@
-$tag-gap: 0.6rem;
-$tag-padding: 0.2rem 0.3rem;
+$tag-gap: 8px;
+$tag-padding: 4px 6px;
+
+.post-list {
+  list-style-type: none;
+}
 
 .post {
-  margin-bottom: 0.5rem;
+  padding-bottom: 16px;
 }
 
 .title {
-  line-height: 1.4;
   font-weight: bold;
   font-family: var(--font-sans-serif);
 }
 
+.title-group {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  position: relative;
+  width: fit-content;
+  color: var(--primary);
+
+  &:hover {
+    text-decoration: none;
+    color: var(--secondary);
+    &:after {
+      height: 100%;
+    }
+  }
+
+  &:after {
+    transition: all var(--hover-time) ease-out;
+    content: " ";
+    position: absolute;
+    width: 100%;
+    background-color: var(--secondary);
+    height: 0;
+    opacity: 0.2;
+    border-radius: 3px;
+    padding: 0 4px 4px 4px;
+    box-sizing: content-box;
+    left: -4px;
+  }
+}
+
 .readtime {
-  color: var(--grey);
+  color: var(--grey2);
 }
 
 .chosen-container {
-  margin: $tag-gap 0rem;
+  padding: $tag-gap 0;
+  gap: $tag-gap;
+  display: flex;
 }
 
 .tags-container {
-  margin-top: 0.3rem;
-}
-
-.tags-container,
-.chosen-container {
-  display: flex;
+  padding-top: 6px;
   gap: $tag-gap;
+  display: flex;
 }
 
 @mixin default-tag-color {
@@ -36,7 +68,6 @@ $tag-padding: 0.2rem 0.3rem;
 
 @mixin invert-tag-color {
   background: var(--grey2);
-  transition: var(--hover-time) ease;
 }
 
 .tag {
@@ -45,6 +76,7 @@ $tag-padding: 0.2rem 0.3rem;
   cursor: pointer;
   font-weight: normal;
   @include default-tag-color;
+  transition: background var(--hover-time) ease;
 }
 
 .tag:hover,
@@ -65,12 +97,12 @@ $tag-padding: 0.2rem 0.3rem;
 }
 
 .year {
-  margin: $tag-gap 0rem;
+  padding: $tag-gap 0 12px 0;
   display: block;
-  height: fit-content;
 
   > a {
-    padding: $tag-padding;
+    transition: background-color var(--hover-time) ease;
+    padding: 2px 3px;
     background-color: inherit;
     text-decoration: none;
     color: var(--primary);
@@ -94,4 +126,8 @@ $tag-padding: 0.2rem 0.3rem;
 .year-match > a,
 .year-nomatch > a:hover {
   @include invert-tag-color;
+}
+
+.date {
+  color: var(--grey);
 }

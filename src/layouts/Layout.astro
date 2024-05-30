@@ -135,7 +135,7 @@ const {
         --font-size-sm: 1.2rem;
         --font-size-xs: 1rem;
 
-        --hover-time: 0.15s;
+        --hover-time: 0.3s;
         --border-radius: 0.3rem;
         --shadow-color: rgb(0 0 0 / 40%);
       }
@@ -205,12 +205,11 @@ const {
 
       a {
         color: var(--secondary);
-        text-decoration: none;
+        transition: text-decoration var(--hover-time) ease-out;
+        text-decoration-color: transparent;
 
         &:hover {
-          transition: var(--hover-time) ease;
-          text-decoration: underline;
-          text-decoration-color: var(--primary);
+          text-decoration: underline var(--primary);
         }
         &:active {
           color: var(--primary);
@@ -235,6 +234,7 @@ const {
       }
 
       button {
+        cursor: pointer;
         border-radius: var(--border-radius);
         border: none;
         font-size: var(--font-size-xs);
@@ -243,6 +243,10 @@ const {
         background: var(--background-secondary);
         color: var(--primary);
         letter-spacing: 0.07rem;
+        transition: background var(--hover-time) ease-out;
+        &:hover {
+          background: var(--grey2);
+        }
       }
     </style>
   </body>
