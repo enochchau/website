@@ -1,20 +1,16 @@
 ---
+import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
-interface ImageMeta {
-  src: string;
-  width: number;
-  height: number;
-  format: string;
-}
-let pics = (
-  await Astro.glob<{ default: ImageMeta }>("../assets/college-recipes/*.webp")
-).map((p) => {
-  let alt = p.default.src.split("/").pop();
-  alt = (alt ?? "").split(".webp")[0];
+let urls = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/college-recipes/*.webp",
+);
+
+let pics = Object.entries(urls).map(([k, v]) => {
+  let alt = k.split('/').pop()!.replace(/\.[^/.]+$/, "")
   return {
-    ...p.default,
     alt,
+    src: v,
   };
 });
 ---
@@ -24,11 +20,10 @@ let pics = (
     pics.map(({ src, alt }) => (
       <div class="frame">
         <Image
-          src={src}
+          src={src()}
           alt={alt}
           width={600}
           format="webp"
-          height={(3 / 4) * 600}
         />
       </div>
     ))
@@ -37,19 +32,17 @@ let pics = (
 
 <style lang="scss">
   .frame {
-    &:nth-child(odd) {
-      margin-right: 1rem;
-    }
-    margin: 1rem 0;
     width: 300px;
     img {
       width: 100%;
       height: auto;
+      margin: 0;
     }
   }
   .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 16px;
   }
 </style>
