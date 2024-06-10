@@ -21,7 +21,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="text-black bg-white dark:text-white dark:bg-black">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -57,49 +57,30 @@ const {
       }
     </style>
     <script>
-      const root = document.documentElement;
-      const darkMedia = matchMedia("(prefers-color-scheme: dark)");
-
-      darkMedia.addEventListener("change", (ev) => {
-        if (ev.matches) {
-          localStorage.setItem("theme", "dark");
-          root.classList.add("dark");
-        } else {
-          localStorage.setItem("theme", "light");
-          root.classList.remove("dark");
-        }
-      });
-
+      import { setDarkMode, setLightMode, useMediaTheme } from "../util/darkMode";
       // listen to theme changes from other tabs
       window.addEventListener("storage", (ev) => {
         if (ev.storageArea === localStorage) {
           if (ev.newValue === "dark") {
-            root.classList.add("dark");
+            setDarkMode();
           } else if (ev.newValue === "light") {
-            root.classList.remove("dark");
+            setLightMode();
+          } else {
+            useMediaTheme()
           }
         }
       });
 
       const theme = localStorage.getItem("theme");
       if (theme === "dark") {
-        root.classList.add("dark");
+        setDarkMode();
       } else if (theme === "light") {
-        root.classList.remove("dark");
-      } else {
-        const darkMedia = matchMedia("(prefers-color-scheme: dark)");
-        if (darkMedia.matches) {
-          root.classList.add("dark");
-          localStorage.setItem("theme", "dark")
-        } else {
-          root.classList.remove("dark");
-          localStorage.setItem("theme", "light")
-        }
-      }
+        setLightMode();
+      } 
     </script>
   </head>
 
-  <body class="mx-auto my-4 max-w-3xl px-1">
+  <body class="mx-auto my-4 max-w-3xl px-1 text-black bg-white dark:text-white dark:bg-black">
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
   </body>

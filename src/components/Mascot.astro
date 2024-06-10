@@ -3,26 +3,43 @@ import penguinSvg from "../assets/penguin.svg?raw";
 ---
 
 <script>
+  import { setDarkMode, setLightMode, useMediaTheme } from "../util/darkMode";
   const penguin = document.getElementById("penguin");
-  const root = document.documentElement;
 
   if (penguin) {
     penguin.addEventListener("click", () => {
       const theme = localStorage.getItem("theme");
+      const darkMedia = matchMedia("(prefers-color-scheme: dark)");
 
-      if (theme === "dark") {
-        localStorage.setItem("theme", "light");
-        root.classList.remove("dark");
-      } else if (theme === "light") {
-        localStorage.setItem("theme", "dark");
-        root.classList.add("dark");
-      } else {
-        const darkMedia = matchMedia("(prefers-color-scheme: dark)");
-        localStorage.setItem("theme", darkMedia.matches ? "light" : "dark");
+      if (!theme) {
         if (darkMedia.matches) {
-          root.classList.add("dark");
+          localStorage.setItem("theme", "light");
+          setLightMode();
+          return
         } else {
-          root.classList.remove("dark");
+          localStorage.setItem("theme", "dark");
+          setDarkMode();
+          return
+        }
+      } else if (theme === "dark") {
+        if (darkMedia.matches) {
+          localStorage.setItem("theme", "light");
+          setLightMode();
+          return
+        } else {
+          localStorage.removeItem("theme");
+          useMediaTheme();
+          return
+        }
+      } else if (theme === "light") {
+        if (darkMedia.matches) {
+          localStorage.removeItem("theme");
+          useMediaTheme();
+          return
+        } else {
+          localStorage.setItem("theme", "dark");
+          setDarkMode();
+          return
         }
       }
     });

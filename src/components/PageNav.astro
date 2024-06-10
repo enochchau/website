@@ -15,11 +15,9 @@ const { active, items } = Astro.props as Props;
           href={"/" + item.value}
           class:list={[
             "transition-all underline hover:decoration-purple-500",
-          ].concat(
-            active === item.label
-              ? ["decoration-purple-500"]
-              : ["decoration-transparent"],
-          )}
+            { "decoration-purple-500": active === item.label },
+            { "decoration-transparent": active !== item.label },
+          ]}
         >
           {item.label}
         </a>
