@@ -4,56 +4,25 @@ import penguinSvg from "../assets/penguin.svg?raw";
 
 <script>
   const penguin = document.getElementById("penguin");
-  const darkMedia = matchMedia("(prefers-color-scheme: dark)");
   const root = document.documentElement;
-
-  darkMedia.addEventListener("change", () => {
-    localStorage.removeItem("theme");
-    root.classList.remove("light");
-    root.classList.remove("dark");
-  });
-
-  function setLightTheme() {
-    if (darkMedia.matches) {
-      localStorage.setItem("theme", "light");
-      root.classList.add("light");
-      root.classList.remove("dark");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light");
-      root.classList.remove("dark");
-    }
-  }
-
-  function setDarkTheme() {
-    if (!darkMedia.matches) {
-      localStorage.setItem("theme", "dark");
-      root.classList.add("dark");
-      root.classList.remove("light");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light");
-      root.classList.remove("dark");
-    }
-  }
 
   if (penguin) {
     penguin.addEventListener("click", () => {
       const theme = localStorage.getItem("theme");
-      if (typeof theme === "string") {
-        switch (theme) {
-          case "light":
-            setDarkTheme();
-            break;
-          case "dark":
-            setLightTheme();
-            break;
-        }
+
+      if (theme === "dark") {
+        localStorage.setItem("theme", "light");
+        root.classList.remove("dark");
+      } else if (theme === "light") {
+        localStorage.setItem("theme", "dark");
+        root.classList.add("dark");
       } else {
+        const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+        localStorage.setItem("theme", darkMedia.matches ? "light" : "dark");
         if (darkMedia.matches) {
-          setLightTheme();
+          root.classList.add("dark");
         } else {
-          setDarkTheme();
+          root.classList.remove("dark");
         }
       }
     });
@@ -66,5 +35,5 @@ import penguinSvg from "../assets/penguin.svg?raw";
   class="transition-all hover:scale-110 w-40 cursor-pointer"
   id="penguin"
 >
-  <div set:html={penguinSvg} class="dark:invert"/>
+  <div set:html={penguinSvg} class="dark:invert" />
 </a>

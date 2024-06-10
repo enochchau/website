@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import Prose from "../components/Prose.astro";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -16,15 +17,15 @@ const { data } = content;
   activeNav="blog"
   description={data.subtitle}
 >
-  <div class="md-container">
-    <h1>{data.title}</h1>
-    {data.subtitle && <h3>{data.subtitle}</h3>}
-    <h4>{data.date}</h4>
+  <h1 class="text-2xl font-bold">{data.title}</h1>
+  {data.subtitle && <h2 class="text-lg">{data.subtitle}</h2>}
+  <h3 class="text-md italic">{data.date}</h3>
+  <Prose>
     <slot />
-  </div>
+  </Prose>
 </Layout>
 
-<style is:global lang="scss">
+<style is:global>
   .md-container {
     img,
     iframe,
