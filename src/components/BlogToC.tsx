@@ -219,10 +219,14 @@ function Tag(props: TagProps) {
     <button
       title={!props.selected ? props.title : undefined}
       classList={{
-        [styles.tag]: true,
-        [styles["selected"]]: props.selected,
-        [styles["chosen-filter"]]: props.chosen,
+        "p-1 text-gray-500 text-base font-sans rounded border-solid border-gray-600 border-2 leading-none":
+          true,
       }}
+      // classList={{
+      //   [styles.tag]: true,
+      //   [styles["selected"]]: props.selected,
+      //   [styles["chosen-filter"]]: props.chosen,
+      // }}
       onclick={props.onClick}
     >
       {props.children} {props.closable && "×"}
