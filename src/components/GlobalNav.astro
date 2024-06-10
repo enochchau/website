@@ -19,16 +19,7 @@ const navItems = [
 ];
 ---
 
-<nav>
+<nav class="my-2 flex items-end justify-between">
   <NavTitle />
   <PageNav items={navItems} active={activeNav} />
 </nav>
-
-<style lang="scss">
-  nav {
-    margin: 2vh 0 2vh 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-</style>

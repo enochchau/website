@@ -1,5 +1,6 @@
 ---
 import "../styles/reset.css";
+import "../styles/base.css";
 
 import penguinSvg from "../assets/penguin.svg";
 import GlobalNav from "../components/GlobalNav.astro";
@@ -20,7 +21,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="text-black bg-white dark:text-white dark:bg-black">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -50,19 +51,20 @@ const {
       const root = document.documentElement;
       function readTheme() {
         const theme = localStorage.getItem("theme");
-        switch (theme) {
-          case "light":
-            root.classList.add("light-theme");
-            root.classList.remove("dark-theme");
-            break;
-          case "dark":
-            root.classList.add("dark-theme");
-            root.classList.remove("light-theme");
-            break;
-          case null:
-            root.classList.remove("light-theme");
-            root.classList.remove("dark-theme");
-            break;
+        if (theme === "dark") {
+          root.classList.add("dark");
+          return;
+        } else if (theme === "light") {
+          root.classList.remove("dark");
+          return;
+        }
+
+        const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+
+        if (darkMedia.matches) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
         }
       }
 
@@ -72,6 +74,14 @@ const {
       window.addEventListener("storage", readTheme);
     </script>
     <style lang="scss" is:global>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
       @mixin dark-theme {
         --background-secondary: #444;
         --background: #1a1b1d;
@@ -135,114 +145,98 @@ const {
         @include light-theme;
       }
 
-      html {
-        color: var(--primary);
-        background: var(--background);
-        font-family: var(--font-sans-serif);
-      }
-
-      body {
-        line-height: 1.2;
-      }
-
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      h1 {
-        font-size: var(--font-size-xl);
-      }
-
-      h2 {
-        font-size: var(--font-size-lg);
-      }
-
-      h3 {
-        font-size: var(--font-size-md);
-      }
-
-      h4 {
-        font-size: var(--font-size-sm);
-      }
-
-      h5 {
-        font-size: var(--font-size-xs);
-      }
-
-      p {
-        font-size: var(--font-size-xs);
-      }
-
-      code {
-        font-family: var(--font-mono);
-      }
-
-      strong {
-        font-weight: bold;
-      }
-
-      a {
-        color: var(--secondary);
-        transition: text-decoration var(--hover-time) ease-out;
-        text-decoration-color: transparent;
-
-        &:hover {
-          text-decoration: underline var(--primary);
-        }
-        &:active {
-          color: var(--primary);
-        }
-        &:visited {
-          color: var(--grey);
-        }
-      }
-
-      ul {
-        list-style-type: disc;
-        list-style-position: inside;
-      }
-
-      ol {
-        list-style-type: decimal;
-        list-style-position: inside;
-      }
-
-      img {
-        border-radius: var(--border-radius);
-      }
-
-      button {
-        cursor: pointer;
-        border-radius: var(--border-radius);
-        border: none;
-        font-size: var(--font-size-xs);
-        padding: 10px 12px;
-        font-weight: bold;
-        background: var(--background-secondary);
-        color: var(--primary);
-        letter-spacing: 0.07rem;
-        transition: background var(--hover-time) ease-out;
-        &:hover {
-          background: var(--grey2);
-        }
-      }
-    </style>
-    <style lang="scss">
-      body {
-        margin: 0px auto 2vh auto;
-        max-width: 800px;
-        @media (max-width: 800px) {
-          padding: 0 2vw;
-        }
-      }
+      // html {
+      //   color: var(--primary);
+      //   background: var(--background);
+      //   font-family: var(--font-sans-serif);
+      // }
+      //
+      // body {
+      //   line-height: 1.2;
+      // }
+      //
+      //
+      // h1 {
+      //   font-size: var(--font-size-xl);
+      // }
+      //
+      // h2 {
+      //   font-size: var(--font-size-lg);
+      // }
+      //
+      // h3 {
+      //   font-size: var(--font-size-md);
+      // }
+      //
+      // h4 {
+      //   font-size: var(--font-size-sm);
+      // }
+      //
+      // h5 {
+      //   font-size: var(--font-size-xs);
+      // }
+      //
+      // p {
+      //   font-size: var(--font-size-xs);
+      // }
+      //
+      // code {
+      //   font-family: var(--font-mono);
+      // }
+      //
+      // strong {
+      //   font-weight: bold;
+      // }
+      //
+      // a {
+      //   color: var(--secondary);
+      //   transition: text-decoration var(--hover-time) ease-out;
+      //   text-decoration-color: transparent;
+      //
+      //   &:hover {
+      //     text-decoration: underline var(--primary);
+      //   }
+      //   &:active {
+      //     color: var(--primary);
+      //   }
+      //   // &:visited {
+      //   //   color: var(--grey);
+      //   // }
+      // }
+      //
+      // ul {
+      //   list-style-type: disc;
+      //   list-style-position: inside;
+      // }
+      //
+      // ol {
+      //   list-style-type: decimal;
+      //   list-style-position: inside;
+      // }
+      //
+      // img {
+      //   border-radius: var(--border-radius);
+      // }
+      //
+      // button {
+      //   cursor: pointer;
+      //   border-radius: var(--border-radius);
+      //   border: none;
+      //   font-size: var(--font-size-xs);
+      //   padding: 10px 12px;
+      //   font-weight: bold;
+      //   background: var(--background-secondary);
+      //   color: var(--primary);
+      //   letter-spacing: 0.07rem;
+      //   transition: background var(--hover-time) ease-out;
+      //   &:hover {
+      //     background: var(--grey2);
+      //   }
+      // }
     </style>
   </head>
 
-  <body>
+  <body class="mx-auto my-4 max-w-3xl px-1">
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
   </body>

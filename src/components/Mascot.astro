@@ -2,10 +2,6 @@
 import penguinSvg from "../assets/penguin.svg?raw";
 ---
 
-<a aria-label="Toggle dark mode" href="javascript:void 0" id="penguin">
-  <Fragment set:html={penguinSvg} />
-</a>
-
 <script>
   const penguin = document.getElementById("penguin");
   const darkMedia = matchMedia("(prefers-color-scheme: dark)");
@@ -13,31 +9,31 @@ import penguinSvg from "../assets/penguin.svg?raw";
 
   darkMedia.addEventListener("change", () => {
     localStorage.removeItem("theme");
-    root.classList.remove("light-theme");
-    root.classList.remove("dark-theme");
+    root.classList.remove("light");
+    root.classList.remove("dark");
   });
 
   function setLightTheme() {
     if (darkMedia.matches) {
       localStorage.setItem("theme", "light");
-      root.classList.add("light-theme");
-      root.classList.remove("dark-theme");
+      root.classList.add("light");
+      root.classList.remove("dark");
     } else {
       localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
+      root.classList.remove("light");
+      root.classList.remove("dark");
     }
   }
 
   function setDarkTheme() {
     if (!darkMedia.matches) {
       localStorage.setItem("theme", "dark");
-      root.classList.add("dark-theme");
-      root.classList.remove("light-theme");
+      root.classList.add("dark");
+      root.classList.remove("light");
     } else {
       localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
+      root.classList.remove("light");
+      root.classList.remove("dark");
     }
   }
 
@@ -64,14 +60,11 @@ import penguinSvg from "../assets/penguin.svg?raw";
   }
 </script>
 
-<style lang="scss">
-  #penguin:hover {
-    transform: scale(1.1);
-  }
-  #penguin {
-    transition: transform 800ms;
-  }
-  a {
-    width: 160px;
-  }
-</style>
+<a
+  aria-label="Toggle dark mode"
+  href="javascript:void 0"
+  class="transition-all hover:scale-110 w-40 cursor-pointer"
+  id="penguin"
+>
+  <div set:html={penguinSvg} class="dark:invert"/>
+</a>

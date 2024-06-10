@@ -5,38 +5,14 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<h2 class:list={["font-bold font-sans text-2xl", className]}><a href="/">enoch chau</a></h2>
-
-<style lang="scss">
-  .title {
-    font-weight: bold;
-    color: var(--nav-title-color);
-    text-shadow:
-      1px 1px var(--nav-title-shadow),
-      2px 2px var(--nav-title-shadow),
-      3px 3px var(--nav-title-shadow),
-      4px 4px var(--nav-title-shadow),
-      5px 5px var(--nav-title-shadow);
-
-    transition: var(--hover-time);
-    &:hover {
-      transition: var(--hover-time);
-      color: var(--nav-title-shadow);
-      text-shadow:
-        1px 1px var(--nav-title-color),
-        2px 2px var(--nav-title-color),
-        3px 3px var(--nav-title-color),
-        4px 4px var(--nav-title-color),
-        5px 5px var(--nav-title-color);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      &:hover {
-        color: inherit;
-        text-decoration: none;
-      }
-    }
-  }
-</style>
+<h1
+  class:list={[
+    "tracking-normal font-bold font-sans text-2xl nav-title hover:text-gray-400 transition-all dark:nav-title-dark dark:hover:text-purple-500",
+    className,
+  ]}
+>
+  <a
+    class="text-inherit no-underline hover:text-inherit hover:no-underline"
+    href="/">enoch chau</a
+  >
+</h1>
