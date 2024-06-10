@@ -1,6 +1,5 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
-import defaultTheme from "tailwindcss/defaultTheme";
 import type { PluginUtils } from "tailwindcss/types/config";
 
 export default {
@@ -53,9 +52,6 @@ export default {
           },
         },
       }),
-    },
-    fontFamily: {
-      mono: ["Fantasque Sans Mono", ...defaultTheme.fontFamily.mono],
     },
     colors: {
       white: "#f0f0f0",
