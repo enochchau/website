@@ -2,76 +2,55 @@
 import penguinSvg from "../assets/penguin.svg?raw";
 ---
 
-<a aria-label="Toggle dark mode" href="javascript:void 0" id="penguin">
-  <Fragment set:html={penguinSvg} />
-</a>
-
 <script>
+  import { setDarkMode, setLightMode, useMediaTheme } from "../util/darkMode";
   const penguin = document.getElementById("penguin");
-  const darkMedia = matchMedia("(prefers-color-scheme: dark)");
-  const root = document.documentElement;
-
-  darkMedia.addEventListener("change", () => {
-    localStorage.removeItem("theme");
-    root.classList.remove("light-theme");
-    root.classList.remove("dark-theme");
-  });
-
-  function setLightTheme() {
-    if (darkMedia.matches) {
-      localStorage.setItem("theme", "light");
-      root.classList.add("light-theme");
-      root.classList.remove("dark-theme");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
-    }
-  }
-
-  function setDarkTheme() {
-    if (!darkMedia.matches) {
-      localStorage.setItem("theme", "dark");
-      root.classList.add("dark-theme");
-      root.classList.remove("light-theme");
-    } else {
-      localStorage.removeItem("theme");
-      root.classList.remove("light-theme");
-      root.classList.remove("dark-theme");
-    }
-  }
 
   if (penguin) {
     penguin.addEventListener("click", () => {
       const theme = localStorage.getItem("theme");
-      if (typeof theme === "string") {
-        switch (theme) {
-          case "light":
-            setDarkTheme();
-            break;
-          case "dark":
-            setLightTheme();
-            break;
-        }
-      } else {
+      const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+
+      if (!theme) {
         if (darkMedia.matches) {
-          setLightTheme();
+          localStorage.setItem("theme", "light");
+          setLightMode();
+          return
         } else {
-          setDarkTheme();
+          localStorage.setItem("theme", "dark");
+          setDarkMode();
+          return
+        }
+      } else if (theme === "dark") {
+        if (darkMedia.matches) {
+          localStorage.setItem("theme", "light");
+          setLightMode();
+          return
+        } else {
+          localStorage.removeItem("theme");
+          useMediaTheme();
+          return
+        }
+      } else if (theme === "light") {
+        if (darkMedia.matches) {
+          localStorage.removeItem("theme");
+          useMediaTheme();
+          return
+        } else {
+          localStorage.setItem("theme", "dark");
+          setDarkMode();
+          return
         }
       }
     });
   }
 </script>
 
-<style lang="scss">
-  #penguin:hover {
-    transform: scale(1.1);
-  }
-  #penguin {
-    transition: transform 800ms;
-  }
-  a {
-    width: 160px;
-  }
-</style>
+<a
+  aria-label="Toggle dark mode"
+  href="javascript:void 0"
+  class="transition-all hover:scale-110 w-40 cursor-pointer"
+  id="penguin"
+>
+  <div set:html={penguinSvg} class="dark:invert" />
+</a>

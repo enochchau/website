@@ -1,41 +1,24 @@
 ---
+import Anchor from "../components/Anchor";
 import Mascot from "../components/Mascot.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Enoch Chau">
-  <div class="title">
+  <div class="text-center flex flex-col justify-center items-center gap-3">
     <Mascot />
-    <h1><strong>enoch chau</strong></h1>
-    <h2>conversation enthusiast</h2>
-    <h3>(humans and computers)</h3>
-    <div class="links">
-      <h3>
-        <a href="https://www.linkedin.com/in/enoch-chau-a2a522126/">linkedin</a>
-      </h3>
-      <h3><a href="https://github.com/enochchau">github</a></h3>
-    </div>
+    <h1 class="text-3xl font-bold">enoch chau</h1>
+    <h2 class="text-2xl">conversation enthusiast</h2>
+    <h3 class="text-xl">(humans and computers)</h3>
+    <ul class="flex gap-3">
+      <li>
+        <Anchor href="https://www.linkedin.com/in/enoch-chau-a2a522126/"
+          >linkedin</Anchor
+        >
+      </li>
+      <li>
+        <Anchor href="https://github.com/enochchau">github</Anchor>
+      </li>
+    </ul>
   </div>
 </Layout>
-
-<style lang="scss">
-  .title {
-    text-align: center;
-  }
-  .title {
-    img {
-      cursor: pointer;
-    }
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .links {
-    gap: 8px;
-    display: flex;
-  }
-</style>

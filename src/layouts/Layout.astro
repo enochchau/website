@@ -1,8 +1,9 @@
 ---
-import "../styles/reset.css";
+import "~/styles/reset.css";
+import "~/styles/base.css";
 
-import penguinSvg from "../assets/penguin.svg";
-import GlobalNav from "../components/GlobalNav.astro";
+import penguinSvg from "~/assets/penguin.svg";
+import GlobalNav from "~/components/GlobalNav.astro";
 
 export interface Props {
   title: string;
@@ -28,7 +29,6 @@ const {
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎱</text></svg>"
     />
-    <link rel="stylesheet" href="/fonts/FantasqueSansMono-Regular-decl.css " />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -46,105 +46,7 @@ const {
       content={`https://enochchau.com${Astro.url.pathname}`}
     />
     <title>{title}</title>
-    <script>
-      const root = document.documentElement;
-      function readTheme() {
-        const theme = localStorage.getItem("theme");
-        switch (theme) {
-          case "light":
-            root.classList.add("light-theme");
-            root.classList.remove("dark-theme");
-            break;
-          case "dark":
-            root.classList.add("dark-theme");
-            root.classList.remove("light-theme");
-            break;
-          case null:
-            root.classList.remove("light-theme");
-            root.classList.remove("dark-theme");
-            break;
-        }
-      }
-
-      readTheme();
-
-      // listen to theme changes from other tabs
-      window.addEventListener("storage", readTheme);
-    </script>
     <style lang="scss" is:global>
-      @mixin dark-theme {
-        --background-secondary: #444;
-        --background: #1a1b1d;
-        --grey2: #666666;
-        --grey: #8f96a1;
-        --primary: #f0f0f0;
-        --secondary: #a86be7;
-        #penguin {
-          filter: invert(100%);
-        }
-        --nav-title-color: var(--primary);
-        --nav-title-shadow: var(--secondary);
-      }
-
-      @mixin light-theme {
-        --background-secondary: #ddd;
-        --background: #f0f0f0;
-        --grey2: #a2a3a8;
-        --grey: #666666;
-        --primary: #282c34;
-        --secondary: #6f1cc5;
-        #penguin {
-          filter: unset;
-        }
-        --nav-title-color: var(--primary);
-        --nav-title-shadow: var(--grey2);
-      }
-
-      :root {
-        @include light-theme;
-        --font-sans-serif: -apple-system, BlinkMacSystemFont, avenir next,
-          avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto,
-          noto, arial, sans-serif;
-        --font-serif: Iowan Old Style, Apple Garamond, Baskerville,
-          Times New Roman, Droid Serif, Times, Source Serif Pro, serif,
-          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-        --font-mono: Fantasque Sans Mono, Menlo, Consolas, Monaco,
-          Liberation Mono, Lucida Console, monospace;
-
-        --font-size-xl: 2rem;
-        --font-size-lg: 1.6rem;
-        --font-size-md: 1.4rem;
-        --font-size-sm: 1.2rem;
-        --font-size-xs: 1rem;
-
-        --hover-time: 0.3s;
-        --border-radius: 4px;
-        --shadow-color: rgb(0 0 0 / 40%);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          @include dark-theme;
-        }
-      }
-
-      .dark-theme {
-        @include dark-theme;
-      }
-      .light-theme {
-        @include light-theme;
-      }
-
-      html {
-        color: var(--primary);
-        background: var(--background);
-        font-family: var(--font-sans-serif);
-      }
-
-      body {
-        line-height: 1.2;
-      }
-
       *,
       *:before,
       *:after {
@@ -152,97 +54,38 @@ const {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-
-      h1 {
-        font-size: var(--font-size-xl);
-      }
-
-      h2 {
-        font-size: var(--font-size-lg);
-      }
-
-      h3 {
-        font-size: var(--font-size-md);
-      }
-
-      h4 {
-        font-size: var(--font-size-sm);
-      }
-
-      h5 {
-        font-size: var(--font-size-xs);
-      }
-
-      p {
-        font-size: var(--font-size-xs);
-      }
-
-      code {
-        font-family: var(--font-mono);
-      }
-
-      strong {
-        font-weight: bold;
-      }
-
-      a {
-        color: var(--secondary);
-        transition: text-decoration var(--hover-time) ease-out;
-        text-decoration-color: transparent;
-
-        &:hover {
-          text-decoration: underline var(--primary);
-        }
-        &:active {
-          color: var(--primary);
-        }
-        &:visited {
-          color: var(--grey);
-        }
-      }
-
-      ul {
-        list-style-type: disc;
-        list-style-position: inside;
-      }
-
-      ol {
-        list-style-type: decimal;
-        list-style-position: inside;
-      }
-
-      img {
-        border-radius: var(--border-radius);
-      }
-
-      button {
-        cursor: pointer;
-        border-radius: var(--border-radius);
-        border: none;
-        font-size: var(--font-size-xs);
-        padding: 10px 12px;
-        font-weight: bold;
-        background: var(--background-secondary);
-        color: var(--primary);
-        letter-spacing: 0.07rem;
-        transition: background var(--hover-time) ease-out;
-        &:hover {
-          background: var(--grey2);
-        }
-      }
     </style>
-    <style lang="scss">
-      body {
-        margin: 0px auto 2vh auto;
-        max-width: 800px;
-        @media (max-width: 800px) {
-          padding: 0 2vw;
+    <script>
+      import {
+        setDarkMode,
+        setLightMode,
+        useMediaTheme,
+      } from "../util/darkMode";
+      // listen to theme changes from other tabs
+      window.addEventListener("storage", (ev) => {
+        if (ev.storageArea === localStorage && ev.key === "theme") {
+          if (ev.newValue === "dark") {
+            setDarkMode();
+          } else if (ev.newValue === "light") {
+            setLightMode();
+          } else {
+            useMediaTheme();
+          }
         }
+      });
+
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        setDarkMode();
+      } else if (theme === "light") {
+        setLightMode();
       }
-    </style>
+    </script>
   </head>
 
-  <body>
+  <body
+    class="mx-auto my-4 max-w-3xl px-1 text-black bg-white dark:text-white dark:bg-black"
+  >
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
   </body>

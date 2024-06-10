@@ -11,7 +11,7 @@ import {
 } from "solid-js";
 
 import type { ByYear } from "../types";
-import styles from "./BlogToC.module.scss";
+import BlogHeader from "./BlogHeader";
 
 const FILTER_PARAM = "f";
 
@@ -118,24 +118,18 @@ export default function BlogToC(props: BlogToCProps) {
   return (
     <div>
       <Show when={filters().length > 0}>
-        <div class={styles["chosen-container"]}>
+        <div class="flex flex-wrap gap-2">
           <Tag
             onClick={() => {
               setFilters([]);
             }}
             selected
-            chosen
           >
             clear all
           </Tag>
           <For each={filters()}>
             {(filter) => (
-              <Tag
-                onClick={() => removeFilter(filter)}
-                selected
-                chosen
-                closable
-              >
+              <Tag onClick={() => removeFilter(filter)} selected closable>
                 {filter}
               </Tag>
             )}
@@ -170,29 +164,36 @@ export default function BlogToC(props: BlogToCProps) {
                 matches={matches}
                 filters={filters()}
               />
-              <ul class={styles["post-list"]}>
+              <ul>
                 <For each={posts}>
                   {(post) => (
-                    <li class={styles.post}>
-                      <a href={post.url} class={styles["title-group"]}>
-                        <h2 class={styles.title}>{post.title}</h2>
-                        <p class={styles["date"]}>{post.date}</p>
-                        <p class={styles.readtime}>{post.readingTime}</p>
-                      </a>
-                      <div>
-                        <div class={styles["tags-container"]}>
-                          <For each={post.tags}>
-                            {(tag) => (
-                              <Tag
-                                title="click to filter posts"
-                                onClick={() => addFilter(tag)}
-                                selected={filters().includes(tag)}
-                              >
-                                {tag}
-                              </Tag>
-                            )}
-                          </For>
+                    <li class="pb-2">
+                      <a
+                        href={post.url}
+                        class="visited:text-gray-500 dark:visited:text-gray-300"
+                      >
+                        <div class="md:flex md:items-end gap-2 py-1">
+                          <BlogHeader>{post.title}</BlogHeader>
+                          <p class="text-gray-500 dark:text-gray-300">
+                            {post.date}
+                          </p>
+                          <p class="text-gray-500 italic dark:text-gray-300">
+                            {post.readingTime}
+                          </p>
                         </div>
+                      </a>
+                      <div class="gap-2 flex flex-wrap">
+                        <For each={post.tags}>
+                          {(tag) => (
+                            <Tag
+                              title="click to filter posts"
+                              onClick={() => addFilter(tag)}
+                              selected={filters().includes(tag)}
+                            >
+                              {tag}
+                            </Tag>
+                          )}
+                        </For>
                       </div>
                     </li>
                   )}
@@ -210,7 +211,6 @@ interface TagProps {
   children: JSX.Element;
   onClick?: JSX.EventHandler<HTMLSpanElement, MouseEvent>;
   selected?: boolean;
-  chosen?: boolean; // chosen at the top of the toc
   title?: string;
   closable?: boolean;
 }
@@ -219,9 +219,12 @@ function Tag(props: TagProps) {
     <button
       title={!props.selected ? props.title : undefined}
       classList={{
-        [styles.tag]: true,
-        [styles["selected"]]: props.selected,
-        [styles["chosen-filter"]]: props.chosen,
+        "px-2 py-1 text-base rounded leading-none transition-all tracking-wide":
+          true,
+        "bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500":
+          !props.selected,
+        "hover:bg-gray-200 bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600":
+          props.selected,
       }}
       onclick={props.onClick}
     >
@@ -246,9 +249,10 @@ function YearHeader(props: YearHeaderProps) {
   return (
     <h1
       classList={{
-        [styles.year]: true,
-        [styles["year-match"]]: props.matches,
-        [styles["year-nomatch"]]: !props.matches,
+        ["rounded p-1 text-3xl w-fit transition-all my-2"]: true,
+        ["hover:bg-gray-300 dark:hover:bg-gray-500"]: !props.matches,
+        ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]:
+          props.matches,
       }}
     >
       <a href={href()} onClick={props.onClick}>

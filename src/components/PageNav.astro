@@ -7,36 +7,21 @@ interface Props {
 const { active, items } = Astro.props as Props;
 ---
 
-<nav>
+<nav class="flex gap-3">
   {
     items.map((item) => (
-      <h3>
+      <h2 class="font-bold text-xl">
         <a
           href={"/" + item.value}
-          class={active === item.label ? "current-nav" : ""}
+          class:list={[
+            "transition-all underline hover:decoration-purple-500",
+            { "decoration-purple-500": active === item.label },
+            { "decoration-transparent": active !== item.label },
+          ]}
         >
           {item.label}
         </a>
-      </h3>
+      </h2>
     ))
   }
 </nav>
-
-<style lang="scss">
-  .current-nav {
-    text-decoration: underline;
-    text-decoration-color: var(--secondary);
-  }
-
-  h3 {
-    font-weight: bold;
-    > a {
-      color: var(--primary);
-    }
-  }
-
-  nav {
-    display: flex;
-    gap: 12px;
-  }
-</style>

@@ -3,7 +3,10 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "exclude": ["dist"]
 }

@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import Layout from "./Layout.astro";
+import Prose from "~/components/Prose.astro";
+import Layout from "~/layouts/Layout.astro";
 
 interface Props {
   content: CollectionEntry<"blog">;
@@ -16,108 +17,10 @@ const { data } = content;
   activeNav="blog"
   description={data.subtitle}
 >
-  <div class="md-container">
-    <h1>{data.title}</h1>
-    {data.subtitle && <h3>{data.subtitle}</h3>}
-    <h4>{data.date}</h4>
+  <h1 class="text-2xl font-bold mt-6">{data.title}</h1>
+  {data.subtitle && <h2 class="text-lg my-1">{data.subtitle}</h2>}
+  <h3 class="text-md italic mb-6">{data.date}</h3>
+  <Prose>
     <slot />
-  </div>
+  </Prose>
 </Layout>
-
-<style is:global lang="scss">
-  .md-container {
-    img,
-    iframe,
-    ul,
-    p,
-    video,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    ol {
-      margin: 0.5rem 0;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 0.8rem 0;
-    }
-
-    p {
-      line-height: 1.725;
-    }
-
-    /* hide md language id */
-    div.language-id {
-      display: none;
-    }
-
-    code {
-      background-color: var(--background-secondary);
-      border-radius: var(--border-radius);
-      padding: 0rem 0.2rem;
-    }
-
-    pre.astro-code {
-      padding: 0.9rem;
-      border-radius: var(--border-radius);
-      overflow: auto;
-      > code {
-        background-color: unset;
-        border-radius: unset;
-        padding: unset;
-      }
-    }
-
-    ul,
-    ol {
-      list-style-position: outside;
-      padding-left: 1rem;
-    }
-
-    hr {
-      border: 1px solid var(--background-secondary);
-      border-bottom: 0;
-      border-left: 0;
-      border-right: 0;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    th {
-      font-weight: bold;
-    }
-
-    table,
-    th,
-    td {
-      border: 1px solid;
-      padding: 0.5rem;
-    }
-
-    table {
-      border-collapse: collapse;
-    }
-
-    blockquote {
-      margin: 1rem;
-      padding-left: 1rem;
-      opacity: 0.8;
-      border-left: 2px solid var(--secondary);
-    }
-  }
-</style>

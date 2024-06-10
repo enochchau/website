@@ -1,11 +1,11 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
+import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 
 import { rehypePreview } from "./rehype-preview";
 import { remarkReadingTime } from "./remark-reading-time";
-
 const site = "https://enochchau.com";
 
 // https://astro.build/config
@@ -26,6 +26,7 @@ export default defineConfig({
         ].some((p) => site + p === page);
       },
     }),
+    tailwind(),
   ],
   markdown: {
     gfm: true,

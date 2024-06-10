@@ -2,12 +2,13 @@
 import { Image } from "astro:assets";
 
 import me from "../assets/me.webp";
+import Anchor from "../components/Anchor";
 import ContactButton from "../components/ContactButton";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Enoch - About" activeNav="about">
-  <div class="about">
+  <div class="flex flex-wrap-reverse gap-4">
     <Image
       src={me}
       alt="enoch bouldering in red rock"
@@ -15,8 +16,8 @@ import Layout from "../layouts/Layout.astro";
       height={0}
       format="webp"
     />
-    <article>
-      <h1>hello there</h1>
+    <div class="w-1/2">
+      <h1 class="text-2xl font-bold">hello there</h1>
       <p>
         I'm a full stack software enigneer at
         <a href="https://gatsby.events">Gatsby</a>. I'm interested in JavaScript
@@ -27,48 +28,21 @@ import Layout from "../layouts/Layout.astro";
           the boulders.
         </a>
       </p>
-      <ul>
+      <ul class="py-2">
         <li>
-          <a href="https://www.linkedin.com/in/enoch-chau-a2a522126/"
+          <Anchor
+            href="https://www.linkedin.com/in/enoch-chau-a2a522126/"
+            class="underline transition-all decoration-transparent hover:decoration-purple-500 font-bold"
             >linkedin
-          </a>
+          </Anchor>
         </li>
         <li>
-          <a href="https://github.com/enochchau">github</a>
+          <Anchor href="https://github.com/enochchau">github</Anchor>
         </li>
       </ul>
       <div class="contact-container">
         <ContactButton client:idle />
       </div>
-    </article>
+    </div>
   </div>
 </Layout>
-
-<style lang="scss">
-  div.contact-container,
-  ul {
-    margin-top: 1rem;
-  }
-
-  .about {
-    display: flex;
-    flex-wrap: wrap-reverse;
-
-    article {
-      width: 23rem;
-      margin-bottom: 2rem;
-
-      p {
-        line-height: 1.5;
-      }
-
-      h1 {
-        margin-bottom: 0.6rem;
-      }
-    }
-  }
-
-  img {
-    margin-right: 2rem;
-  }
-</style>

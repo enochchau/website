@@ -24,6 +24,7 @@ export default tseslint.config(
   {
     rules: {
       "@typescript-eslint/triple-slash-reference": "off",
+      "@typescript-eslint/consistent-type-imports": "error",
     },
   },
 );

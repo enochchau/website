@@ -15,34 +15,18 @@ let pics = Object.entries(urls).map(([k, v]) => {
 });
 ---
 
-<div class="grid">
+<div class="flex flex-wrap justify-between gap-4">
   {
     pics.map(({ src, alt }) => (
-      <div class="frame">
+      <div class="w-72">
         <Image
           src={src()}
           alt={alt}
           width={600}
           format="webp"
+          class="w-full h-auto m-0"
         />
       </div>
     ))
   }
 </div>
-
-<style lang="scss">
-  .frame {
-    width: 300px;
-    img {
-      width: 100%;
-      height: auto;
-      margin: 0;
-    }
-  }
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 16px;
-  }
-</style>
