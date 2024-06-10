@@ -115,19 +115,6 @@ export default function BlogToC(props: BlogToCProps) {
     return filteredByYear;
   });
 
-  // navigate back to root `/blog` if we're on a filtered subpath like `/blog/dev`
-  createEffect(() => {
-    if (filters().length === 0) {
-      const [blog, dev] = window.location.pathname
-        .split("/")
-        .filter((part) => part);
-
-      if (dev === "dev") {
-        window.history.pushState("/blog/dev", "", "/" + blog);
-      }
-    }
-  });
-
   return (
     <div>
       <Show when={filters().length > 0}>

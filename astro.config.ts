@@ -1,10 +1,10 @@
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 
 import { rehypePreview } from "./rehype-preview";
 import { remarkReadingTime } from "./remark-reading-time";
-import sitemap from "@astrojs/sitemap";
 
 const site = "https://enochchau.com";
 
