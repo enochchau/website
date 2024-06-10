@@ -9,15 +9,9 @@ const items = ["visual", "sound", "collect"];
 const { active } = Astro.props as Props;
 ---
 
-<div>
+<div class="mb-2">
   <PageNav
     items={items.map((item) => ({ label: item, value: "create/" + item }))}
     active={active}
   />
 </div>
-
-<style lang="scss">
-  div {
-    margin-bottom: 16px;
-  }
-</style>

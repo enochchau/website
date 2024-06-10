@@ -20,40 +20,16 @@ let latest = {
 ---
 
 <Layout title="Enoch - Links" hideNav={true}>
-  <div class="container">
-    <NavTitle class="pad" />
-    <ButtonLink class="pad" href={latest.url}>Latest Blog Post</ButtonLink>
-    <ButtonLink class="pad" href="/blog">Blog</ButtonLink>
-    <ButtonLink
-      class="pad"
-      href="https://www.youtube.com/channel/UC8WzolokXeJKN2d4dMrjPlA"
-    >
+  <div class="flex flex-col gap-3 items-center">
+    <NavTitle />
+    <ButtonLink href={latest.url}>Latest Blog Post</ButtonLink>
+    <ButtonLink href="/blog">Blog</ButtonLink>
+    <ButtonLink href="https://www.youtube.com/channel/UC8WzolokXeJKN2d4dMrjPlA">
       YouTube
     </ButtonLink>
-    <ButtonLink class="pad" href="https://www.instagram.com/uhhuhhuny/">
+    <ButtonLink href="https://www.instagram.com/uhhuhhuny/">
       Instagram
     </ButtonLink>
     <Mascot />
   </div>
 </Layout>
-
-<style lang="scss">
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0;
-    gap: 12px;
-  }
-
-  .pad {
-    padding: 8px;
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-</style>

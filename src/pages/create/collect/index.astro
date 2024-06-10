@@ -1,7 +1,14 @@
 ---
+import BlogHeader from "../../../components/BlogHeader";
 import Create from "../../../layouts/Create.astro";
 ---
 
 <Create title="Collect" description="Things I collect">
-  <h1><a href="/blog/2022/college-recipes">college recipes</a></h1>
+  <ul>
+    <li>
+      <a href="/blog/2022/college-recipes">
+        <BlogHeader>College Recipe</BlogHeader>
+      </a>
+    </li>
+  </ul>
 </Create>

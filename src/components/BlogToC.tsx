@@ -11,6 +11,7 @@ import {
 } from "solid-js";
 
 import type { ByYear } from "../types";
+import BlogHeader from "./BlogHeader";
 
 const FILTER_PARAM = "f";
 
@@ -171,18 +172,14 @@ export default function BlogToC(props: BlogToCProps) {
                         href={post.url}
                         class="visited:text-gray-500 dark:visited:text-gray-300"
                       >
-                        <div class="w-fit md:flex md:items-end gap-2 py-1">
-                          <h2
-                            classList={{
-                              ["relative text-xl font-bold blog-title"]: true,
-                              "before:w-full before:bg-purple-500/30 before:absolute before:h-1 before:bottom-1 before:hover:h-2/3 before:rounded before:transition-all before:px-1 before:box-content before:-left-1":
-                                true,
-                            }}
-                          >
-                            {post.title}
-                          </h2>
-                          <p class="text-gray-500 dark:text-gray-300">{post.date}</p>
-                          <p class="text-gray-500 italic dark:text-gray-300">{post.readingTime}</p>
+                        <div class="md:flex md:items-end gap-2 py-1">
+                          <BlogHeader>{post.title}</BlogHeader>
+                          <p class="text-gray-500 dark:text-gray-300">
+                            {post.date}
+                          </p>
+                          <p class="text-gray-500 italic dark:text-gray-300">
+                            {post.readingTime}
+                          </p>
                         </div>
                       </a>
                       <div class="gap-2 flex flex-wrap">
@@ -224,8 +221,10 @@ function Tag(props: TagProps) {
       classList={{
         "px-2 py-1 text-base rounded leading-none transition-all tracking-wide":
           true,
-        "bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500": !props.selected,
-        "hover:bg-gray-200 bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600": props.selected,
+        "bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500":
+          !props.selected,
+        "hover:bg-gray-200 bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600":
+          props.selected,
       }}
       onclick={props.onClick}
     >
@@ -252,7 +251,8 @@ function YearHeader(props: YearHeaderProps) {
       classList={{
         ["rounded p-1 text-3xl w-fit transition-all my-2"]: true,
         ["hover:bg-gray-300 dark:hover:bg-gray-500"]: !props.matches,
-        ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]: props.matches,
+        ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]:
+          props.matches,
       }}
     >
       <a href={href()} onClick={props.onClick}>

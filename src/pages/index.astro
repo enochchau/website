@@ -1,4 +1,5 @@
 ---
+import Anchor from "../components/Anchor";
 import Mascot from "../components/Mascot.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -11,16 +12,12 @@ import Layout from "../layouts/Layout.astro";
     <h3 class="text-xl">(humans and computers)</h3>
     <ul class="flex gap-3">
       <li>
-        <a
-          class="underline transition-all decoration-transparent hover:decoration-purple-500 font-bold"
-          href="https://www.linkedin.com/in/enoch-chau-a2a522126/">linkedin</a
+        <Anchor href="https://www.linkedin.com/in/enoch-chau-a2a522126/"
+          >linkedin</Anchor
         >
       </li>
       <li>
-        <a
-          class="underline transition-all decoration-transparent hover:decoration-purple-500 font-bold"
-          href="https://github.com/enochchau">github</a
-        >
+        <Anchor href="https://github.com/enochchau">github</Anchor>
       </li>
     </ul>
   </div>
