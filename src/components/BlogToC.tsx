@@ -124,7 +124,6 @@ export default function BlogToC(props: BlogToCProps) {
               setFilters([]);
             }}
             selected
-            chosen
           >
             clear all
           </Tag>
@@ -133,7 +132,6 @@ export default function BlogToC(props: BlogToCProps) {
               <Tag
                 onClick={() => removeFilter(filter)}
                 selected
-                chosen
                 closable
               >
                 {filter}
@@ -210,7 +208,6 @@ interface TagProps {
   children: JSX.Element;
   onClick?: JSX.EventHandler<HTMLSpanElement, MouseEvent>;
   selected?: boolean;
-  chosen?: boolean; // chosen at the top of the toc
   title?: string;
   closable?: boolean;
 }
@@ -219,14 +216,13 @@ function Tag(props: TagProps) {
     <button
       title={!props.selected ? props.title : undefined}
       classList={{
-        "p-1 text-gray-500 text-base font-sans rounded border-solid border-gray-600 border-2 leading-none":
+        "p-1 text-base font-sans rounded leading-none border-2 border-transparent border-solid transition-all":
           true,
+        "text-zinc-50 bg-zinc-400 hover:text-zinc-400 hover:bg-zinc-50 hover:border-zinc-400 border-transparent":
+          !props.selected,
+        "hover:text-zinc-50 hover:bg-zinc-400 text-zinc-400 bg-zinc-50 border-zinc-400 hover:border-transparent":
+          props.selected,
       }}
-      // classList={{
-      //   [styles.tag]: true,
-      //   [styles["selected"]]: props.selected,
-      //   [styles["chosen-filter"]]: props.chosen,
-      // }}
       onclick={props.onClick}
     >
       {props.children} {props.closable && "×"}
