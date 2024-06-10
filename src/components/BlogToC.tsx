@@ -175,7 +175,7 @@ export default function BlogToC(props: BlogToCProps) {
                   {(post) => (
                     <li class={styles.post}>
                       <a href={post.url} class={styles["title-group"]}>
-                        <h4 class={styles.title}>{post.title}</h4>
+                        <h2 class={styles.title}>{post.title}</h2>
                         <p class={styles["date"]}>{post.date}</p>
                         <p class={styles.readtime}>{post.readingTime}</p>
                       </a>

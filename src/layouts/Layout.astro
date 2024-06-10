@@ -1,5 +1,5 @@
 ---
-import "../styles/reset.css"
+import "../styles/reset.css";
 
 import penguinSvg from "../assets/penguin.svg";
 import GlobalNav from "../components/GlobalNav.astro";
@@ -46,14 +46,6 @@ const {
       content={`https://enochchau.com${Astro.url.pathname}`}
     />
     <title>{title}</title>
-  </head>
-
-  <body>
-    <div class="container">
-      {!hideNav && <GlobalNav activeNav={activeNav} />}
-      <slot />
-    </div>
-
     <script>
       const root = document.documentElement;
       function readTheme() {
@@ -79,22 +71,11 @@ const {
       // listen to theme changes from other tabs
       window.addEventListener("storage", readTheme);
     </script>
-
-    <style lang="scss">
-      .container {
-        margin: 0px auto 2vh auto;
-        max-width: 800px;
-        @media (max-width: 800px) {
-          padding: 0 2vw;
-        }
-      }
-    </style>
-
     <style lang="scss" is:global>
       @mixin dark-theme {
         --background-secondary: #444;
         --background: #1a1b1d;
-        --grey2: #777777;
+        --grey2: #666666;
         --grey: #8f96a1;
         --primary: #f0f0f0;
         --secondary: #a86be7;
@@ -109,7 +90,7 @@ const {
         --background-secondary: #ddd;
         --background: #f0f0f0;
         --grey2: #a2a3a8;
-        --grey: #777777;
+        --grey: #666666;
         --primary: #282c34;
         --secondary: #6f1cc5;
         #penguin {
@@ -250,5 +231,19 @@ const {
         }
       }
     </style>
+    <style lang="scss">
+      body {
+        margin: 0px auto 2vh auto;
+        max-width: 800px;
+        @media (max-width: 800px) {
+          padding: 0 2vw;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {!hideNav && <GlobalNav activeNav={activeNav} />}
+    <slot />
   </body>
 </html>

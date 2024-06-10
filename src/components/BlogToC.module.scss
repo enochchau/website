@@ -30,6 +30,7 @@ $tag-padding: 4px 6px;
 }
 
 .title {
+  font-size: var(--font-size-sm);
   font-weight: bold;
   font-family: var(--font-sans-serif);
   @media (max-width: 800px) {
@@ -63,7 +64,8 @@ $tag-padding: 4px 6px;
 }
 
 .readtime {
-  color: var(--grey2);
+  color: var(--grey);
+  font-style: italic;
 }
 
 .chosen-container {
