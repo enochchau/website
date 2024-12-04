@@ -1,4 +1,6 @@
 ---
+import { render } from "astro:content";
+
 import Md from "../../layouts/Md.astro";
 import { getBlogEntries } from "../../util/getBlogEntries";
 
@@ -6,14 +8,14 @@ export async function getStaticPaths() {
   let blogEntries = await getBlogEntries();
 
   let staticPaths = blogEntries.map((entry) => {
-    return { params: { slug: entry.slug }, props: { entry } };
+    return { params: { slug: entry.id}, props: { entry } };
   });
 
   return staticPaths;
 }
 
 const { entry } = Astro.props;
-let { Content } = await entry.render();
+let { Content } = await render(entry);
 ---
 
 <Md content={entry}><Content /></Md>

@@ -1,5 +1,6 @@
 import type { RSSOptions } from "@astrojs/rss";
 import rss from "@astrojs/rss";
+import {render} from 'astro:content'
 
 import { getBlogEntries } from "../util/getBlogEntries";
 
@@ -9,10 +10,10 @@ export const GET = async () => {
   const items: RSSOptions["items"] = [];
 
   for (const entry of blogEntries) {
-    const rendered = await entry.render();
+    const rendered = await render(entry);
 
     items.push({
-      link: `/${entry.collection}/${entry.slug}`,
+      link: `/${entry.collection}/${entry.id}`,
       title: entry.data.title,
       pubDate: new Date(entry.data.date),
       description: rendered.remarkPluginFrontmatter?.preview,

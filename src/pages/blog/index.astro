@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import dayjs from "dayjs";
 
 import BlogToC from "../../components/BlogToC";
@@ -24,10 +25,10 @@ for (const entry of blogEntries) {
   let date = dayObj.format(noDay ? "MMMM" : "MMMM DD");
   let year = dayObj.get("year");
 
-  const { remarkPluginFrontmatter } = await entry.render();
+  const { remarkPluginFrontmatter } = await render(entry);
 
   let metadata = {
-    url: `/${entry.collection}/${entry.slug}`,
+    url: `/${entry.collection}/${entry.id}`,
     title: entry.data.title,
     date,
     tags: entry.data.tags?.sort() ?? [],
@@ -43,7 +44,7 @@ for (const entry of blogEntries) {
 
 for (const years in byYear) {
   byYear[years] = byYear[years].sort(
-    (a, b) => dayjs(b.date).unix() - dayjs(a.date).unix(),
+    (a, b) => dayjs(b.date).unix() - dayjs(a.date).unix()
   );
 }
 ---
