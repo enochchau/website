@@ -11,21 +11,27 @@ const site = "https://enochchau.com";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), solid({
-    include: '**/components/**'
-  }), sitemap({
-    filter: (page) => {
-      return ![
-        "/blog/dev/",
-        "/create/",
-        "/create/collect/",
-        "/create/sound/",
-        "/create/visual/",
-        "/links/",
-        "/organic_color_picker/",
-      ].some((p) => site + p === page);
-    },
-  }), tailwind(), react({include: "**/react/**"})],
+  integrations: [
+    mdx(),
+    solid({
+      include: "**/components/**",
+    }),
+    sitemap({
+      filter: (page) => {
+        return ![
+          "/blog/dev/",
+          "/create/",
+          "/create/collect/",
+          "/create/sound/",
+          "/create/visual/",
+          "/links/",
+          "/organic_color_picker/",
+        ].some((p) => site + p === page);
+      },
+    }),
+    tailwind(),
+    react({ include: "**/react/**" }),
+  ],
   markdown: {
     gfm: true,
     shikiConfig: {

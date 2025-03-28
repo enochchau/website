@@ -3,9 +3,11 @@ title: Optimal Filter Sort Search List
 date: 27 March 2025
 tags: ["dev"]
 ---
-import SortFilterSearchList from '../../../react/SortFilterSearchList.astro'
+
+import SortFilterSearchList from "../../../react/SortFilterSearchList.astro";
 
 A problem I've been seeing frequently at work is a list of items on the frontend that is filterable, sortable, and searchable.
+
 <SortFilterSearchList />
 There should be an optimal order for these three operations.
 
@@ -34,16 +36,18 @@ Time: 229ms
 3. Sort by: 'A-Z'
 Time: 61ms
 ```
-These results aren't too surprising. 
+
+These results aren't too surprising.
 Sorting first provides the longest time at around 225ms while sorting last is fastest at around 60ms.
-Quick Sort is O(n log n) which is much longer than the O(n) filtering on a single color. 
-Searching a string is naively an O(m * n) operation but can also be as fast as O(n).
+Quick Sort is O(n log n) which is much longer than the O(n) filtering on a single color.
+Searching a string is naively an O(m \* n) operation but can also be as fast as O(n).
 
 Taking these into account, we want to reduce the size of the list by as much as possible
 before sorting.
 We could even combine filtering and searching in the same loop.
 
 So the order of operations is:
+
 1. Filter - always O(n) since the number of filter options is generally pre-defined
 2. Search - as fast as O(n)
 3. Sort - O(n log n) pretty slow considering the other contenders.

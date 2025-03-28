@@ -1,6 +1,6 @@
 import type { RSSOptions } from "@astrojs/rss";
 import rss from "@astrojs/rss";
-import {render} from 'astro:content'
+import { render } from "astro:content";
 
 import { getBlogEntries } from "../util/getBlogEntries";
 

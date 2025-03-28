@@ -12,7 +12,12 @@ export default function ContactButton() {
 
   return (
     <div class="flex items-center gap-3">
-      <img src={emailGif.src} alt='email-gif' width={emailGif.width} height={emailGif.height}/>
+      <img
+        src={emailGif.src}
+        alt="email-gif"
+        width={emailGif.width}
+        height={emailGif.height}
+      />
 
       <Show
         when={show()}

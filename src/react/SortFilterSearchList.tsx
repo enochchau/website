@@ -71,7 +71,7 @@ const SortFilterSearchList = () => {
   }, [items, query, colorFilter, selectedSort]);
 
   return (
-    <div style={{ borderRadius: 16, padding: 8, border: '1px solid #999' }}>
+    <div style={{ borderRadius: 16, padding: 8, border: "1px solid #999" }}>
       <p>Time Taken: {took}ms</p>
       <div>
         <label htmlFor="number-of-items">Number of Items</label>
