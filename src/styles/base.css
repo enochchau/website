@@ -1,23 +1,22 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../tailwind.config.ts';
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+@theme {
+  --color-white: #f0f0f0;
+  --color-black: #1a1b1d;
+  --color-purple-500: #a86be7;
+  --color-purple-600: #6f1cc5;
+  --color-gray-100: #ebebeb;
+  --color-gray-200: #dddddd;
+  --color-gray-250: #c9c9c9;
+  --color-gray-300: #a2a3a8;
+  --color-gray-400: #8f96a1;
+  --color-gray-500: #666666;
+  --color-gray-600: #444444;
+  --color-gray-700: #262626;
+  --color-gray-800: #141414;
+  --color-transparent: transparent;
 }
 
 @utility nav-title {
