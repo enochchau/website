@@ -44,7 +44,7 @@ const SortFilterSearchList = () => {
     });
   }, [numberOfItems]);
 
-  const [processedItems, setProcessedItems] = useState<typeof items>(items);
+  const [processedItems, setProcessedItems] = useState<typeof items>([]);
   const [processOrder, setProcessOrder] = useState<"sortFirst" | "filterFirst">(
     "filterFirst",
   );
@@ -112,7 +112,6 @@ const SortFilterSearchList = () => {
           Sort then Filter
         </label>
       </div>
-      <p>Time Taken: {took}ms</p>
       <div className="flex gap-1">
         <label htmlFor="number-of-items">Number of Items</label>
         <select
@@ -128,7 +127,7 @@ const SortFilterSearchList = () => {
           ))}
         </select>
       </div>
-      <div className="flex gap-2 justify-between flex-wrap">
+      <div className="flex gap-2 justify-between flex-wrap py-2">
         <div className="flex gap-1">
           <label htmlFor="search">Search</label>
           <input
@@ -174,27 +173,32 @@ const SortFilterSearchList = () => {
           </select>
         </div>
       </div>
-      <p>Resulting Number of Items: {processedItems.length}</p>
-      <List
-        height={200}
-        width={264}
-        itemCount={processedItems.length}
-        itemSize={40}
-        itemData={processedItems}
-        itemKey={(idx) => processedItems[idx].label}
-      >
-        {({ index, style, data }) => (
-          <div
-            className="text-black"
-            style={{
-              ...style,
-              backgroundColor: data[index].color,
-            }}
-          >
-            {data[index].label}
-          </div>
-        )}
-      </List>
+      <div className="rounded-md border border-gray-300 border-solid p-2">
+        <p className="m-0 p-0 pb-1">Time Taken: {took}ms</p>
+        <p className="m-0 p-0 pb-1">
+          Resulting Number of Items: {processedItems.length}
+        </p>
+        <List
+          height={200}
+          width={264}
+          itemCount={processedItems.length}
+          itemSize={40}
+          itemData={processedItems}
+          itemKey={(idx) => processedItems[idx].label}
+        >
+          {({ index, style, data }) => (
+            <div
+              className="text-black"
+              style={{
+                ...style,
+                backgroundColor: data[index].color,
+              }}
+            >
+              {data[index].label}
+            </div>
+          )}
+        </List>
+      </div>
     </div>
   );
 };

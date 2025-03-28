@@ -4,10 +4,10 @@ date: 27 March 2025
 tags: ["dev"]
 ---
 
-import SortFilterSearchListAstro from "../../../react/SortFilterSearchListAstro.astro";
+import SortFilterSearchList from "../../../react/SortFilterSearchList.tsx";
 
 A problem I've been seeing frequently at work is a list of items on the frontend that is filterable, sortable, and searchable.
-<SortFilterSearchListAstro />
+<SortFilterSearchList client:only="react" />
 There should be an optimal order for these three operations.
 
 Testing a few combinations:
