@@ -1,3 +1,4 @@
+/* @jsxImportSource solid-js */
 import "solid-js";
 
 import { createSignal, Show } from "solid-js";
