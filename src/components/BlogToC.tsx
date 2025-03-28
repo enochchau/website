@@ -220,7 +220,7 @@ function Tag(props: TagProps) {
     <button
       title={!props.selected ? props.title : undefined}
       classList={{
-        "px-2 py-1 text-base rounded leading-none transition-all tracking-wide":
+        "px-2 py-1 text-base rounded-sm leading-none transition-all tracking-wide":
           true,
         "bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500":
           !props.selected,
@@ -250,7 +250,7 @@ function YearHeader(props: YearHeaderProps) {
   return (
     <h1
       classList={{
-        ["rounded p-1 text-3xl w-fit transition-all my-2"]: true,
+        ["rounded-sm p-1 text-3xl w-fit transition-all my-2"]: true,
         ["hover:bg-gray-300 dark:hover:bg-gray-500"]: !props.matches,
         ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]:
           props.matches,

@@ -8,7 +8,7 @@ export default function Button(
 ) {
   return (
     <button
-      class="rounded dark:bg-gray-500 p-2 font-bold dark:hover:bg-gray-600 transition-all bg-gray-200 hover:bg-gray-300 h-fit"
+      class="rounded-sm dark:bg-gray-500 p-2 font-bold dark:hover:bg-gray-600 transition-all bg-gray-200 hover:bg-gray-300 h-fit"
       {...props}
     >
       {props.children}
