@@ -45,11 +45,11 @@ const SortFilterSearchList = () => {
   }, [numberOfItems]);
 
   const [processedItems, setProcessedItems] = useState<typeof items>(items);
+  const [processOrder, setProcessOrder] = useState<"sortFirst" | "filterFirst">(
+    "filterFirst",
+  );
 
-  useEffect(() => {
-    const start = performance.now();
-    let nextItems = items;
-
+  const filter = (nextItems: typeof items) => {
     if (colorFilter) {
       nextItems = nextItems.filter((item) => colorFilter === item.color);
     }
@@ -59,24 +59,64 @@ const SortFilterSearchList = () => {
         return item.label.includes(query);
       });
     }
+    return nextItems;
+  };
+
+  const sort = (nextItems: typeof items) => {
     if (selectedSort === SortOptions.AZ) {
       nextItems = nextItems.sort((a, b) => a.label.localeCompare(b.label));
     } else if (selectedSort === SortOptions.ZA) {
       nextItems = nextItems.sort((a, b) => b.label.localeCompare(a.label));
     }
+    return nextItems;
+  };
+
+  useEffect(() => {
+    const start = performance.now();
+    let nextItems = items;
+
+    if (processOrder === "sortFirst") {
+      nextItems = sort(nextItems);
+      nextItems = filter(nextItems);
+    } else if (processOrder === "filterFirst") {
+      nextItems = filter(nextItems);
+      nextItems = sort(nextItems);
+    }
 
     const diff = performance.now() - start;
     setTook(diff);
     setProcessedItems(nextItems);
-  }, [items, query, colorFilter, selectedSort]);
+  }, [processOrder, items, query, colorFilter, selectedSort]);
 
   return (
     <div className="rounded-lg border border-gray-300 border-solid p-2">
+      <div className="flex gap-2">
+        <label className="flex gap-1">
+          <input
+            type="radio"
+            checked={processOrder === "filterFirst"}
+            onChange={() => {
+              setProcessOrder("filterFirst");
+            }}
+          />
+          Filter then Sort
+        </label>
+        <label className="flex gap-1">
+          <input
+            type="radio"
+            checked={processOrder === "sortFirst"}
+            onChange={() => {
+              setProcessOrder("sortFirst");
+            }}
+          />
+          Sort then Filter
+        </label>
+      </div>
       <p>Time Taken: {took}ms</p>
-      <div>
+      <div className="flex gap-1">
         <label htmlFor="number-of-items">Number of Items</label>
         <select
-          style={{ color: "black" }}
+          className="text-black"
           name="number-of-items"
           value={numberOfItems}
           onChange={(e) => setNumberOfItems(parseInt(e.currentTarget.value))}
@@ -95,13 +135,13 @@ const SortFilterSearchList = () => {
             name="search"
             value={query}
             onChange={(e) => setQuery(e.currentTarget.value)}
-            style={{ color: "black" }}
+            className="text-black"
           />
         </div>
         <div className="flex gap-1">
           <label htmlFor="filter-color">Filter by Color</label>
           <select
-            style={{ color: "black" }}
+            className="text-black"
             name="filter-color"
             value={colorFilter}
             onChange={(e) => {
@@ -119,7 +159,7 @@ const SortFilterSearchList = () => {
         <div className="flex gap-1">
           <label htmlFor="sort">Sort by</label>
           <select
-            style={{ color: "black" }}
+            className="text-black"
             name="sort"
             value={selectedSort}
             onChange={(e) => {
@@ -134,20 +174,21 @@ const SortFilterSearchList = () => {
           </select>
         </div>
       </div>
+      <p>Resulting Number of Items: {processedItems.length}</p>
       <List
         height={200}
         width={264}
         itemCount={processedItems.length}
         itemSize={40}
         itemData={processedItems}
-        itemKey={idx => processedItems[idx].label}
+        itemKey={(idx) => processedItems[idx].label}
       >
         {({ index, style, data }) => (
           <div
+            className="text-black"
             style={{
               ...style,
               backgroundColor: data[index].color,
-              color: "black",
             }}
           >
             {data[index].label}
