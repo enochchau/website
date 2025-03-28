@@ -115,7 +115,6 @@ const SortFilterSearchList = () => {
       <div className="flex gap-1">
         <label htmlFor="number-of-items">Number of Items</label>
         <select
-          className="text-black"
           name="number-of-items"
           value={numberOfItems}
           onChange={(e) => setNumberOfItems(parseInt(e.currentTarget.value))}
@@ -132,15 +131,14 @@ const SortFilterSearchList = () => {
           <label htmlFor="search">Search</label>
           <input
             name="search"
+            placeholder='Apple...'
             value={query}
             onChange={(e) => setQuery(e.currentTarget.value)}
-            className="text-black"
           />
         </div>
         <div className="flex gap-1">
           <label htmlFor="filter-color">Filter by Color</label>
           <select
-            className="text-black"
             name="filter-color"
             value={colorFilter}
             onChange={(e) => {
@@ -158,7 +156,6 @@ const SortFilterSearchList = () => {
         <div className="flex gap-1">
           <label htmlFor="sort">Sort by</label>
           <select
-            className="text-black"
             name="sort"
             value={selectedSort}
             onChange={(e) => {
@@ -188,7 +185,6 @@ const SortFilterSearchList = () => {
         >
           {({ index, style, data }) => (
             <div
-              className="text-black"
               style={{
                 ...style,
                 backgroundColor: data[index].color,
