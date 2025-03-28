@@ -71,7 +71,7 @@ const SortFilterSearchList = () => {
   }, [items, query, colorFilter, selectedSort]);
 
   return (
-    <div style={{ borderRadius: 16, padding: 8, border: "1px solid #999" }}>
+    <div className="rounded-lg border border-gray-300 border-solid p-2">
       <p>Time Taken: {took}ms</p>
       <div>
         <label htmlFor="number-of-items">Number of Items</label>
@@ -88,53 +88,59 @@ const SortFilterSearchList = () => {
           ))}
         </select>
       </div>
-      <div style={{ display: "flex", gap: 8 }}>
-        <label htmlFor="search">Search</label>
-        <input
-          name="search"
-          value={query}
-          onChange={(e) => setQuery(e.currentTarget.value)}
-          style={{ color: "black" }}
-        />
-        <label htmlFor="filter-color">Filter by Color</label>
-        <select
-          style={{ color: "black" }}
-          name="filter-color"
-          value={colorFilter}
-          onChange={(e) => {
-            setColorFilter(e.currentTarget.value as Color | "");
-          }}
-        >
-          <option value="">--Select--</option>
-          {Colors.map((color) => (
-            <option key={color} value={color}>
-              {color}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="sort">Sort by</label>
-        <select
-          style={{ color: "black" }}
-          name="sort"
-          value={selectedSort}
-          onChange={(e) => {
-            setSelectedSort(e.currentTarget.value as SortOptions);
-          }}
-        >
-          {Object.values(SortOptions).map((sortOption) => (
-            <option key={sortOption} value={sortOption}>
-              {sortOption}
-            </option>
-          ))}
-        </select>
+      <div className="flex gap-2 justify-between flex-wrap">
+        <div className="flex gap-1">
+          <label htmlFor="search">Search</label>
+          <input
+            name="search"
+            value={query}
+            onChange={(e) => setQuery(e.currentTarget.value)}
+            style={{ color: "black" }}
+          />
+        </div>
+        <div className="flex gap-1">
+          <label htmlFor="filter-color">Filter by Color</label>
+          <select
+            style={{ color: "black" }}
+            name="filter-color"
+            value={colorFilter}
+            onChange={(e) => {
+              setColorFilter(e.currentTarget.value as Color | "");
+            }}
+          >
+            <option value="">--Select--</option>
+            {Colors.map((color) => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex gap-1">
+          <label htmlFor="sort">Sort by</label>
+          <select
+            style={{ color: "black" }}
+            name="sort"
+            value={selectedSort}
+            onChange={(e) => {
+              setSelectedSort(e.currentTarget.value as SortOptions);
+            }}
+          >
+            {Object.values(SortOptions).map((sortOption) => (
+              <option key={sortOption} value={sortOption}>
+                {sortOption}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <List
-        key={processedItems.length}
         height={200}
-        width={400}
+        width={264}
         itemCount={processedItems.length}
         itemSize={40}
         itemData={processedItems}
+        itemKey={idx => processedItems[idx].label}
       >
         {({ index, style, data }) => (
           <div
