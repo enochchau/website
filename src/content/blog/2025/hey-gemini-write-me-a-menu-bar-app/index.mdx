@@ -1,0 +1,193 @@
+---
+title: Hey Gemini, Write Me a Menu Bar App
+date: 7 April 2025
+tags: ["dev"]
+---
+
+import MdImage from "../../../../components/MdImage.astro";
+
+I need to switch my default browser frequently. 
+On my MacBook, I use Chrome at work but I use Firefox as my personal browser.
+I have some [hotkeys](https://github.com/enochchau/dotfiles/blob/1ed11c39b31a765f50a0a55d78b5bd251deb193f/roles/skhd/files/skhdrc) setup so I can quickly switch my browser when I clock out,
+but sometimes I forget to switch it back in the morning and end up opening links
+in the wrong browser.
+
+I want something more visual, like a small gui that I can check.
+Maybe something that lives in OSX's top menu bar so I can always see whats
+active.
+And maybe be able to change my default browser from there as well.
+
+The problem is I don't know anything about making Mac apps. 
+But in the year 2025, that's hardly an excuse to balk at a challenge when
+we have nifty chatbots like ChatGPT and Gemini to write apps for use.
+I chose Gemini, since I read somewhere that it's model was the best at the time.
+
+My first few prompts were mostly for exploration:
+
+>  in MacOS, how can I programmatically change the default browser? 
+
+With which it responded with a bash script.
+
+>  How can I do this using MacOS APIs?
+
+Now it's giving me some Swift and Objective-C code, using `LSSetDefaultHandlerForURLScheme`.
+
+>  How can I create a toolbar widget that can do this for me with a UI menu?
+
+The code I got back from this prompt used `AppDelegate`:
+
+```swift
+import Cocoa
+import CoreServices
+
+@main
+class AppDelegate: NSObject, NSApplicationDelegate {
+ func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Create the status item
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+
+        if let button = statusItem.button {
+            button.image = NSImage(systemSymbolName: "globe.americas", accessibilityDescription: "Default Browser Switcher")
+            button.action = #selector(showMenu(_:))
+            button.target = self
+        }
+
+        // Build the menu
+        let menu = NSMenu()
+
+  // ...
+```
+
+So I created a new MacOS app project in XCode and pasted in the code.
+
+At this point, I had no idea what an App Delegate even was.
+I tried pasting the code into the main file and deleting things, changing Info.plist,
+but nothing I did would get it to run.
+It was late at night at this point, so I shelved the idea.
+
+A few days later, I decided I should do some preliminary research into what I was doing. 
+I read up a bit on what the App Delegate is as well as the structure of a Swift app.
+Armed with this knowledge I returned to Gemini.
+
+> How can I create a top menu bar item graphical application in MacOS using Swift and XCode that can switch default browsers for me? 
+> I want the application to have a dropdown menu that shows the current default browser and allows me to change it.
+
+The code it gave me at this point, basically worked. 
+
+```swift
+import Cocoa
+
+@main
+class AppDelegate: NSObject, NSApplicationDelegate {
+
+    private var statusItem: NSStatusItem!
+    private var currentDefaultBrowser: String = ""
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Create the menu bar item
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+
+        // Set the icon (optional)
+        if let button = statusItem.button {
+            button.image = NSImage(systemSymbolName: "globe", accessibilityDescription: "Switch Default Browser")
+        }
+
+        // Build the menu
+        constructMenu()
+
+        // Get the initial default browser
+        updateCurrentDefaultBrowser()
+    }
+
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+    }
+
+    func constructMenu() {
+      // ...
+    }
+
+    @objc func changeDefaultBrowser(_ sender: NSMenuItem) {
+        if let browserIdentifier = sender.representedObject as? String {
+            let url = URL(string: "http://example.com")! // Use a dummy URL
+            LSSetDefaultHandlerForURLScheme("http" as CFString, browserIdentifier as CFString)
+            LSSetDefaultHandlerForURLScheme("https" as CFString, browserIdentifier as CFString)
+            updateCurrentDefaultBrowser()
+            constructMenu() // Rebuild the menu to update the current browser display
+        }
+    }
+
+    func updateCurrentDefaultBrowser() {
+      // ...
+    }
+}
+```
+
+There was only one issue:  
+
+> The current browser is not being set correctly.
+
+After changing the browser default, the menu bar dropdown would not reflect the
+up-to-date value for the current default browser.
+
+Gemini thought it was a problem with the `changeDefaultBrowser` function above,
+but pasting it's new code made no difference.
+
+At this point, Gemini couldn't really figure out my problem because it's never
+actually used OSX before.
+What happens when you change your default browser is that
+a pop-up window will ask you to confirm the switch.
+
+<MdImage
+  src={import("./chrome-to-firefox-browser-default-switch.webp")}
+  alt="switching browsers pop-up"
+  class="w-[360px] m-auto"
+/>
+
+The default browser won't actually change until the pop-up window is confirmed.
+But the menu is already re-drawn by the time the pop-up is confirmed, so the
+new browser default state isn't captured in the updated menu.
+
+What we need is something like a notification or polling mechanism to make sure
+the menu is up-to-date after the pop-up is confirmed.
+
+> How can I have it listen to changes in the default browser from other places in the OS?
+
+Gemini said to register the app in launch services:
+
+> You need to register your application to receive notifications for changes in default handlers for the "http" and "https" URL schemes. You can do this in your AppDelegate's applicationDidFinishLaunching method.
+
+Which didn't work and I wasn't keen to dig deeper since it seemed to need
+deeper knowledge of OSX APIs.
+
+> What if i use polling instead of notification event?
+
+Well that worked.
+
+The rest of the prompting was to see if I could use non-deprecated APIs but
+that didn't work either on the first try.
+[`kerm/defaultbrowser`](https://github.com/kerma/defaultbrowser) uses the same 
+deprecated API, namely `LSCopyAllHandlersForURLScheme`.
+Even [`jwbargsten/defbro`](https://github.com/jwbargsten/defbro), a re-write
+of `defaultbrowser` in swift, still uses `LSCopyAllHandlersForURLScheme`
+so I decided to leave it as be for now. 
+Maybe a better chatbot in the future can fix this for me when the API is removed.
+
+You can see the source code here: [`enochchau/BrowserDefaults`](https://github.com/enochchau/BrowserDefaults).
+
+<MdImage 
+  src={import("./default-browser-menu-bar.webp")}
+  alt="default browser menu bar app"
+  class="w-[320px] m-auto"
+/>
+
+I'm happy with what I was able to create but there's a nagging feeling in the
+back of my head that this was a missed opportunity.
+I could have taken the time to learn more about OSX, Mac app development, and Swift
+and I did learn a little bit, but not as much as if I figured out and wrote all the code
+myself.
+The thing is, if I hadn't used Gemini to code the app, I'd probably end up using 
+something like [SwiftBar](https://github.com/swiftbar/SwiftBar) or [Hammerspoon](https://www.hammerspoon.org/)
+as a simpler interface to OSX.
+AI Chatbots may be a good replacement for some smaller low-code or no-code tools, but at least for now,
+I don't see it as a full replacement for software developers.

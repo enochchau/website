@@ -6,6 +6,7 @@ interface Props {
   alt: string;
   width?: number;
   height?: number;
+  class?: string;
 }
 
 const { src, alt, width = 800, height = 0 } = Astro.props as Props;
@@ -17,5 +18,5 @@ const { src, alt, width = 800, height = 0 } = Astro.props as Props;
   format="webp"
   width={width}
   height={height}
-  class="w-full h-auto"
+  class={Astro.props.class ?? "w-full h-auto"}
 />
