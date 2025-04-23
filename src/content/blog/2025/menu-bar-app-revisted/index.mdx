@@ -11,26 +11,27 @@ In that post, I left a lot of loose ends left by the generated code that I never
 With a bit more time over the last few weeks, well, I tidied them up.
 
 First, I was using deprecated APIs. So I went back and updated those.
-I went down the tried and true path, starting with the [Apple Developer Docs](https://developer.apple.com/documentation/appkit/nsworkspace/setdefaultapplication(at:toopenfileat:completion:))
+I went down the tried and true path, starting with the [Apple Developer Docs](<https://developer.apple.com/documentation/appkit/nsworkspace/setdefaultapplication(at:toopenfileat:completion:)>)
 and then combing through various software forums to find examples on how to do
-these things. 
+these things.
 All culminating in an aptly named commit titled ["refactor AI generated code"](https://github.com/enochchau/BrowserDefaults/commit/6f03308e5ce53d2d322035f616bd8054005cc319).
 
 Next, I wanted a prettier UI. During my initial search for an app that did
 what I created, I found ["Default Browser" created by Sindre Sorhus](https://sindresorhus.com/default-browser)
-but damn it if that 
-<button style="width:80px;height:30px;background:#2563eb;color:white;border-radius:8px;font-weight:bold;">Buy</button>
-button didn't discourage me from taking a closer look.
-But Sindre's app has icons and I wanted icons.
-This ended up being a fun conversation with Gemini where it gave me examples
-using `NSworkspace` to get an icon from a URL handler, which I [then implemented](https://github.com/enochchau/BrowserDefaults/commit/f3e1a6dfcfdbd3a2b55d4584a34ca3d1a5be7f54)
-as well as setting the main menu bar icon so I could tell, at a glance, what the default was.
+but damn it if that
 
+<button style="width:80px;height:30px;background:#2563eb;color:white;border-radius:8px;font-weight:bold;">
+  Buy
+</button>
+button didn't discourage me from taking a closer look. But Sindre's app has
+icons and I wanted icons. This ended up being a fun conversation with Gemini
+where it gave me examples using `NSworkspace` to get an icon from a URL handler,
+which I [then
+implemented](https://github.com/enochchau/BrowserDefaults/commit/f3e1a6dfcfdbd3a2b55d4584a34ca3d1a5be7f54)
+as well as setting the main menu bar icon so I could tell, at a glance, what the
+default was.
 
-<MdImage 
-  src={import("./updated-menu-bar.webp")}
-  alt="updated menu bar"
-/>
+<MdImage src={import("./updated-menu-bar.webp")} alt="updated menu bar" />
 
 Around this time, Gemini 2.5 Pro was released and I wanted to retry the original prompt
 with the new model. My own little way to benchmark these LLMs, you might say.
@@ -40,8 +41,8 @@ That was new to me, all the previous responses I got had used `NSMenu` and `NSMe
 but that's cool, that's something new to learn.
 I [tried `MenuBarExtra` out a bit](https://github.com/enochchau/BrowserDefaults/commit/b2438c7f390b5952578a8bd2dc612c8bc1e63a97), learning a bit of SwiftUI and a bit more of XCode.
 
-I'm liking MacOS development more now. 
-There's not that many examples or tutorials so I ask Gemini a lot of questions to learn syntax and see examples. 
+I'm liking MacOS development more now.
+There's not that many examples or tutorials so I ask Gemini a lot of questions to learn syntax and see examples.
 I've found that using AI as a partner for learning feels like actual development instead
 of throwing darts blindly.
 I first learned to program watching YouTube tutorials and reading example blog posts,
@@ -49,7 +50,7 @@ not by reading documentation.
 Now, as a seasoned programmer, I'm more comfortable reading the manual but some learning styles,
 like seeing examples, just work better for me.
 I need a little bit of inspiration.
-And as always, you don't know what you don't know, and sometimes the AI chatbot 
+And as always, you don't know what you don't know, and sometimes the AI chatbot
 can tell you something new.
 
 Here's a link to [the project's GitHub](https://github.com/enochchau/BrowserDefaults).

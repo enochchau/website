@@ -131,7 +131,7 @@ const SortFilterSearchList = () => {
           <label htmlFor="search">Search</label>
           <input
             name="search"
-            placeholder='Apple...'
+            placeholder="Apple..."
             value={query}
             onChange={(e) => setQuery(e.currentTarget.value)}
           />
