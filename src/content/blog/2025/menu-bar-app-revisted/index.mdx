@@ -16,20 +16,17 @@ and then combing through various software forums to find examples on how to do
 these things.
 All culminating in an aptly named commit titled ["refactor AI generated code"](https://github.com/enochchau/BrowserDefaults/commit/6f03308e5ce53d2d322035f616bd8054005cc319).
 
+{/* prettier-ignore-start */}
 Next, I wanted a prettier UI. During my initial search for an app that did
 what I created, I found ["Default Browser" created by Sindre Sorhus](https://sindresorhus.com/default-browser)
-but damn it if that
-
-<button style="width:80px;height:30px;background:#2563eb;color:white;border-radius:8px;font-weight:bold;">
-  Buy
-</button>
+but damn it if that <button style="width:80px;height:30px;background:#2563eb;color:white;border-radius:8px;font-weight:bold;">Buy</button>
 button didn't discourage me from taking a closer look. But Sindre's app has
 icons and I wanted icons. This ended up being a fun conversation with Gemini
 where it gave me examples using `NSworkspace` to get an icon from a URL handler,
-which I [then
-implemented](https://github.com/enochchau/BrowserDefaults/commit/f3e1a6dfcfdbd3a2b55d4584a34ca3d1a5be7f54)
+which I [then implemented](https://github.com/enochchau/BrowserDefaults/commit/f3e1a6dfcfdbd3a2b55d4584a34ca3d1a5be7f54)
 as well as setting the main menu bar icon so I could tell, at a glance, what the
 default was.
+{/* prettier-ignore-end */}
 
 <MdImage src={import("./updated-menu-bar.webp")} alt="updated menu bar" />
 
