@@ -53,6 +53,9 @@ const {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+      @view-transition {
+        navigation: auto;
+      }
     </style>
     <script>
       import {
@@ -80,6 +83,7 @@ const {
         setLightMode();
       }
     </script>
+    <slot name="head" />
   </head>
 
   <body

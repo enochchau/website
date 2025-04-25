@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 import Prose from "~/components/Prose.astro";
 import Layout from "~/layouts/Layout.astro";
+import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionName";
 
 interface Props {
   content: CollectionEntry<"blog">;
@@ -10,6 +11,7 @@ interface Props {
 
 const { content } = Astro.props as Props;
 const { data } = content;
+let viewTransitionName = contentIdToViewTransitionName(content.id);
 ---
 
 <Layout
@@ -17,7 +19,12 @@ const { data } = content;
   activeNav="blog"
   description={data.subtitle}
 >
-  <h1 class="text-2xl font-bold mt-6">{data.title}</h1>
+  <h1
+    class="text-2xl font-bold mt-6"
+    style={`view-transition-name: ${viewTransitionName};`}
+  >
+    {data.title}
+  </h1>
   {data.subtitle && <h2 class="text-lg my-1">{data.subtitle}</h2>}
   <h3 class="text-md italic mb-6">{data.date}</h3>
   <Prose>

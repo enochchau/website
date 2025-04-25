@@ -11,6 +11,8 @@ import {
   Show,
 } from "solid-js";
 
+import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionName";
+
 import type { ByYear } from "../types";
 import BlogHeader from "./BlogHeader";
 
@@ -174,7 +176,14 @@ export default function BlogToC(props: BlogToCProps) {
                         class="visited:text-gray-500 dark:visited:text-gray-300"
                       >
                         <div class="md:flex md:items-end gap-2 py-1">
-                          <BlogHeader>{post.title}</BlogHeader>
+                          <BlogHeader
+                            style={{
+                              "view-transition-name":
+                                contentIdToViewTransitionName(post.id),
+                            }}
+                          >
+                            {post.title}
+                          </BlogHeader>
                           <p class="text-gray-500 dark:text-gray-300">
                             {post.date}
                           </p>
