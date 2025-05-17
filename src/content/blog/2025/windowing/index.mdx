@@ -1,0 +1,73 @@
+---
+title: Windowing in React
+date: 16 May 2025
+tags: ["dev"]
+---
+import MdImage from "../../../../components/MdImage.astro";
+
+*this post assumes knowledge of virtualization/windowing*
+
+At [Gatsby](https://gatsby.events), one of the projects I worked on a few years back was creating our 
+high performance guest list table component.
+At that time, we used [React Window](https://github.com/bvaughn/react-window) as 
+an off the shelf solution in order to render thousands of guest rows in the table.
+Since then, I've wanted to write my own windowing/virtualization library.
+
+Lately, I've been working on my project: [Windowing](https://github.com/enochchau/windowing).
+It's a windowing demo for React that I hope to turn into a full fledged library.
+I was largely inspired by React Window but I wanted to write a modern implementation.
+React Window was written to be backwards compatible, with class components, my Windowing library
+uses modern function components and hooks.
+I've often always believed that the best way to understand something is to do it yourself.
+
+React Window uses `absolute` positioning with `top` and `left` for positioning of cells within the grid.
+My naive implementation for Windowing also used this same strategy.
+But after building my library, I wanted to see what industry standard [AG Grid](https://www.ag-grid.com/)
+does differently as their competitive advantage.
+For positioning of columns, they do use `left` but for rows, I noticed that they
+use `transform: translateY` for positioning.
+
+Transform translate has been known as a performance hack to offload CPU work to the GPU.
+Using `top` and `left` for positioning requires CPU operations to calculate the 
+layout of the DOM but `transform: translate` offloads some of the work to the GPU.
+To verify, I did some benchmarking of my own.
+
+In the Firefox profiler, we can see that the CPU time is half when using translate vs. `top` positioning.
+
+**Top Positioning - Firefox - 964ms**
+
+<MdImage src={import("./top-firefox.webp")} alt="top positioning firefox" />
+
+**Translate Positioning - Firefox - 465ms**
+
+<MdImage src={import("./translate-firefox.webp")} alt="translate positioning firefox" />
+
+And in Chrome, we can see that the commit step is much faster.
+
+**Top Positioning - Chrome - Commit 860μs**
+
+<MdImage src={import("./top-chrome.webp")} alt="top positioning chrome" />
+
+**Translate Positioning - Chrome - Commit 36μs**
+
+<MdImage src={import("./translate-chrome.webp")} alt="translate positioning chrome" />
+
+That's almost 24x faster!
+
+Asking Gemini about the Commit step in Chrome's performance tools:
+
+> A slow commit step can indicate issues on the main thread that are delaying the handover to the compositor.
+
+So a slow commit step means we're spending more CPU time rather than offloading calculations to the GPU compositor.
+A faster commit step means we're doing less single threaded CPU work and can utilize the multi-core nature
+of the GPU.
+There's actually a visual difference when scrolling with row/column overflow set to 0 
+(no additional rows and columns are rendered outside the window as a buffer).
+When using `top` positioning, the browser takes more CPU time to do DOM layout
+calculations which delays rendering of HTML which results in more time seeing
+white space when scrolling quickly before the HTML pops in.
+When using `translate` positioning, setting the buffer to 0 has almost no noticeable difference
+to setting a buffer of 3 as the majority of the work is handed off to the GPU and the
+CPU isn't delayed in rendering HTML
+
+Checkout the [demo for Windowing](https://enochchau.github.io/windowing/)!
