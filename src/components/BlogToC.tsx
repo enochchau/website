@@ -113,13 +113,13 @@ export default function BlogToC(props: BlogToCProps) {
         }
         return filtered;
       },
-      {},
+      {}
     );
     return filteredByYear;
   });
 
   return (
-    <div>
+    <div class="relative">
       <Show when={filters().length > 0}>
         <div class="flex flex-wrap gap-2">
           <Tag
@@ -141,7 +141,7 @@ export default function BlogToC(props: BlogToCProps) {
       </Show>
       <For
         each={Object.entries(filteredByYear()).sort(
-          ([a], [b]) => parseInt(b) - parseInt(a),
+          ([a], [b]) => parseInt(b) - parseInt(a)
         )}
       >
         {([year, posts]) => {
@@ -154,7 +154,7 @@ export default function BlogToC(props: BlogToCProps) {
                   window.history.pushState(
                     { matches, year },
                     "",
-                    e.currentTarget.href,
+                    e.currentTarget.href
                   );
 
                   if (matches) {
@@ -259,8 +259,9 @@ function YearHeader(props: YearHeaderProps) {
   return (
     <h1
       classList={{
-        ["rounded-sm p-1 text-3xl w-fit transition-all my-2"]: true,
-        ["hover:bg-gray-300 dark:hover:bg-gray-500"]: !props.matches,
+        ["border-gray-200 border z-3 top-1 sticky rounded-sm p-1 text-3xl w-fit transition-all my-2"]:
+          true,
+        ["hover:bg-gray-300 dark:hover:bg-gray-500 bg-white dark:bg-black"]: !props.matches,
         ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]:
           props.matches,
       }}
