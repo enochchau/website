@@ -35,9 +35,10 @@ const { active, items } = Astro.props as Props;
   a {
     transition-duration: var(--delay-m);
     text-decoration-color: var(--color-purple-500);
+    color: inherit;
   }
   a:visited {
-    color: unset;
+    color: inherit;
   }
   .inactive {
     text-decoration-color: transparent;
