@@ -3,11 +3,14 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 let urls = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/college-recipes/*.webp",
+  "../assets/college-recipes/*.webp"
 );
 
 let pics = Object.entries(urls).map(([k, v]) => {
-  let alt = k.split('/').pop()!.replace(/\.[^/.]+$/, "")
+  let alt = k
+    .split("/")
+    .pop()!
+    .replace(/\.[^/.]+$/, "");
   return {
     alt,
     src: v,
@@ -15,18 +18,95 @@ let pics = Object.entries(urls).map(([k, v]) => {
 });
 ---
 
-<div class="flex flex-wrap justify-between gap-4">
+<div id="recipe-container">
   {
     pics.map(({ src, alt }) => (
-      <div class="w-72">
+      <div class="img-container">
         <Image
           src={src()}
           alt={alt}
           width={600}
           format="webp"
-          class="w-full h-auto m-0"
+          class="full-image"
         />
       </div>
     ))
   }
 </div>
+<dialog id="recipe-viewer"></dialog>
+
+<script>
+  function handleImageClick() {
+    const container = document.getElementById("recipe-container");
+    if (!container || !(container instanceof HTMLDivElement)) {
+      return;
+    }
+    const viewer = document.getElementById("recipe-viewer");
+    if (!viewer || !(viewer instanceof HTMLDialogElement)) {
+      return;
+    }
+
+    console.log(container);
+    container.addEventListener("click", (e) => {
+      console.log("Clicked");
+      if (e.target instanceof HTMLImageElement) {
+        viewer.innerHTML = "";
+        viewer.appendChild(e.target.cloneNode());
+        viewer.showModal();
+      }
+    });
+    viewer.addEventListener("click", (e) => {
+      if (e.target === viewer) {
+        viewer.close();
+      }
+    });
+  }
+  handleImageClick();
+</script>
+
+<style>
+  #recipe-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .img-container {
+    width: 180px;
+    border-radius: 4px;
+    overflow: hidden;
+    height: fit-content;
+    border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+    &:hover {
+      border: 1px solid var(--color-purple-500);
+      cursor: pointer;
+    }
+  }
+  .full-image {
+    margin: 0;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+  }
+
+  dialog {
+    border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+    border-radius: 4px;
+    overflow: hidden;
+    width: 400px;
+    height: fit-content;
+    padding: 0;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 720px) {
+    dialog {
+      width: 500px;
+    }
+    
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>
