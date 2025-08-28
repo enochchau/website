@@ -8,40 +8,51 @@ import pot from "./pot.webp";
 ---
 
 <Create title="Visual" description="Selected visual works from 2016 to 2018">
-  <div class="my-4 flex justify-center items-center">
+  <div class="img-container">
     <Image
       src={pot}
       alt="Pot - 2018"
       width={800}
       format="webp"
       height={0}
-      class="border-img rounded-sm w-auto h-full"
+      class="border-img"
     />
   </div>
-  <div class="my-4 flex justify-center items-center">
+  <div class="img-container">
     <Image
       src={face}
       alt="Face - 2018"
       width={800}
       format="webp"
       height={0}
-      class="border-img rounded-sm w-auto h-full"
+      class="border-img"
     />
   </div>
-  <div class="my-4 flex justify-center items-center">
+  <div class="img-container">
     <Image
       src={averii}
       alt="Averii - 2017"
       width={800}
       format="webp"
       height={0}
-      class="border-img rounded-sm w-auto h-full"
+      class="border-img"
     />
   </div>
 </Create>
 
 <style>
-  img.border-img {
+  .img-container {
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .border-img {
     border: 16px solid black;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    max-width: 520px;
   }
 </style>

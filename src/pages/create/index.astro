@@ -4,8 +4,18 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Enoch - Create" activeNav="create">
-  <article class="flex items-center justify-center h-40 flex-col">
+  <article>
     <h1 class="text-3xl font-bold">creative endevours</h1>
     <CreateNav />
   </article>
 </Layout>
+
+<style>
+  article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 40vh;
+  }
+</style>

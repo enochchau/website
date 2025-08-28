@@ -1,4 +1,5 @@
 ---
+import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionName";
 interface Props {
   active?: string;
   items: { label: string; value: string }[];
@@ -7,10 +8,14 @@ interface Props {
 const { active, items } = Astro.props as Props;
 ---
 
-<nav class="flex gap-3">
+<nav>
   {
     items.map((item) => (
-      <h2>
+      <h2
+        style={{
+          "view-transition-name": contentIdToViewTransitionName(item.value),
+        }}
+      >
         <a
           href={"/" + item.value}
           class:list={[{ inactive: active !== item.label }]}
