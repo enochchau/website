@@ -1,18 +1,37 @@
 ---
-interface Props {
-  class?: string;
-}
-const { class: className } = Astro.props;
+
 ---
 
-<h1
-  class:list={[
-    "tracking-normal font-bold font-sans text-2xl nav-title hover:text-gray-400 transition-all dark:nav-title-dark dark:hover:text-purple-500",
-    className,
-  ]}
->
-  <a
-    class="text-inherit no-underline hover:text-inherit hover:no-underline"
-    href="/">enoch chau</a
-  >
+<h1>
+  <a href="/">enoch chau</a>
 </h1>
+
+<style>
+  h1 {
+    --text-shadow: light-dark(var(--color-gray-300), var(--color-purple-500));
+    --text-shadow-hover: light-dark(var(--color-black), var(--color-white));
+    font-size: var(--text-xl);
+    text-shadow:
+      1px 1px var(--text-shadow),
+      2px 2px var(--text-shadow),
+      3px 3px var(--text-shadow),
+      4px 4px var(--text-shadow),
+      5px 5px var(--text-shadow);
+    &:hover {
+      color: var(--color-purple-500);
+      text-shadow:
+        1px 1px var(--text-shadow-hover),
+        2px 2px var(--text-shadow-hover),
+        3px 3px var(--text-shadow-hover),
+        4px 4px var(--text-shadow-hover),
+        5px 5px var(--text-shadow-hover);
+    }
+    transition-duration: var(--delay-m, 300ms);
+  }
+  a:visited {
+    color: inherit;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,163 @@
+/* CSS Reset */
+/* prettier-ignore */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* prettier-ignore */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+  line-height: 1;
+}
+/* prettier-ignore */
+ol, ul {
+	list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+/* prettier-ignore */
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:root {
+  --color-white: #f0f0f0;
+  --color-black: #1a1b1d;
+  --color-purple-500: #a86be7;
+  --color-purple-600: #6f1cc5;
+  --color-gray-100: #ebebeb;
+  --color-gray-200: #dddddd;
+  --color-gray-250: #c9c9c9;
+  --color-gray-300: #a2a3a8;
+  --color-gray-400: #8f96a1;
+  --color-gray-500: #666666;
+  --color-gray-600: #444444;
+  --color-gray-700: #262626;
+  --color-gray-800: #141414;
+  --color-transparent: transparent;
+  --delay-m: 200ms;
+
+  --text-xs: 0.5rem;
+  --text-s: 0.8rem;
+  --text-m: 1rem;
+  --text-l: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-xxl: 2rem;
+
+  box-sizing: border-box;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    Adwaita Sans,
+    Cantarell,
+    Ubuntu,
+    roboto,
+    noto,
+    helvetica,
+    arial,
+    sans-serif;
+  color-scheme: light dark;
+}
+
+.dark {
+  color-scheme: dark;
+}
+.light {
+  color-scheme: light;
+}
+
+body {
+  background-color: light-dark(var(--color-white), var(--color-black));
+  color: light-dark(var(--color-black), var(--color-white));
+}
+table,
+th,
+td {
+  border-color: light-dark(var(--color-gray-400), var(--color-gray-500));
+}
+th {
+  background-color: light-dark(var(--color-gray-200), var(--color-gray-600));
+}
+
+h1 {
+  font-size: var(--text-xxl);
+  font-weight: bold;
+}
+h2 {
+  font-size: var(--text-xl);
+}
+h3 {
+  font-size: var(--text-l);
+}
+p {
+  font-size: var(--text-m);
+}
+table {
+  border-collapse: collapse;
+  border-width: 1px;
+  border-style: solid;
+}
+
+th,
+td {
+  padding: 4px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+a {
+  color: light-dark(var(--color-purple-600), var(--color-purple-500));
+}
+
+button {
+  --bg: light-dark(var(--color-gray-200), var(--color-gray-500));
+  border-radius: 4px;
+  border: none;
+  background-color: var(--bg);
+  &:hover {
+    background-color: light-dark(var(--color-gray-300), var(--color-gray-600));
+  }
+  transition: background-color var(--delay-m);
+  cursor: pointer;
+  font-size: var(--text-m);
+  padding: 8px;
+  font-weight: bold;
+
+  &:disabled {
+    cursor: default;
+  }
+  &:disabled:hover {
+    background-color: light-dark(var(--color-gray-300), var(--color-gray-600));
+  }
+}

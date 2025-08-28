@@ -3,19 +3,14 @@ import "solid-js";
 
 import type { JSX } from "solid-js";
 
+import styles from "./BlogHeader.module.css";
+
 export default function BlogHeader(props: {
   style?: JSX.CSSProperties;
   children?: JSX.Element;
 }) {
   return (
-    <h2
-      style={props.style}
-      classList={{
-        ["w-fit relative text-xl font-bold blog-title"]: true,
-        "before:w-full before:bg-purple-500/30 before:absolute before:h-1 before:bottom-1 hover:before:h-2/3 before:rounded-sm before:transition-all before:px-1 before:box-content before:-left-1":
-          true,
-      }}
-    >
+    <h2 style={props.style} class={styles.header}>
       {props.children}
     </h2>
   );

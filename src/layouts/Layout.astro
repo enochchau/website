@@ -1,5 +1,5 @@
 ---
-import "~/styles/base.css";
+import "~/styles/global.css";
 
 import penguinSvg from "~/assets/penguin.svg";
 import GlobalNav from "~/components/GlobalNav.astro";
@@ -45,18 +45,6 @@ const {
       content={`https://enochchau.com${Astro.url.pathname}`}
     />
     <title>{title}</title>
-    <style lang="scss" is:global>
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      @view-transition {
-        navigation: auto;
-      }
-    </style>
     <script>
       import {
         setDarkMode,
@@ -87,9 +75,29 @@ const {
   </head>
 
   <body
-    class="mx-auto my-4 max-w-3xl px-1 text-black bg-white dark:text-white dark:bg-black"
+    class="body"
   >
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
   </body>
 </html>
+
+<style>
+  .body {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 8px;
+  }
+</style>
+<style is:global>
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @view-transition {
+    navigation: auto;
+  }
+</style>

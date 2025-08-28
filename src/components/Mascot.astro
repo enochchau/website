@@ -15,42 +15,56 @@ import penguinSvg from "../assets/penguin.svg?raw";
         if (darkMedia.matches) {
           localStorage.setItem("theme", "light");
           setLightMode();
-          return
+          return;
         } else {
           localStorage.setItem("theme", "dark");
           setDarkMode();
-          return
+          return;
         }
       } else if (theme === "dark") {
         if (darkMedia.matches) {
           localStorage.setItem("theme", "light");
           setLightMode();
-          return
+          return;
         } else {
           localStorage.removeItem("theme");
           useMediaTheme();
-          return
+          return;
         }
       } else if (theme === "light") {
         if (darkMedia.matches) {
           localStorage.removeItem("theme");
           useMediaTheme();
-          return
+          return;
         } else {
           localStorage.setItem("theme", "dark");
           setDarkMode();
-          return
+          return;
         }
       }
     });
   }
 </script>
 
-<a
-  aria-label="Toggle dark mode"
-  href="javascript:void 0"
-  class="transition-all hover:scale-110 w-40 cursor-pointer"
-  id="penguin"
->
-  <div set:html={penguinSvg} class="dark:invert" />
+<a aria-label="Toggle dark mode" href="javascript:void 0" id="penguin">
+  <div set:html={penguinSvg} class="invert" />
 </a>
+<style>
+  a {
+    width: 40%;
+    min-width: 160px;
+    max-width: 220px;
+    &:hover {
+      transform: scale(1.1);
+    }
+    transition: transform var(--delay-m);
+  }
+  body.dark .invert {
+    filter: invert(1);
+  }
+  @media (prefers-color-scheme: dark) {
+    .invert {
+      filter: invert(1);
+    }
+  }
+</style>

@@ -1,0 +1,10 @@
+.anchor {
+    text-decoration: underline;
+    transition-duration: var(--delay-m);
+    text-decoration-color: transparent;
+    font-weight: bold;
+    color: inherit;
+    &:hover {
+        text-decoration-color: var(--color-purple-500);
+    }
+}

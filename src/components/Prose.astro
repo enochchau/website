@@ -2,23 +2,13 @@
 
 ---
 
-<article
-  class={`md-prose
-w-full max-w-none prose prose-enoch dark:prose-invert text-black dark:text-white
-prose-code:after:content-none prose-code:before:content-none prose-code:bg-gray-200 prose-code:rounded-sm prose-code:p-1 dark:prose-code:bg-gray-600 prose-code:tracking-wider
-prose-blockquote:border-l-2 prose-blockquote:border-solid
-dark:prose-thead:bg-gray-700 prose-thead:bg-gray-300 prose-thead:border-solid
-dark:prose-table:bg-gray-800 prose-table:bg-gray-250
-prose-th:p-1
-prose-td:p-1 
-visited:prose-a:text-gray-400
-`}
->
+<article class={"md"}>
   <slot />
 </article>
 
 <style is:global>
-  article.md-prose {
+  article.md {
+    font-family: sans-serif;
     pre.astro-code {
       > code {
         background-color: unset;
@@ -28,7 +18,41 @@ visited:prose-a:text-gray-400
     }
 
     a:visited {
-      color: #8f96a1;
+      color: light-dark(var(--color-gray-500), var(--color-gray-300));
+    }
+
+    * {
+      margin: 16px 0;
+    }
+
+    p {
+      line-height: 1.5rem;
+    }
+
+    th,
+    td {
+      font-size: var(--text-s);
+    }
+    th {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+    code {
+      font-family:
+        Menlo,
+        Consolas,
+        Monaco,
+        Adwaita Mono,
+        Liberation Mono,
+        Lucida Console,
+        monospace;
+    }
+    .astro-code {
+      padding: 6px;
+      border-radius: 4px;
     }
   }
 </style>

@@ -10,7 +10,7 @@ import { getBlogEntries } from "../util/getBlogEntries";
 let blogEntries = await getBlogEntries();
 
 blogEntries = blogEntries.sort(
-  (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix(),
+  (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix()
 );
 
 let latest = {
@@ -20,7 +20,7 @@ let latest = {
 ---
 
 <Layout title="Enoch - Links" hideNav={true}>
-  <div class="flex flex-col gap-3 items-center">
+  <div class="container">
     <NavTitle />
     <ButtonLink href={latest.url}>Latest Blog Post</ButtonLink>
     <ButtonLink href="/blog">Blog</ButtonLink>
@@ -33,3 +33,12 @@ let latest = {
     <Mascot />
   </div>
 </Layout>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+</style>

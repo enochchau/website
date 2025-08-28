@@ -1,17 +1,17 @@
 export function setDarkMode() {
-  const root = document.documentElement;
-  root.classList.add("dark");
-  root.classList.remove("light");
+  const body = document.body;
+  body.classList.add("dark");
+  body.classList.remove("light");
 }
 
 export function setLightMode() {
-  const root = document.documentElement;
-  root.classList.add("light");
-  root.classList.remove("dark");
+  const body = document.body;
+  body.classList.add("light");
+  body.classList.remove("dark");
 }
 
 export function useMediaTheme() {
-  const root = document.documentElement;
-  root.classList.remove("light");
-  root.classList.remove("dark");
+  const body = document.body;
+  body.classList.remove("light");
+  body.classList.remove("dark");
 }

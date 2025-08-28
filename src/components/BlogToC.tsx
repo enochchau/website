@@ -1,5 +1,6 @@
 /* @jsxImportSource solid-js */
 import "solid-js";
+import styles from "./BlogToC.module.css";
 
 import type { JSX } from "solid-js";
 import {
@@ -119,20 +120,28 @@ export default function BlogToC(props: BlogToCProps) {
   });
 
   return (
-    <div class="relative">
+    <div class={styles.relative}>
       <Show when={filters().length > 0}>
-        <div class="flex flex-wrap gap-2">
-          <Tag
-            onClick={() => {
-              setFilters([]);
-            }}
-            selected
-          >
-            clear all
-          </Tag>
+        <div class={styles.tagRow}>
+          {filters().length > 1 && (
+            <Tag
+              onClick={() => {
+                setFilters([]);
+              }}
+              selected
+              filterTag
+            >
+              clear all
+            </Tag>
+          )}
           <For each={filters()}>
             {(filter) => (
-              <Tag onClick={() => removeFilter(filter)} selected closable>
+              <Tag
+                onClick={() => removeFilter(filter)}
+                selected
+                closable
+                filterTag
+              >
                 {filter}
               </Tag>
             )}
@@ -167,15 +176,12 @@ export default function BlogToC(props: BlogToCProps) {
                 matches={matches}
                 filters={filters()}
               />
-              <ul>
+              <ul class={styles.blogList}>
                 <For each={posts}>
                   {(post) => (
-                    <li class="pb-2">
-                      <a
-                        href={post.url}
-                        class="visited:text-gray-500 dark:visited:text-gray-300"
-                      >
-                        <div class="md:flex md:items-end gap-2 py-1">
+                    <li class={styles.blogItem}>
+                      <a href={post.url} class={styles.blogAnchor}>
+                        <div class={styles.blogContainer}>
                           <BlogHeader
                             style={{
                               "view-transition-name":
@@ -184,15 +190,13 @@ export default function BlogToC(props: BlogToCProps) {
                           >
                             {post.title}
                           </BlogHeader>
-                          <p class="text-gray-500 dark:text-gray-300">
-                            {post.date}
-                          </p>
-                          <p class="text-gray-500 italic dark:text-gray-300">
+                          <p>{post.date}</p>
+                          <p class={styles.blogReadingTime}>
                             {post.readingTime}
                           </p>
                         </div>
                       </a>
-                      <div class="gap-2 flex flex-wrap">
+                      <div class={styles.tagContainer}>
                         <For each={post.tags}>
                           {(tag) => (
                             <Tag
@@ -222,21 +226,16 @@ interface TagProps {
   onClick?: JSX.EventHandler<HTMLSpanElement, MouseEvent>;
   selected?: boolean;
   title?: string;
+  filterTag?: boolean;
   closable?: boolean;
 }
 function Tag(props: TagProps) {
   return (
     <button
       title={!props.selected ? props.title : undefined}
-      classList={{
-        "px-2 py-1 text-base rounded-sm leading-none transition-all tracking-wide":
-          true,
-        "bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500":
-          !props.selected,
-        "hover:bg-gray-200 bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600":
-          props.selected,
-      }}
+      classList={{ [styles.tag]: true, [styles.tagSelected]: props.selected }}
       onclick={props.onClick}
+      disabled={!props.filterTag && props.selected}
     >
       {props.children} {props.closable && "×"}
     </button>
@@ -259,11 +258,8 @@ function YearHeader(props: YearHeaderProps) {
   return (
     <h1
       classList={{
-        ["border-gray-200 border z-3 top-1 sticky rounded-sm p-1 text-3xl w-fit transition-all my-2"]:
-          true,
-        ["hover:bg-gray-300 dark:hover:bg-gray-500 bg-white dark:bg-black"]: !props.matches,
-        ["bg-gray-300 hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600"]:
-          props.matches,
+        [styles.yearHeader]: true,
+        [styles.yearHeaderMatches]: props.matches,
       }}
     >
       <a href={href()} onClick={props.onClick}>

@@ -6,6 +6,7 @@ import { createMemo, createSignal, Show } from "solid-js";
 import emailGif from "../assets/email.gif";
 import Anchor from "./Anchor";
 import Button from "./Button";
+import styles from "./ContactButton.module.css";
 
 export default function ContactButton() {
   const [show, setShow] = createSignal(false);
@@ -25,7 +26,7 @@ export default function ContactButton() {
   });
 
   return (
-    <div class="flex items-center gap-3">
+    <div class={styles.container}>
       <img
         src={emailGif.src}
         alt="email-gif"

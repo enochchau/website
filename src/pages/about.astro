@@ -8,7 +8,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Enoch - About" activeNav="about">
-  <div class="flex flex-wrap-reverse gap-4">
+  <div class="container">
     <Image
       src={me}
       alt="enoch bouldering in red rock"
@@ -16,7 +16,7 @@ import Layout from "../layouts/Layout.astro";
       height={0}
       format="webp"
     />
-    <div class="md:w-1/2 sm:w-full">
+    <div class="text-container">
       <h1 class="text-2xl font-bold">hello there</h1>
       <p>
         I'm a full stack software engineer at
@@ -28,7 +28,7 @@ import Layout from "../layouts/Layout.astro";
           the boulders.
         </a>
       </p>
-      <ul class="py-2">
+      <ul>
         <li>
           <Anchor
             href="https://www.linkedin.com/in/enoch-chau-a2a522126/"
@@ -40,9 +40,26 @@ import Layout from "../layouts/Layout.astro";
           <Anchor href="https://github.com/enochchau">github</Anchor>
         </li>
       </ul>
-      <div class="contact-container">
-        <ContactButton client:idle />
-      </div>
+      <ContactButton client:idle />
     </div>
   </div>
 </Layout>
+
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 8px;
+  }
+
+  .text-container {
+    width: 100%;
+  }
+
+  ul {
+    padding: 8px 0;
+    > li:not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+</style>

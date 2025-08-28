@@ -12,4 +12,8 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const test = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/test" }),
+});
+
+export const collections = { blog, test };

@@ -10,14 +10,10 @@ const { active, items } = Astro.props as Props;
 <nav class="flex gap-3">
   {
     items.map((item) => (
-      <h2 class="font-bold text-xl">
+      <h2>
         <a
           href={"/" + item.value}
-          class:list={[
-            "transition-all underline hover:decoration-purple-500",
-            { "decoration-purple-500": active === item.label },
-            { "decoration-transparent": active !== item.label },
-          ]}
+          class:list={[{ inactive: active !== item.label }]}
         >
           {item.label}
         </a>
@@ -25,3 +21,27 @@ const { active, items } = Astro.props as Props;
     ))
   }
 </nav>
+
+<style>
+  nav {
+    display: flex;
+    gap: 8px;
+  }
+  a {
+    transition-duration: var(--delay-m);
+    text-decoration-color: var(--color-purple-500);
+  }
+  a:visited {
+    color: inherit;
+  }
+  .inactive {
+    text-decoration-color: transparent;
+    &:hover {
+      text-decoration-color: var(--color-purple-500);
+    }
+  }
+  h2 {
+    font-weight: bold;
+    font-size: var(--text-l);
+  }
+</style>

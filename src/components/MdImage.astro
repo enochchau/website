@@ -7,9 +7,10 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
+  portrait?: boolean;
 }
 
-const { src, alt, width = 800, height = 0 } = Astro.props as Props;
+const { portrait, src, alt, width = 800, height = 0 } = Astro.props as Props;
 ---
 
 <Image
@@ -18,5 +19,23 @@ const { src, alt, width = 800, height = 0 } = Astro.props as Props;
   format="webp"
   width={width}
   height={height}
-  class={Astro.props.class ?? "w-full h-auto"}
+  class={Astro.props.class
+    ? Astro.props.class
+    : portrait
+      ? "portrait"
+      : "image"}
 />
+
+<style>
+  .image {
+    width: 100%;
+    height: auto;
+  }
+  .portrait {
+    display:block;
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  }
+</style>
