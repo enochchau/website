@@ -141,6 +141,16 @@ a {
   color: light-dark(var(--color-purple-600), var(--color-purple-500));
 }
 
+.underline-hover {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition-duration: var(--delay-m);
+  font-weight: bold;
+  &:hover {
+    text-decoration-color: var(--color-purple-500);
+  }
+}
+
 button {
   --bg: light-dark(var(--color-gray-200), var(--color-gray-500));
   border-radius: 4px;

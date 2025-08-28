@@ -1,10 +1,4 @@
 .anchor {
-    text-decoration: underline;
-    transition-duration: var(--delay-m);
-    text-decoration-color: transparent;
-    font-weight: bold;
+    composes: underline-hover from "../styles/global.css";
     color: inherit;
-    &:hover {
-        text-decoration-color: var(--color-purple-500);
-    }
 }

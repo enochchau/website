@@ -1,10 +1,4 @@
 .header {
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  &:hover {
-    text-decoration-color: var(--color-purple-500);
-  }
-  transition: var(--delay-m);
-  font-weight: bold;
+  composes: underline-hover from "../styles/global.css";
   font-size: var(--text-l);
 }

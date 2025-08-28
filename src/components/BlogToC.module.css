@@ -36,7 +36,6 @@
 .yearHeader {
   z-index: 3;
   position: sticky;
-  background-color: inherit;
   border: 1px solid light-dark(var(--color-gray-300), var(--color-gray-500));
   top: 0;
   left: 0;
