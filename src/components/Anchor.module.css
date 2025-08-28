@@ -1,4 +1,4 @@
 .anchor {
-    composes: underline-hover from "../styles/global.css";
-    color: inherit;
+  composes: underline-hover from "../styles/global.css";
+  color: inherit;
 }

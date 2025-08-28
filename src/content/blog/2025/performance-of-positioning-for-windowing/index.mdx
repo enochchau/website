@@ -3,13 +3,14 @@ title: Performance of Positioning for Windowing
 date: 16 May 2025
 tags: ["dev"]
 ---
+
 import MdImage from "../../../../components/MdImage.astro";
 
-*this post assumes knowledge of virtualization/windowing*
+_this post assumes knowledge of virtualization/windowing_
 
-At [Gatsby](https://gatsby.events), one of the projects I worked on a few years back was creating our 
+At [Gatsby](https://gatsby.events), one of the projects I worked on a few years back was creating our
 high performance guest list table component.
-At that time, we used [React Window](https://github.com/bvaughn/react-window) as 
+At that time, we used [React Window](https://github.com/bvaughn/react-window) as
 an off the shelf solution in order to render thousands of guest rows in the table.
 Since then, I've wanted to write my own windowing/virtualization library.
 
@@ -28,7 +29,7 @@ For positioning of columns, they do use `left` but for rows, I noticed that they
 use `transform: translateY` for positioning.
 
 Transform translate has been known as a performance hack to offload CPU work to the GPU.
-Using `top` and `left` for positioning requires CPU operations to calculate the 
+Using `top` and `left` for positioning requires CPU operations to calculate the
 layout of the DOM but `transform: translate` offloads some of the work to the GPU.
 To verify, I did some benchmarking of my own.
 
@@ -40,7 +41,10 @@ In the Firefox profiler, we can see that the CPU time is half when using transla
 
 **Translate Positioning - Firefox - 465ms**
 
-<MdImage src={import("./translate-firefox.webp")} alt="translate positioning firefox" />
+<MdImage
+  src={import("./translate-firefox.webp")}
+  alt="translate positioning firefox"
+/>
 
 And in Chrome, we can see that the commit step is much faster.
 
@@ -50,7 +54,10 @@ And in Chrome, we can see that the commit step is much faster.
 
 **Translate Positioning - Chrome - Commit 36μs**
 
-<MdImage src={import("./translate-chrome.webp")} alt="translate positioning chrome" />
+<MdImage
+  src={import("./translate-chrome.webp")}
+  alt="translate positioning chrome"
+/>
 
 That's almost 24x faster!
 
@@ -61,7 +68,7 @@ Asking Gemini about the Commit step in Chrome's performance tools:
 So a slow commit step means we're spending more CPU time rather than offloading calculations to the GPU compositor.
 A faster commit step means we're doing less single threaded CPU work and can utilize the multi-core nature
 of the GPU.
-There's actually a visual difference when scrolling with row/column overflow set to 0 
+There's actually a visual difference when scrolling with row/column overflow set to 0
 (no additional rows and columns are rendered outside the window as a buffer).
 When using `top` positioning, the browser takes more CPU time to do DOM layout
 calculations which delays rendering of HTML which results in more time seeing
