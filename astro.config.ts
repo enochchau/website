@@ -39,4 +39,9 @@ export default defineConfig({
     rehypePlugins: [rehypePreview],
   },
   site,
+  vite: {
+    css: {
+      transformer: "lightningcss",
+    },
+  },
 });
