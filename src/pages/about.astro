@@ -47,13 +47,19 @@ import Layout from "../layouts/Layout.astro";
 
 <style>
   .container {
+    margin: 16px 0;
     display: flex;
     flex-wrap: wrap-reverse;
-    gap: 8px;
+    gap: 16px;
   }
 
   .text-container {
     width: 100%;
+  }
+  @media screen and (min-width: 720px) {
+    .text-container {
+      width: calc(50% - 16px);
+    }
   }
 
   ul {
