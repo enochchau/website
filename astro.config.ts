@@ -2,7 +2,6 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 import { rehypePreview } from "./rehype-preview";
@@ -40,7 +39,4 @@ export default defineConfig({
     rehypePlugins: [rehypePreview],
   },
   site,
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });
