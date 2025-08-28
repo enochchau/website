@@ -22,15 +22,15 @@
   color: inherit;
   text-decoration: none;
 }
-.blogAnchor a:visited {
-  color: light-dark(var("--color-gray-500"), var("--color-gray-300"));
+.blogAnchor:visited {
+  color: light-dark(var(--color-gray-500), var(--color-gray-300));
 }
 .blogContainer {
   line-height: 120%;
 }
 .blogReadingTime {
-    font-style: italic;
-    color: light-dark(var(--color-gray-500), var(--color-gray-200));
+  font-style: italic;
+  color: light-dark(var(--color-gray-500), var(--color-gray-200));
 }
 
 .yearHeader {

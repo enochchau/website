@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { FixedSizeList as List } from "react-window";
 
+import styles from "./SortFilterSearchList.module.css";
+
 const Colors = ["red", "orange", "yellow", "purple", "blue", "green"] as const;
 type Color = (typeof Colors)[number];
 
@@ -89,9 +91,9 @@ const SortFilterSearchList = () => {
   }, [processOrder, items, query, colorFilter, selectedSort]);
 
   return (
-    <div className="rounded-lg border border-gray-300 border-solid p-2">
-      <div className="flex gap-2">
-        <label className="flex gap-1">
+    <div className={styles.container}>
+      <div className={styles.radioGroup}>
+        <label className={styles.radioLabel}>
           <input
             type="radio"
             checked={processOrder === "filterFirst"}
@@ -101,7 +103,7 @@ const SortFilterSearchList = () => {
           />
           Filter then Sort
         </label>
-        <label className="flex gap-1">
+        <label className={styles.radioLabel}>
           <input
             type="radio"
             checked={processOrder === "sortFirst"}
@@ -112,7 +114,7 @@ const SortFilterSearchList = () => {
           Sort then Filter
         </label>
       </div>
-      <div className="flex gap-1">
+      <div className={styles.numberControl}>
         <label htmlFor="number-of-items">Number of Items</label>
         <select
           name="number-of-items"
@@ -126,8 +128,8 @@ const SortFilterSearchList = () => {
           ))}
         </select>
       </div>
-      <div className="flex gap-2 justify-between flex-wrap py-2">
-        <div className="flex gap-1">
+      <div className={styles.controlsRow}>
+        <div className={styles.control}>
           <label htmlFor="search">Search</label>
           <input
             name="search"
@@ -136,7 +138,7 @@ const SortFilterSearchList = () => {
             onChange={(e) => setQuery(e.currentTarget.value)}
           />
         </div>
-        <div className="flex gap-1">
+        <div className={styles.control}>
           <label htmlFor="filter-color">Filter by Color</label>
           <select
             name="filter-color"
@@ -153,7 +155,7 @@ const SortFilterSearchList = () => {
             ))}
           </select>
         </div>
-        <div className="flex gap-1">
+        <div className={styles.control}>
           <label htmlFor="sort">Sort by</label>
           <select
             name="sort"
@@ -170,9 +172,9 @@ const SortFilterSearchList = () => {
           </select>
         </div>
       </div>
-      <div className="rounded-md border border-gray-300 border-solid p-2">
-        <p className="m-0 p-0 pb-1">Time Taken: {took}ms</p>
-        <p className="m-0 p-0 pb-1">
+      <div className={styles.resultsContainer}>
+        <p className={styles.resultText}>Time Taken: {took}ms</p>
+        <p className={styles.resultText}>
           Resulting Number of Items: {processedItems.length}
         </p>
         <List

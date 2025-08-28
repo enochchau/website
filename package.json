@@ -51,6 +51,7 @@
     "reading-time": "^1.5.0",
     "sharp": "^0.33.5",
     "solid-js": "1.9.5",
-    "tailwindcss": "^4.0.17"
+    "tailwindcss": "^4.0.17",
+    "typescript-plugin-css-modules": "^5.2.0"
   }
 }

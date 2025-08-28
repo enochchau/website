@@ -1,0 +1,45 @@
+.container {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.radioLabel {
+  display: flex;
+  gap: 4px;
+}
+
+.numberControl {
+  display: flex;
+  gap: 4px;
+}
+
+.controlsRow {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.control {
+  display: flex;
+  gap: 4px;
+}
+
+.resultsContainer {
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+}
+
+.resultText {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 4px;
+}

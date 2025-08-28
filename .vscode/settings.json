@@ -1,3 +1,4 @@
 {
-  "typescript.experimental.useTsgo": false
+  "typescript.experimental.useTsgo": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

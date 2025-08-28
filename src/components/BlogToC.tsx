@@ -1,6 +1,5 @@
 /* @jsxImportSource solid-js */
 import "solid-js";
-import styles from "./BlogToC.module.css";
 
 import type { JSX } from "solid-js";
 import {
@@ -16,6 +15,7 @@ import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionN
 
 import type { ByYear } from "../types";
 import BlogHeader from "./BlogHeader";
+import styles from "./BlogToC.module.css";
 
 const FILTER_PARAM = "f";
 
