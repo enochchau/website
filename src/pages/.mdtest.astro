@@ -3,9 +3,12 @@ import { render } from "astro:content";
 import { getCollection } from "astro:content";
 
 import Prose from "~/components/Prose.astro";
+import Layout from "~/layouts/Layout.astro";
 
 let testCollection = await getCollection("test");
 let { Content } = await render(testCollection[0]);
 ---
 
-<Prose><Content /> </Prose>
+<Layout title="Markdown Tester">
+  <Prose><Content /></Prose>
+</Layout>

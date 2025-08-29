@@ -91,5 +91,32 @@
       margin-left: 15px;
       margin-top: 2px;
     }
+    blockquote {
+      background: light-dark(var(--color-gray-200), var(--color-gray-700));
+      padding: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      border-left: 1px solid var(--color-gray-400);
+    }
+
+    sup {
+      font-size: 0.7em;
+      line-height: 0;
+      vertical-align: super;
+    }
+    sup a {
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 2px;
+      transition: color 0.2s ease-in-out;
+    }
+    sup a:hover {
+      text-decoration: underline;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--color-gray-400);
+    }
   }
 </style>
