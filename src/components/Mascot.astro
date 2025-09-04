@@ -3,7 +3,6 @@ import penguinSvg from "../assets/penguin.svg?raw";
 ---
 
 <script>
-  import { setDarkMode, setLightMode, useMediaTheme } from "../util/darkMode";
   const penguin = document.getElementById("penguin");
 
   if (penguin) {
@@ -14,32 +13,26 @@ import penguinSvg from "../assets/penguin.svg?raw";
       if (!theme) {
         if (darkMedia.matches) {
           localStorage.setItem("theme", "light");
-          setLightMode();
-          return;
+          document.body.className = "light";
         } else {
           localStorage.setItem("theme", "dark");
-          setDarkMode();
-          return;
+          document.body.className = "dark";
         }
       } else if (theme === "dark") {
         if (darkMedia.matches) {
           localStorage.setItem("theme", "light");
-          setLightMode();
-          return;
+          document.body.className = "light";
         } else {
           localStorage.removeItem("theme");
-          useMediaTheme();
-          return;
+          document.body.className = "";
         }
       } else if (theme === "light") {
         if (darkMedia.matches) {
           localStorage.removeItem("theme");
-          useMediaTheme();
-          return;
+          document.body.className = "";
         } else {
           localStorage.setItem("theme", "dark");
-          setDarkMode();
-          return;
+          document.body.className = "dark";
         }
       }
     });

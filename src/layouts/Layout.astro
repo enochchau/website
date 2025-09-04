@@ -45,45 +45,39 @@ const {
       content={`https://enochchau.com${Astro.url.pathname}`}
     />
     <title>{title}</title>
-    <script>
-      import {
-        setDarkMode,
-        setLightMode,
-        useMediaTheme,
-      } from "../util/darkMode";
-      // listen to theme changes from other tabs
-      window.addEventListener("storage", (ev) => {
-        if (ev.storageArea === localStorage && ev.key === "theme") {
-          if (ev.newValue === "dark") {
-            setDarkMode();
-          } else if (ev.newValue === "light") {
-            setLightMode();
-          } else {
-            useMediaTheme();
-          }
-        }
-      });
 
-      const theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        setDarkMode();
-      } else if (theme === "light") {
-        setLightMode();
-      }
-    </script>
     <slot name="head" />
   </head>
 
-  <body
-    class="body"
-  >
+  <body>
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
+    <script is:inline>
+      const t = localStorage.getItem("theme");
+      if (t === "dark") {
+        document.body.className = "dark";
+      } else if (t === "light") {
+        document.body.className = "light";
+      }
+
+      // listen to theme changes from other tabs
+      window.addEventListener("storage", function (ev) {
+        if (ev.storageArea === localStorage && ev.key === "theme") {
+          if (ev.newValue === "dark") {
+            document.body.className = "dark";
+          } else if (ev.newValue === "light") {
+            document.body.className = "light";
+          } else {
+            document.body.className = "";
+          }
+        }
+      });
+    </script>
   </body>
 </html>
 
 <style>
-  .body {
+  body {
     margin: 0 auto;
     max-width: 760px;
     padding: 8px;
