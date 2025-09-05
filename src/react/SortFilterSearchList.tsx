@@ -179,7 +179,7 @@ const SortFilterSearchList = () => {
         </p>
         <div>
           <List
-            style={{ height: 200, }}
+            style={{ height: 200 }}
             defaultHeight={200}
             rowComponent={ListItem}
             rowCount={processedItems.length}
