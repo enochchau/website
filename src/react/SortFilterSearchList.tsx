@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { FixedSizeList as List } from "react-window";
+import { List, type RowComponentProps } from "react-window";
 
 import styles from "./SortFilterSearchList.module.css";
 
@@ -48,7 +48,7 @@ const SortFilterSearchList = () => {
 
   const [processedItems, setProcessedItems] = useState<typeof items>([]);
   const [processOrder, setProcessOrder] = useState<"sortFirst" | "filterFirst">(
-    "filterFirst",
+    "filterFirst"
   );
 
   const filter = (nextItems: typeof items) => {
@@ -177,28 +177,32 @@ const SortFilterSearchList = () => {
         <p className={styles.resultText}>
           Resulting Number of Items: {processedItems.length}
         </p>
-        <List
-          height={200}
-          width={264}
-          itemCount={processedItems.length}
-          itemSize={40}
-          itemData={processedItems}
-          itemKey={(idx) => processedItems[idx].label}
-        >
-          {({ index, style, data }) => (
-            <div
-              style={{
-                ...style,
-                backgroundColor: data[index].color,
-              }}
-            >
-              {data[index].label}
-            </div>
-          )}
-        </List>
+        <div>
+          <List
+            style={{ height: 200, }}
+            defaultHeight={200}
+            rowComponent={ListItem}
+            rowCount={processedItems.length}
+            rowHeight={40}
+            rowProps={{ data: processedItems }}
+          />
+        </div>
       </div>
     </div>
   );
 };
+
+function ListItem({ data, index, style }: RowComponentProps<{ data: Item[] }>) {
+  return (
+    <div
+      style={{
+        ...style,
+        backgroundColor: data[index].color,
+      }}
+    >
+      {data[index].label}
+    </div>
+  );
+}
 
 export default SortFilterSearchList;
