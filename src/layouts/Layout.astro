@@ -49,9 +49,7 @@ const {
     <slot name="head" />
   </head>
 
-  <body>
-    {!hideNav && <GlobalNav activeNav={activeNav} />}
-    <slot />
+  <body id="body">
     <script is:inline>
       const t = localStorage.getItem("theme");
       if (t === "dark") {
@@ -73,11 +71,13 @@ const {
         }
       });
     </script>
+    {!hideNav && <GlobalNav activeNav={activeNav} />}
+    <slot />
   </body>
 </html>
 
 <style>
-  body {
+  #body {
     margin: 0 auto;
     max-width: 760px;
     padding: 8px;
