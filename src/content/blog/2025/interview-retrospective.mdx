@@ -13,7 +13,7 @@ As a result, over the last month and a half, I decided to take every single recr
 and do every single interview with the goal to use them primarily as practice, but also just
 to test the water.
 
-First, I emailed back every recruiter that had emailed me in the months of June and July to setup initial calls.
+First, I emailed back every recruiter that had emailed me in the months of June and July to set up initial calls.
 Some of them got back to me, some of them ghosted me. 
 The worst one was one who tried to reschedule twice before ghosting me.
 These were all third party recruiters who shopped my resume around to different startups, 
@@ -27,82 +27,23 @@ Basically, I got really good at bullshitting people to make myself sound like I 
 The goal at this point was to get through the initial screen so I could get practice on technical interviews.
 
 Around this time, I also started doing technical interview prep.
-I replaced my video-game time with [LeetCode](https://leetcode.com/) (LC) practice.
+I replaced my video game time with [LeetCode](https://leetcode.com/) (LC) practice.
 I replaced my TikTok scrolling with System Design YouTube shorts.
 I was surprised by how much easier it is to learn and relearn computer science fundamentals today in the age of short form content.
 I may have learned more in breadth of system design from YouTube shorts than I ever did from working as a software engineer.
 
-For first-round technical screens, these were the questions I got with each respective company:
+For first-round technical screens, these were my experiences with each respective company:
 
 ## Imbue
-I was expected to setup my own local environment to conduct the interview.
+
+I was expected to set up my own local environment to conduct the interview.
 No AI coding tools were allowed and I screen shared with a third party interview proctor.
-
-<details>
-<summary>Is Valid Word & Scrabble</summary>
-
-### 1. Is Valid word
-
-Read this file: https://raw.githubusercontent.com/jonbcard/scrabble-bot/master/src/dictionary.txt and create a function that can check if a word is valid
-### 2. All Valid Words
-
-Given a string, return all valid words from the combination of the letters
-
-ADD -> [ 'DAD', 'AD', 'ADD' ]
-
-### 3. Is Valid Board
-
-Given a scrabble board that is 15x15: https://gist.githubusercontent.com/bawr/460fdadd7e6c301471596e3b2f6ed90b/raw/296de5b6ad40050748f166832675b94b2c900db6/boards.txt
-
-Check if its valid:
-
-- There is a tile in the center
-- All words are connected
-- All words are valid words
-- words are read from left to right, up to down
-
-</details>
-
-Pretty standard leetcode style assessment. 
+It was a pretty standard leetcode style assessment. 
 I'm guessing that they would have given this as an online assessment (OA) before the age of LLMs.
 
 ## Fermat
 
-<details>
-<summary>Write a function spiral(n) that generates and prints a spiral pattern on an n × n grid.</summary>
-
-#### Specs
-
-- The spiral begins at the top-left corner (0,0) of the grid
-- The initial direction of the spiral is rightward (east)
-- The spiral follows this pattern:
-    - Draw a line segment of length n going east (right)
-    - Turn 90 degrees clockwise (to south/down)
-    - Draw a line segment of length n-1
-    - Turn 90 degrees clockwise (to west/left)
-    - Draw a line segment of length n-2
-    - Turn 90 degrees clockwise (to north/up)
-    - Draw a line segment of length n-3
-    - Continue this pattern, reducing the length after every turn
-    - Stop when the remaining length becomes 0
-
-#### Example
-
-For spiral(10), the output should be:
-```
-OOOOOOOOOO
-.........O
-..OOOOOO.O
-..O....O.O
-..O.OO.O.O
-..O.O..O.O
-..O.OOOO.O
-..O......O
-..OOOOOOOO
-..........
-```
-</details>
-
+Similar to the Imbue interview, this was another LC medium, conducted on CoderPad
 This was less like an OA since I did it with a member of their engineering team.
 
 ## Roger Healthcare
@@ -110,72 +51,14 @@ This was less like an OA since I did it with a member of their engineering team.
 I was given an example repo and told to implement some features within 1 hour.
 These features were basically impossible to implement for a human within the given
 time frame and the candidate was expected to vibe code.
-
-<details>
-<summary>Tasks</summary>
-
-### 1. Refactor Using Question Schema
-
-Right now the form has a hardcoded set of 5 questions. However we
-want it to be more dynamic so the questions can be easily changed.
-1. Download this containing 90 questions
-2. Change the frontend and backend code so that all question-specific code is now based on the schema rather than hardcoded
-to specific questions
-
-### 2. AI Context Splitting
-We suspect that AI performance will degrade with very large question
-schemas (e.g. hundreds of questions). Split the LLM call up so that all
-questions are not corrected in one single big call to the LLM.
-
-### 3. Job Queue Refactor
-The backend code uses the asynchronous job queue library `arq` to run
-the LLM calls in a non-blocking way. `arq` has some advantages but it
-is not the best-maintained library and our team wishes to move to a
-more mainstream tool, `celery`.
-Help us migrate the code from arq to celery for the async operations
-while maintaining exactly the same end user experience.
-Note that Celery can be configured to use Redis as its message queue,
-meaning that you shouldn’t need to set up any other dependencies.
-
-### 4. New AI Objective: Medical Consistency Fix
-Rather than fixing the answers’ grammar and spelling, we want the AI to
-fix something else instead now: adjust answers so that all of them paint
-a picture of the same patient.consistent
-
-> ⚠ For example, if one question says the patient takes insulin and
-the other says they have no signs of diabetes at all, this looks
-like an inconsistency.
-
-Create an AI workflow to make the minimal fixes necessary to make all
-the answers consistent.
-
-### 5. Consistency Check Splitting
-The consistency check is more complicated than grammar check,
-because grammar could be fixed on each question independently of the others. 
-This is not true of consistency - we want the entire set of
-answers to form a cohesive whole.
-Suppose the input schema had thousands of questions and again was
-too big for one LLM call. Come up with an improved splitting strategy
-for this case.
-</details>
-
 This was a fun one and very reflective of their engineering culture as an AI first company.
 It was pretty funny to feed the prompts into Copilot and just sit back and watch the clock tick down.
 I eventually had to bring in the big guns with Claude Code to get it across the finish line.
 
 ## Loop
 
-This was a phone call with one of the engineers along with Coder Pad.
-
-<details>
-<summary>[Time Based Key Value Store](https://leetcode.com/problems/time-based-key-value-store/description/)</summary>
-
-The problem was read to me and none of the constraints were given.
-I was only provided with example inputs and outputs.
-
-</details>
-
-Seemed to be a pretty generic LC question on the surface but later I realized
+This was a phone call with one of the engineers along with CoderPad.
+On the surface, it seemed to be a pretty generic LC medium question but later I realized
 that I failed hard because I did not clarify constraints before starting on the solution.
 The weird part was that it was a phone call and I could have easily googled or 
 used an LLM to solve the problem.
@@ -187,26 +70,10 @@ It was conducted by a third party interviewer that [Stepwork](https://www.stepwo
 had found through a VC connection.
 It was split into three parts: coding, knowledge, and system design.
 
-<details>
-<summary>Coding</summary>
-
-Write tic tac toe as a CLI program in whatever language you're comfortable in.
-
-1. Draw the board, use a Class
-2. Create a simple AI that will play any valid move
-3. Allow user input with validation
-4. Win condition
-5. Advanced AI
-</details>
-
+The coding portion tested basic programming concepts.
 The knowledge portion felt like random trivia. 
-I was asked about database optimizations, cryptography, https and some other random things.
 It was very strange because I was sitting in front of my computer and could have easily googled any of the questions.
-
-The system design question was a high level of "Design Ticket Master".
-
-I've written tic tac toe a bunch of times as toy programs when learning new languages.
-Take that as you will.
+The system design question was fairly high level without delving too deeply into specific technologies.
 
 ---
 
@@ -221,79 +88,7 @@ and live coding.
 
 ## Imbue 
 
-I was given three LC hard questions to choose from and then collaborated with one of 
-their engineers to try to solve it.
-The problem I tried was Magician Tour.
-
-<details>
-<summary>Magician Tour</summary>
-
-You are a magician who has two different shows. 
-You are planning a tour of a series of cities. 
-Given the population of each city and the roads between cities, you must plan the tour such that no two cities directly connected by a road are assigned the same show and such that the difference between the number of people who see show 1 and those who see show 2 is minimized. 
-You have to return the difference between the number of people who will see show 1 and those who will see show 2.
-
-The roads between the cities are specified in the String[] roads. roads[i][j] is '1' if there is a road between the ith and jth cities and is '0' if there is no road. You are guaranteed that you can pull this off. (You can schedule the shows such that no two adjacent cities are assigned the same show.) Keep in mind that each city must be assigned one of the two shows. The population of each city is specified by the int[] populations whose ith element is the population of the ith city.
-
-### Definition
-
-**Class:**
-MagicianTour
-
-**Method:**
-bestDifference
-
-**Parameters:**
-String[], int[]
-
-**Returns:**
-int
-
-**Method signature:**
-int bestDifference(String[] roads, int[] populations)
-(be sure your method is public)
-
-### Notes
-You, the magician, can travel between two cities regardless of whether or not they are connected by a road.
-
-### Constraints
-- populations contains between 1 and 50 elements, inclusive.
-- roads contains exactly n elements, each of which has exactly n characters, where n is the number of elements in populations.
-- Each element of populations will be between 0 and 20, inclusive.
-- Each element of roads will only contain the characters '0' and '1'.
-- You are guaranteed that you can schedule the shows such that no two adjacent cities are assigned the same show.
-- No city will have a road to itself.
-- The graph is undirected. Hence, if there is a road from city a to city b then there has to be a road from city b to city a. As a result, roads[i][j] and roads[j][i] must be the same.
-
-### Examples
-```
-1. {"01","10"}
-{15,20}
-Returns: 5
-There are two cities of populations 15 and 20. Perform show 1 in the first and show 2 in the second or vice versa.
-{"0100", "1000", "0001", "0010"}
-{2,4,1,5}
-Returns: 2
-
-2. {"0100", "1000", "0001", "0010"}
-{2,4,2,4}
-Returns: 0
-There are four cities of populations 2, 4, 2 and 4. Perform show 1 in the first and fourth cities and perform show 2 in the second and third cities.
-{"001 0", "0001", "1000", "0100"}
-{ 2,2,2,2}   
-Returns: 0
-
-3. {"000", "000", "000"}
-{6,7,15}
-Returns: 2
-There are no roads! To keep it balanced, perform show 1 in the first and second cities and show 2 in the third city.
-
-4. {"0000", "0010", "0101", "0010"}
-{8,10,15,10}
-Returns: 3
-```
-</details>
-
+I was given three LC hard questions to choose from and then collaborated with one of their engineers to try to solve it.
 This was very challenging and we discussed at length different methods to solve the problem.
 We never reached the coding portion.
 
@@ -308,18 +103,6 @@ of a website builder and the infrastructure that I hadn't really thought about b
 
 I met virtually with one of the founders and was presented with some example code.
 I was asked to implement simple rate limiting.
-
-<details>
-<summary>Rate Limiting</summary>
-
-### Case 1: 
-Every user can send 10 messages every day.
-
-### Case 2:
-Every user can send 10 messages in a 24 hour window.
-
-</details>
-
 I read [a post](https://smudge.ai/blog/ratelimit-algorithms) on Hacker News about
 different rate limiting algorithms before so I was well prepared.
 
@@ -334,7 +117,7 @@ may have been something I said about vibe coding.
 I had one final round with Fermat where we reviewed my past projects.
 After that, I had two weeks of radio silence before they finally responded
 saying they had up-leveled the position I was applying for and removed me from the pipeline.
-Seemed like a huge waste of time for both them and me but it was likely coming from top down.
+Seemed like a huge waste of time for both them and me but it was likely coming from the top down.
 
 Rejections are always hard to take but I appreciate Imbue for being transparent and
 giving good feedback on what I could improve on.
