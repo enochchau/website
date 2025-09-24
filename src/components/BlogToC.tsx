@@ -193,7 +193,7 @@ export default function BlogToC(props: BlogToCProps) {
                           <p class={styles.blogMeta}>
                             {post.date} • 
                             <span class={styles.blogReadingTime}>
-                              {post.readingTime} min
+                              {post.readingTime > 0 ? `${post.readingTime} min` : 'less than a min'}
                             </span>
                           </p>
                         </div>

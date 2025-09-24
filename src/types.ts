@@ -3,7 +3,7 @@ export interface BlogPost {
   url?: string;
   title: string;
   date: string;
-  readingTime: string;
+  readingTime: number;
   tags: string[];
 }
 
