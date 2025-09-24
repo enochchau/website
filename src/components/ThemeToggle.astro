@@ -1,0 +1,92 @@
+---
+
+---
+
+<a aria-label="Toggle dark mode" href="javascript:void 0" id="theme">
+  <svg
+    id="theme-light"
+    width="25"
+    height="25"
+    xmlns="http://www.w3.org/2000/svg"
+    ><path
+      d="M13.5 4v3m9.5 6.5h-3M13.5 23v-3M7 13.5H4M9 9L7 7m13 0l-2 2m2 11l-2-2M7 20l2-2"
+    ></path><circle cx="13.5" cy="13.5" r="4.5" stroke-width="0"></circle></svg
+  >
+  <svg id="theme-dark" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+    ><path
+      d="M10.1 6.6a8.08 8.08 0 00.24 11.06 8.08 8.08 0 0011.06.24c-6.46.9-12.2-4.84-11.3-11.3z"
+      stroke-width="0"></path></svg
+  >
+</a>
+
+<script>
+  const themeToggle = document.getElementById("theme");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const theme = localStorage.getItem("theme");
+      const darkMedia = matchMedia("(prefers-color-scheme: dark)");
+
+      if (!theme) {
+        if (darkMedia.matches) {
+          localStorage.setItem("theme", "light");
+          document.body.className = "light";
+        } else {
+          localStorage.setItem("theme", "dark");
+          document.body.className = "dark";
+        }
+      } else if (theme === "dark") {
+        if (darkMedia.matches) {
+          localStorage.setItem("theme", "light");
+          document.body.className = "light";
+        } else {
+          localStorage.removeItem("theme");
+          document.body.className = "";
+        }
+      } else if (theme === "light") {
+        if (darkMedia.matches) {
+          localStorage.removeItem("theme");
+          document.body.className = "";
+        } else {
+          localStorage.setItem("theme", "dark");
+          document.body.className = "dark";
+        }
+      }
+    });
+  }
+</script>
+
+<style>
+  #theme-light {
+    fill: var(--color-black);
+    stroke: var(--color-black);
+  }
+  #theme-dark {
+    fill: var(--color-white);
+    stroke: var(--color-white);
+  }
+  body.dark {
+    #theme-light {
+      display: none;
+    }
+    #theme-dark {
+      display: unset;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    #theme-light {
+      display: none;
+    }
+    #theme-dark {
+      display: unset;
+    }
+  }
+  body.light {
+    #theme-light {
+      display: unset;
+    }
+    #theme-dark {
+      display: none;
+    }
+  }
+</style>
