@@ -114,7 +114,7 @@ export default function BlogToC(props: BlogToCProps) {
         }
         return filtered;
       },
-      {},
+      {}
     );
     return filteredByYear;
   });
@@ -150,7 +150,7 @@ export default function BlogToC(props: BlogToCProps) {
       </Show>
       <For
         each={Object.entries(filteredByYear()).sort(
-          ([a], [b]) => parseInt(b) - parseInt(a),
+          ([a], [b]) => parseInt(b) - parseInt(a)
         )}
       >
         {([year, posts]) => {
@@ -163,7 +163,7 @@ export default function BlogToC(props: BlogToCProps) {
                   window.history.pushState(
                     { matches, year },
                     "",
-                    e.currentTarget.href,
+                    e.currentTarget.href
                   );
 
                   if (matches) {
@@ -190,9 +190,11 @@ export default function BlogToC(props: BlogToCProps) {
                           >
                             {post.title}
                           </BlogHeader>
-                          <p>{post.date}</p>
-                          <p class={styles.blogReadingTime}>
-                            {post.readingTime}
+                          <p class={styles.blogMeta}>
+                            {post.date} • 
+                            <span class={styles.blogReadingTime}>
+                              {post.readingTime} min
+                            </span>
                           </p>
                         </div>
                       </a>

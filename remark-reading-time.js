@@ -8,6 +8,6 @@ export function remarkReadingTime() {
       "",
     );
     const readingTime = getReadingTime(textOnPage);
-    file.data.astro.frontmatter.readingTime = readingTime.text;
+    file.data.astro.frontmatter.readingTime = Math.round(readingTime.minutes);
   };
 }
