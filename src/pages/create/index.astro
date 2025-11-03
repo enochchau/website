@@ -1,13 +1,59 @@
 ---
-import CreateNav from "../../components/CreateNav.astro";
+import { Image } from "astro:assets";
+
 import Layout from "../../layouts/Layout.astro";
+import averii from "./averii.webp";
+import face from "./face.webp";
+import pot from "./pot.webp";
+
+const pics = [
+  {
+    alt: "Pot - 2018",
+    src: pot,
+  },
+  {
+    alt: "Face - 2018",
+    src: face,
+  },
+  {
+    alt: "Averii - 2017",
+    src: averii,
+  },
+];
 ---
 
 <Layout title="Enoch - Create" activeNav="create">
-  <article>
-    <h1 class="text-3xl font-bold">creative endevours</h1>
-    <CreateNav />
-  </article>
+  {
+    pics.map(({ src, alt }, idx) => (
+      <div class="root-child-outer">
+        <div
+          class:list={{ "root-child-inner": true, "grid-bg": idx % 2 === 0 }}
+        >
+          <div class="img-container">
+            <Image
+              src={src}
+              alt={alt}
+              width={800}
+              format="webp"
+              height={0}
+              class="border-img"
+            />
+          </div>
+        </div>
+      </div>
+    ))
+  }
+
+  <div class="root-child-outer">
+    <div class:list={{ "root-child-inner": true, "grid-bg": true }}>
+      <iframe
+        id="tunes"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/258832097&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+        width="100%"
+        height="450"></iframe>
+    </div>
+  </div>
 </Layout>
 
 <style>
@@ -17,5 +63,17 @@ import Layout from "../../layouts/Layout.astro";
     justify-content: center;
     flex-direction: column;
     height: 40vh;
+  }
+  .img-container {
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .border-img {
+    width: 100%;
+    height: auto;
+    max-width: 520px;
   }
 </style>
