@@ -16,13 +16,16 @@ const navItems = [
 ];
 ---
 
-<nav>
-  <NavTitle />
-  <PageNav items={navItems} active={activeNav} />
-</nav>
+<div class="root-child-outer">
+  <nav class="root-child-inner">
+    <NavTitle />
+    <PageNav items={navItems} active={activeNav} />
+  </nav>
+</div>
 
 <style>
   nav {
+    padding: 8px 8px 16px 8px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;

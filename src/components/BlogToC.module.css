@@ -1,18 +1,19 @@
 .relative {
-  margin-top: 16px;
   position: relative;
 }
 
 .tagRow {
-  margin: 8px 0;
+  position: sticky;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+  top: 0;
+  left: 0;
+  z-index: 4;
 }
 
 .blogList {
   padding-left: 8px;
-  margin-bottom: 12px;
 }
 
 .blogItem {
@@ -43,9 +44,10 @@
 .yearHeader {
   z-index: 3;
   position: sticky;
-  border-bottom: 2px solid light-dark(var(--color-gray-300), var(--color-gray-500));
   top: 0;
   left: 0;
+
+  border-bottom: 2px solid light-dark(var(--color-gray-300), var(--color-gray-500));
   width: fit-content;
   border-radius: 4px;
   padding: 4px;
@@ -60,7 +62,7 @@
     text-decoration: none;
   }
   font-weight: normal;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .yearHeaderMatches {

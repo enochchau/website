@@ -48,6 +48,7 @@ table {
 }
 
 :root {
+  --content-width: 760px;
   --color-white: #f0f0f0;
   --color-black: #1a1b1d;
   --color-purple-500: #a86be7;
@@ -199,4 +200,33 @@ dialog,
 dialog {
   padding: 0;
   margin: auto;
+}
+
+.root-child-outer {
+  --grid-border: light-dark(var(--color-gray-250), var(--color-gray-600));
+  --grid-border-style: dotted;
+
+  width: 100%;
+  border-bottom: 1px solid var(--grid-border);
+  border-style: var(--grid-border-style);
+
+  .root-child-inner {
+    margin: 0 auto;
+    max-width: var(--content-width);
+    border-left: 1px solid var(--grid-border);
+    border-right: 1px solid var(--grid-border);
+    padding: 8px;
+    border-style: var(--grid-border-style);
+  }
+}
+
+.grid-bg {
+  --grid-color: light-dark(var(--color-gray-250), var(--color-gray-600));
+
+  background-image: radial-gradient(
+    circle at center,
+    var(--grid-color) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
 }

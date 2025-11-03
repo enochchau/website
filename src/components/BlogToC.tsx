@@ -122,30 +122,34 @@ export default function BlogToC(props: BlogToCProps) {
   return (
     <div class={styles.relative}>
       <Show when={filters().length > 0}>
-        <div class={styles.tagRow}>
-          {filters().length > 1 && (
-            <Tag
-              onClick={() => {
-                setFilters([]);
-              }}
-              selected
-              filterTag
-            >
-              clear all
-            </Tag>
-          )}
-          <For each={filters()}>
-            {(filter) => (
-              <Tag
-                onClick={() => removeFilter(filter)}
-                selected
-                closable
-                filterTag
-              >
-                {filter}
-              </Tag>
-            )}
-          </For>
+        <div class="root-child-outer">
+          <div class="root-child-inner">
+            <div class={styles.tagRow}>
+              {filters().length > 1 && (
+                <Tag
+                  onClick={() => {
+                    setFilters([]);
+                  }}
+                  selected
+                  filterTag
+                >
+                  clear all
+                </Tag>
+              )}
+              <For each={filters()}>
+                {(filter) => (
+                  <Tag
+                    onClick={() => removeFilter(filter)}
+                    selected
+                    closable
+                    filterTag
+                  >
+                    {filter}
+                  </Tag>
+                )}
+              </For>
+            </div>
+          </div>
         </div>
       </Show>
       <For
@@ -153,68 +157,79 @@ export default function BlogToC(props: BlogToCProps) {
           ([a], [b]) => parseInt(b) - parseInt(a)
         )}
       >
-        {([year, posts]) => {
+        {([year, posts], idx) => {
           const matches = activeYear() === year;
           return (
             <>
-              <YearHeader
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.history.pushState(
-                    { matches, year },
-                    "",
-                    e.currentTarget.href
-                  );
+              <div class="root-child-outer">
+                <div
+                  classList={{
+                    "root-child-inner": true,
+                    "grid-bg": idx() % 2 === 0,
+                  }}
+                >
+                  <YearHeader
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.history.pushState(
+                        { matches, year },
+                        "",
+                        e.currentTarget.href
+                      );
 
-                  if (matches) {
-                    setActiveYear();
-                  } else {
-                    setActiveYear(year);
-                  }
-                }}
-                year={year}
-                matches={matches}
-                filters={filters()}
-              />
-              <ul class={styles.blogList}>
-                <For each={posts}>
-                  {(post) => (
-                    <li class={styles.blogItem}>
-                      <a href={post.url} class={styles.blogAnchor}>
-                        <div class={styles.blogContainer}>
-                          <BlogHeader
-                            style={{
-                              "view-transition-name":
-                                contentIdToViewTransitionName(post.id),
-                            }}
-                          >
-                            {post.title}
-                          </BlogHeader>
-                          <p class={styles.blogMeta}>
-                            {post.date} • 
-                            <span class={styles.blogReadingTime}>
-                              {post.readingTime > 0 ? `${post.readingTime} min` : 'less than a min'}
-                            </span>
-                          </p>
-                        </div>
-                      </a>
-                      <div class={styles.tagContainer}>
-                        <For each={post.tags}>
-                          {(tag) => (
-                            <Tag
-                              title="click to filter posts"
-                              onClick={() => addFilter(tag)}
-                              selected={filters().includes(tag)}
-                            >
-                              {tag}
-                            </Tag>
-                          )}
-                        </For>
-                      </div>
-                    </li>
-                  )}
-                </For>
-              </ul>
+                      if (matches) {
+                        setActiveYear();
+                      } else {
+                        setActiveYear(year);
+                      }
+                    }}
+                    year={year}
+                    matches={matches}
+                    filters={filters()}
+                  />
+                  <ul class={styles.blogList}>
+                    <For each={posts}>
+                      {(post) => (
+                        <li class={styles.blogItem}>
+                          <a href={post.url} class={styles.blogAnchor}>
+                            <div class={styles.blogContainer}>
+                              <BlogHeader
+                                style={{
+                                  "view-transition-name":
+                                    contentIdToViewTransitionName(post.id),
+                                }}
+                              >
+                                {post.title}
+                              </BlogHeader>
+                              <p class={styles.blogMeta}>
+                                {post.date} •
+                                <span class={styles.blogReadingTime}>
+                                  {post.readingTime > 0
+                                    ? `${post.readingTime} min`
+                                    : "less than a min"}
+                                </span>
+                              </p>
+                            </div>
+                          </a>
+                          <div class={styles.tagContainer}>
+                            <For each={post.tags}>
+                              {(tag) => (
+                                <Tag
+                                  title="click to filter posts"
+                                  onClick={() => addFilter(tag)}
+                                  selected={filters().includes(tag)}
+                                >
+                                  {tag}
+                                </Tag>
+                              )}
+                            </For>
+                          </div>
+                        </li>
+                      )}
+                    </For>
+                  </ul>
+                </div>
+              </div>
             </>
           );
         }}

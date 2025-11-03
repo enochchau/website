@@ -22,18 +22,24 @@ let latest = {
 ---
 
 <Layout title="Enoch - Links" hideNav={true}>
-  <div class="container">
-    <NavTitle />
-    <ButtonLink href={latest.url}>Latest Blog Post</ButtonLink>
-    <ButtonLink href="/blog">Blog</ButtonLink>
-    <ButtonLink href="https://www.youtube.com/channel/UC8WzolokXeJKN2d4dMrjPlA">
-      YouTube
-    </ButtonLink>
-    <ButtonLink href="https://www.instagram.com/uhhuhhuny/">
-      Instagram
-    </ButtonLink>
-    <Mascot />
-    <ThemeToggle />
+  <div class="root-child-outer">
+    <div class="root-child-inner grid-bg">
+      <div class="container">
+        <NavTitle />
+        <ButtonLink href={latest.url}>Latest Blog Post</ButtonLink>
+        <ButtonLink href="/blog">Blog</ButtonLink>
+        <ButtonLink
+          href="https://www.youtube.com/channel/UC8WzolokXeJKN2d4dMrjPlA"
+        >
+          YouTube
+        </ButtonLink>
+        <ButtonLink href="https://www.instagram.com/uhhuhhuny/">
+          Instagram
+        </ButtonLink>
+        <Mascot />
+        <ThemeToggle />
+      </div>
+    </div>
   </div>
 </Layout>
 
