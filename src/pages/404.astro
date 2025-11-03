@@ -3,7 +3,23 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="404">
-  <article class="flex items-center justify-center h-40">
-    <p class="text-xl">404: Page not found ;(</p>
-  </article>
+  <div class="root-child-outer">
+    <div class="root-child-inner grid-bg">
+      <article>
+        <h3>404: Page not found ;(</h3>
+      </article>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+  }
+  h3 {
+    font-weight: bold;
+  }
+</style>
