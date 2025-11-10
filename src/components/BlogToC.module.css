@@ -3,13 +3,9 @@
 }
 
 .tagRow {
-  position: sticky;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  top: 0;
-  left: 0;
-  z-index: 4;
 }
 
 .blogList {
@@ -44,7 +40,7 @@
 .yearHeader {
   z-index: 3;
   position: sticky;
-  top: 0;
+  top: 8px;
   left: 0;
 
   border-bottom: 2px solid
