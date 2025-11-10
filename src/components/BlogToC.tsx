@@ -204,7 +204,13 @@ export default function BlogToC(props: BlogToCProps) {
                                 >
                                   {post.title}
                                 </BlogHeader>
-                                <p class={styles.blogMeta}>
+                                <p
+                                  class={styles.blogMeta}
+                                  style={{
+                                    "view-transition-name":
+                                      viewTransitionName + "_date",
+                                  }}
+                                >
                                   {post.date} •
                                   <span class={styles.blogReadingTime}>
                                     {post.readingTime > 0

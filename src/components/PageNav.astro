@@ -1,6 +1,4 @@
 ---
-import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionName";
-
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
@@ -14,11 +12,7 @@ const { active, items } = Astro.props as Props;
 <nav>
   {
     items.map((item) => (
-      <h2
-        style={{
-          "view-transition-name": contentIdToViewTransitionName(item.value),
-        }}
-      >
+      <h2>
         <a
           href={"/" + item.value}
           class:list={[{ inactive: active !== item.label }]}

@@ -28,7 +28,9 @@ let tags = data.tags?.sort();
         {data.title}
       </h1>
       {data.subtitle && <h2>{data.subtitle}</h2>}
-      <h3>{data.date}</h3>
+      <h3 style={`view-transition-name: ${viewTransitionName}_date;`}>
+        {data.date}
+      </h3>
       {
         tags && (
           <div class="tag-row">
