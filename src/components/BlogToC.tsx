@@ -16,6 +16,7 @@ import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionN
 import type { ByYear } from "../types";
 import BlogHeader from "./BlogHeader";
 import styles from "./BlogToC.module.css";
+import Tag from "./Tag";
 
 const FILTER_PARAM = "f";
 
@@ -189,43 +190,51 @@ export default function BlogToC(props: BlogToCProps) {
                   />
                   <ul class={styles.blogList}>
                     <For each={posts}>
-                      {(post) => (
-                        <li class={styles.blogItem}>
-                          <a href={post.url} class={styles.blogAnchor}>
-                            <div class={styles.blogContainer}>
-                              <BlogHeader
-                                style={{
-                                  "view-transition-name":
-                                    contentIdToViewTransitionName(post.id),
-                                }}
-                              >
-                                {post.title}
-                              </BlogHeader>
-                              <p class={styles.blogMeta}>
-                                {post.date} •
-                                <span class={styles.blogReadingTime}>
-                                  {post.readingTime > 0
-                                    ? `${post.readingTime} min`
-                                    : "less than a min"}
-                                </span>
-                              </p>
-                            </div>
-                          </a>
-                          <div class={styles.tagContainer}>
-                            <For each={post.tags}>
-                              {(tag) => (
-                                <Tag
-                                  title="click to filter posts"
-                                  onClick={() => addFilter(tag)}
-                                  selected={filters().includes(tag)}
+                      {(post) => {
+                        const viewTransitionName = contentIdToViewTransitionName(
+                          post.id
+                        );
+                        return (
+                          <li class={styles.blogItem}>
+                            <a href={post.url} class={styles.blogAnchor}>
+                              <div class={styles.blogContainer}>
+                                <BlogHeader
+                                  style={{
+                                    "view-transition-name": viewTransitionName,
+                                  }}
                                 >
-                                  {tag}
-                                </Tag>
-                              )}
-                            </For>
-                          </div>
-                        </li>
-                      )}
+                                  {post.title}
+                                </BlogHeader>
+                                <p class={styles.blogMeta}>
+                                  {post.date} •
+                                  <span class={styles.blogReadingTime}>
+                                    {post.readingTime > 0
+                                      ? `${post.readingTime} min`
+                                      : "less than a min"}
+                                  </span>
+                                </p>
+                              </div>
+                            </a>
+                            <div class={styles.tagContainer}>
+                              <For each={post.tags}>
+                                {(tag) => (
+                                  <Tag
+                                    title="click to filter posts"
+                                    onClick={() => addFilter(tag)}
+                                    selected={filters().includes(tag)}
+                                    style={{
+                                      "view-transition-name":
+                                        viewTransitionName + tag,
+                                    }}
+                                  >
+                                    {tag}
+                                  </Tag>
+                                )}
+                              </For>
+                            </div>
+                          </li>
+                        );
+                      }}
                     </For>
                   </ul>
                 </div>
@@ -235,27 +244,6 @@ export default function BlogToC(props: BlogToCProps) {
         }}
       </For>
     </div>
-  );
-}
-
-interface TagProps {
-  children: JSX.Element;
-  onClick?: JSX.EventHandler<HTMLSpanElement, MouseEvent>;
-  selected?: boolean;
-  title?: string;
-  filterTag?: boolean;
-  closable?: boolean;
-}
-function Tag(props: TagProps) {
-  return (
-    <button
-      title={!props.selected ? props.title : undefined}
-      classList={{ [styles.tag]: true, [styles.tagSelected]: props.selected }}
-      onclick={props.onClick}
-      disabled={!props.filterTag && props.selected}
-    >
-      {props.children} {props.closable && "×"}
-    </button>
   );
 }
 

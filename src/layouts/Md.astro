@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 import Prose from "~/components/Prose.astro";
+import Tag from "~/components/Tag";
 import Layout from "~/layouts/Layout.astro";
 import { contentIdToViewTransitionName } from "~/util/contentIdToViewTransitionName";
 
@@ -12,6 +13,8 @@ interface Props {
 const { content } = Astro.props as Props;
 const { data } = content;
 let viewTransitionName = contentIdToViewTransitionName(content.id);
+
+let tags = data.tags?.sort();
 ---
 
 <Layout
@@ -26,6 +29,23 @@ let viewTransitionName = contentIdToViewTransitionName(content.id);
       </h1>
       {data.subtitle && <h2>{data.subtitle}</h2>}
       <h3>{data.date}</h3>
+      {
+        tags && (
+          <div class="tag-row">
+            {tags.map((tag) => (
+              <a href={`/blog?f=${tag}`}>
+                <Tag
+                  style={{
+                    "view-transition-name": viewTransitionName + tag,
+                  }}
+                >
+                  {tag}
+                </Tag>
+              </a>
+            ))}
+          </div>
+        )
+      }
     </div>
   </div>
   <div class="root-child-outer">
@@ -49,5 +69,11 @@ let viewTransitionName = contentIdToViewTransitionName(content.id);
     margin: 8px 0;
     font-style: italic;
     font-size: var(--text-m);
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 </style>
