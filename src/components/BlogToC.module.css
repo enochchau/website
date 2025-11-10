@@ -28,7 +28,7 @@
   color: light-dark(var(--color-gray-500), var(--color-gray-300));
 }
 .blogContainer {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
@@ -47,7 +47,8 @@
   top: 0;
   left: 0;
 
-  border-bottom: 2px solid light-dark(var(--color-gray-300), var(--color-gray-500));
+  border-bottom: 2px solid
+    light-dark(var(--color-gray-300), var(--color-gray-500));
   width: fit-content;
   border-radius: 4px;
   padding: 4px;

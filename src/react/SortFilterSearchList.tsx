@@ -48,7 +48,7 @@ const SortFilterSearchList = () => {
 
   const [processedItems, setProcessedItems] = useState<typeof items>([]);
   const [processOrder, setProcessOrder] = useState<"sortFirst" | "filterFirst">(
-    "filterFirst"
+    "filterFirst",
   );
 
   const filter = (nextItems: typeof items) => {
