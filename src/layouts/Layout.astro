@@ -75,9 +75,12 @@ const {
     <slot />
     <footer class="root-child-outer rest-outer">
       <div class="root-child-inner rest-inner">
-          <a class="rss-btn" href="/rss.xml">
-            <img src="https://web.badges.world/badges/feeds/rss.gif" alt="rss newsfeed" />
-          </a>
+        <a class="rss-btn" href="/rss.xml">
+          <img
+            src="https://web.badges.world/badges/feeds/rss.gif"
+            alt="rss newsfeed"
+          />
+        </a>
       </div>
     </footer>
   </body>
@@ -100,9 +103,26 @@ const {
     justify-content: flex-end;
     display: flex;
   }
+
   .rss-btn {
     cursor: pointer;
     height: fit-content;
+  }
+  body.dark .rss-btn {
+    filter: invert(100%) hue-rotate(180deg);
+  }
+  @media (prefers-color-scheme: dark) {
+    .rss-btn {
+      filter: invert(100%) hue-rotate(180deg);
+    }
+  }
+  body.light .rss-btn {
+    filter: none;
+  }
+  @media (prefers-color-scheme: light) {
+    .rss-btn {
+      filter: none;
+    }
   }
 </style>
 
