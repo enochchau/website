@@ -4,7 +4,6 @@ import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 
-import { rehypePreview } from "./rehype-preview";
 import { remarkReadingTime } from "./remark-reading-time";
 const site = "https://enochchau.com";
 
@@ -36,7 +35,6 @@ export default defineConfig({
       theme: "one-dark-pro",
     },
     remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [rehypePreview],
   },
   site,
   vite: {
