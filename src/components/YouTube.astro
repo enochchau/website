@@ -3,12 +3,22 @@
 const props = Astro.props;
 ---
 
-<div class="relative h-0 mb-4">
-  <iframe class="w-full h-full absolute top-0 left-0" {...props} ></iframe>
+<div>
+  <iframe {...props}></iframe>
 </div>
 
 <style>
   div {
+    position: relative;
+    height: 0;
+    margin-bottom: 8px;
     padding-bottom: 56.25%;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 </style>
