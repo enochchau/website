@@ -61,12 +61,10 @@ And finally, we made it to the top.
   alt="pulling on dying of the light"
 />
 
-So dogged tired but damn the view was to die for.
+So dogged tired but damn the view was to die for. 
 I felt like I was dying as my legs screamed, dropping my pads provided a slight reprieve.
 But it was worth it.
 El Cap, large and looming in the distance, Yosemite Falls behind us.
-
-And so we begin.
 
 Setup the pads, start trying the moves.
 Feeling stiff, gotta warm back up, and damn the landing kinda sucks.
@@ -77,12 +75,22 @@ We were running at of time. Racing the sun down.
 Dammit I didn't want to get stuck on the top of this hill in the dark.
 
 Kodai sends and I can feel the pressure building.
-So I burn and burn and burn again but I'm not resting and I'm not sending and
+So the burn and burn and burn again but I'm not resting and I'm not sending and
 the sun is already disappearing under the horizon.
 But Pitbull has my back and we gone meet him at the Hotel Room Service.
 And I'm sending and we're having the Time of Our Lives.
-And we're packing it up but the sun is already down.
-And the sky is the dark, and we're probably fucked.
+And we're packing it up but the suns already down.
+
+<YouTube
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/vRID0IMAIEE?si=04an6cqoKpQiQkUL"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+/>
 
 We took it slow on the hike back down, ambling through the dark, trying
 to find whatever way points we could.
@@ -102,20 +110,8 @@ I looked up and I could see the stars.
 
 <MdImage src={import("./yosemite-stars.webp")} alt="yosemite stars" />
 
-<YouTube
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/vRID0IMAIEE?si=04an6cqoKpQiQkUL"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen
-/>
-
 [^1]:
-
-It's not in the guide book, "in the spirit of discovery". An adventure waiting to happen,
-brought to you by James Lucas.
+    It's not in the guide book, "in the spirit of discovery". An adventure waiting to happen,
+    brought to you by James Lucas.
 
 [^2]: In the spirit of the guide book, I'm gate keeping the location.
