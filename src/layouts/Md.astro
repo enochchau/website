@@ -28,26 +28,28 @@ let tags = data.tags?.sort();
         {data.title}
       </h1>
       {data.subtitle && <h2>{data.subtitle}</h2>}
-      <h3 style={`view-transition-name: ${viewTransitionName}_date;`}>
-        {data.date}
-      </h3>
-      {
-        tags && (
-          <div class="tag-row">
-            {tags.map((tag) => (
-              <a href={`/blog?f=${tag}`}>
-                <Tag
-                  style={{
-                    "view-transition-name": viewTransitionName + tag,
-                  }}
-                >
-                  {tag}
-                </Tag>
-              </a>
-            ))}
-          </div>
-        )
-      }
+      <div class="metadata-section">
+        <h3 style={`view-transition-name: ${viewTransitionName}_date;`}>
+          {data.date}
+        </h3>
+        {
+          tags && (
+            <div class="tag-row">
+              {tags.map((tag) => (
+                <a href={`/blog?f=${tag}`}>
+                  <Tag
+                    style={{
+                      "view-transition-name": viewTransitionName + tag,
+                    }}
+                  >
+                    {tag}
+                  </Tag>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
     </div>
   </div>
   <div class="root-child-outer">
@@ -68,7 +70,6 @@ let tags = data.tags?.sort();
     font-size: var(--text-l);
   }
   h3 {
-    margin: 8px 0;
     font-style: italic;
     font-size: var(--text-m);
   }
@@ -77,5 +78,11 @@ let tags = data.tags?.sort();
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+  }
+
+  .metadata-section  {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 </style>

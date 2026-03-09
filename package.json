@@ -13,8 +13,8 @@
     "fmt:check": "prettier -c --cache .",
     "lint": "eslint src/ --cache --fix --cache-strategy content",
     "check": "astro check",
-    "tags": "node ./scripts/tags.js | sort -n -k2 --reverse",
-    "tags:alpha": "node ./scripts/tags.js | sort"
+    "tags": "./scripts/tags.sh",
+    "tags:alpha": "./scripts/tags.sh --alpha"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
