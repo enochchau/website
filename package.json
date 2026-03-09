@@ -13,6 +13,7 @@
     "fmt:check": "prettier -c --cache .",
     "lint": "eslint src/ --cache --fix --cache-strategy content",
     "check": "astro check",
+    "typecheck": "tsc --noEmit",
     "tags": "./scripts/tags.sh",
     "tags:alpha": "./scripts/tags.sh --alpha"
   },
