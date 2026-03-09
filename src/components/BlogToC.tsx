@@ -211,7 +211,7 @@ export default function BlogToC(props: BlogToCProps) {
                                       viewTransitionName + "_date",
                                   }}
                                 >
-                                  {post.date} • {" "}
+                                  {post.date} •{" "}
                                   <span class={styles.blogReadingTime}>
                                     {post.readingTime > 0
                                       ? `${post.readingTime} min`
