@@ -9,7 +9,7 @@ You can achieve similar output in half the time, but the gains of agentic
 development are exponential compared to the linear gains of typing versus handwriting.
 If you can see the path from A to B, the Agent can build you the car and pave the road
 for you to drive there in a few hours where a human would have to manually toil away for several weeks.
-For 90% of software development tasks, it is the right choice, but there remains that
+For 90% of software development tasks, this is the right choice, but there remains that
 final 10% that divides the revenue-generating potential of software from the free (as in freedom)
 artistic pursuit of software.
 
@@ -19,14 +19,14 @@ pays my salary and I get to go home to a well-furnished apartment and eat three 
 I don't feel ownership over the code I write at work; it existed before me and
 dozens of hands have molded it over the course of its life.
 I follow the same language choices, linter rules, formatting rules, object-oriented
-paradigm, build tools, frameworks and infrastructure that my company has imposed upon me.
+paradigm, build tools, frameworks, and infrastructure that my company has imposed upon me.
 Sure, I could go make a big stink to write a service in Lisp,
 but that's counterproductive to the goal of the job which is to ship the damn product
 and go home.
 To that end, agentic coding is perfect because it helps me get there that much faster.
 
 Already, we can all run our own mini team of Agents in order to write lots and lots of code really quickly.
-With this level of orchestration across a whole team, we could be committing "hundreds of [pull requests]" a day.
+With this level of orchestration across a whole team, we could be committing hundreds of pull requests a day.
 The bottleneck is no longer writing the code; instead, it is the human reviewer having to check the parts that the Agent cannot.
 The problem is, how does the human know that what the Agent is doing is correct?
 
@@ -45,20 +45,23 @@ my peers to develop my skills enough to pass the final exam.
 The same thing is true for learning anything; I have to spend enough time with the
 subject matter to develop my own understanding.
 [Software development is no different.](https://www.anthropic.com/research/AI-assistance-coding-skills)
+I started off web development with raw HTML before moving in jQuery and php, eventually
+landing my first job using React with NodeJS.
+I had to put in the reps to learn what I know now.
 I'm far along enough in my career now that I have my coding fundamentals down but
 I am still developing my intuition on what makes a good product.
 
 So much can be delegated to the Agent now. I don't even have to read the tickets anymore.
-With enough MCP and API integrations, I can have the Agent read the Linear ticket,
-ask follow-up questions through Slack, build its own prompt, code the solution,
-write tests to test the solution, then post the pull request without any intervention from me.
+With enough MCP and API integrations, I can have the Agent create it's own prompt by
+reading the Linear ticket and asking follow-up questions through Slack.
+Then it'll code the solution, write tests to test the solution, then post the pull request without any intervention from me.
 If I'm not in the loop at all, how can I ever hope to spend enough time with the problem
 to develop intuition for what is correct?
 
 Conversely, is asking an Agent questions about the code really that different from
 asking my coworker to explain something to me?
-That comes down to a matter of context: does the limit of contextual knowledge start
-and stop in the codebase or is there something more that exists outside the grasp
+That comes down to a matter of context.
+Does the limit of contextual knowledge start and stop in the codebase or is there something more that exists outside the grasp
 of the Agent that only my coworker can explain to me?
 Maybe there's an edge case or specific design decision that is not clear to the Agent
 or, even worse, it hallucinates and gives me bogus information.
@@ -67,7 +70,7 @@ No one is forcing me to hand over my agency to the Agent.
 Unfortunately, there's limited time in a day.
 Once my boss starts to expect the speed of output that only an Agent can deliver,
 it's too little too late to reverse course.
-I've lost the opportunity to spend a lot of time with the codebase to learn things gradually.
+I've lost the opportunity to spend a lot of time with the code to learn things gradually.
 Now I must leverage the Agent even more to ask it questions about the codebase
 instead of doing the hard work of actually reading and tracing the code to draw my own
 inferences and understanding.
@@ -75,13 +78,11 @@ inferences and understanding.
 When I stopped speaking Chinese with my mother every day, my ability to recall
 started to degrade.
 I can feel myself struggling to find the words when I talk to her now.
-I'm losing my gains.
 The same is true with software development.
 When I first started using Cursor, I felt like it could read my mind with its AI tab completion.
 But when I turned off my work computer for the weekend and came back to
 Neovim to edit this website, I realized that I was struggling to write basic CSS without
 Cursor's AI tab completion.
-I'm losing my gains.
 
 I have to remind myself to treat Agents as tools to prevent myself from becoming overly reliant.
 It's up to me to slow down so that I can build a strong foundational understanding
@@ -89,8 +90,8 @@ of the problem space, the technology, and how it fits together in the product.
 None of that is guaranteed to happen for free anymore.
 It's hard to keep up.
 At the end of a long day, when I still see a mountain of tasks to finish, when I
-have a deadline looming on the horizon, when I just want a bit of room to breathe; in
-those moments of weakness, it's easy to let the Agent run amok.
+have a deadline looming on the horizon, when I just want a bit of room to breathe.
+In those moments of weakness, it's easy to let the Agent run amok.
 Maybe it's correct 90% of the time, and maybe that's good enough.
 What scares me, though, is that I am not certain it is correct.
 At least when I write the code, even if it's buggy, I can be certain that, at the
@@ -102,7 +103,7 @@ There's a part of me that still yearns for the tactile feel of writing my own co
 I love my side projects.
 I get to experiment with different tooling, different paradigms, and different languages.
 I love chasing down novel ideas and experimenting to learn or just for the joy
-of writing well-thought-out code.
+of writing well-thought-out programs.
 There was a time before all the Agents that I would do this at work too, but
 that time has passed now.
 
@@ -124,15 +125,16 @@ to prevent the recklessness that AI can bring upon an organization.
 
 Lately, product managers, designers, and even support teams have all started to contribute code.
 They've always hated the bottleneck of engineering time and now there's a tool to circumvent that.
-The engineers don't mind either since it lets them focus on more interesting tasks than having to center a div.
-But the engineers still have to review the code at the end of the day and correct any AI slop that non-engineers create.
+The engineers don't mind either since it lets them focus on more interesting tasks than having to adjust the padding
+by two pixels or change the color of the text.
+At the end of the day, the engineers still have to review the code and correct any AI slop that non-engineers create.
 As this paradigm proliferates, the pull requests from product managers and designers
 will start to get bigger and bigger until the engineers are all but janitors
 for the AI slop that the rest of the organization outputs.
 
 Maybe someday, perhaps someday soon, the Agents will be good enough that none of this will be a problem anymore.
-The code will write itself and be perfect. It will be able to manage its own orchestration;
-we will simply assign it tickets and it will create the perfect system.
+The code will write itself and be perfect.
+The Agent will be able to manage its own orchestration; we will simply assign it tickets and it will create the perfect system.
 Perhaps we will have to build many, many more data centers to see that day come and face
 the environmental consequences.
 
