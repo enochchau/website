@@ -9,7 +9,7 @@ interface Props {
   class?: string;
 }
 
-let { src, alt, width = 800, height = 0} = Astro.props as Props;
+let { src, alt, width, height} = Astro.props as Props;
 ---
 
 <Image
