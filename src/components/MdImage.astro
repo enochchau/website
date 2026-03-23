@@ -10,13 +10,13 @@ interface Props {
   portrait?: boolean;
 }
 
-const { portrait, src, alt, width = 800, height = 0 } = Astro.props as Props;
+let { portrait, src, alt, width = 800, height = 0} = Astro.props as Props;
 ---
 
 <Image
   src={src}
   alt={alt}
-  format="webp"
+  format="avif"
   width={width}
   height={height}
   class={Astro.props.class
