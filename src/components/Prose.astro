@@ -8,7 +8,7 @@
 
 <style is:global>
   article.md {
-    font-family: sans-serif;
+    font-family: var(--font-serif);
     pre.astro-code {
       > code {
         background-color: unset;
@@ -40,10 +40,13 @@
       margin: 0 0;
     }
 
-    p, li {
-      font-family: var(--font-serif);
+    p {
       line-height: 1.5rem;
       font-size: var(--text-m);
+    }
+
+    li {
+      line-height: 1.2rem;
     }
 
     th,
@@ -74,9 +77,6 @@
       code {
         line-height: 1.35;
       }
-    }
-    li {
-      line-height: 1.2rem;
     }
 
     ul {
