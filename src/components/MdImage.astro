@@ -7,10 +7,9 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
-  portrait?: boolean;
 }
 
-let { portrait, src, alt, width = 800, height = 0} = Astro.props as Props;
+let { src, alt, width = 800, height = 0} = Astro.props as Props;
 ---
 
 <Image
@@ -19,23 +18,17 @@ let { portrait, src, alt, width = 800, height = 0} = Astro.props as Props;
   format="avif"
   width={width}
   height={height}
-  class={Astro.props.class
-    ? Astro.props.class
-    : portrait
-      ? "portrait"
-      : "image"}
+  class={Astro.props.class ? Astro.props.class : "image"}
 />
 
 <style>
   .image {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
-  }
-  .portrait {
-    display:block;
-    width: 360px;
+    max-height: 90dvh;
     margin-left: auto;
     margin-right: auto;
-    height: auto;
+    display:block;
   }
 </style>
