@@ -75,11 +75,11 @@ q:before, q:after {
   --text-xl: 1.5rem;
   --text-xxl: 2rem;
 
-  --font-sans-serif: Arial;
+  --font-sans-serif: Arial, sans-serif;
 
-  --font-serif: Georgia;
+  --font-serif: Georgia, serif;
 
-  --font-mono: Consolas;
+  --font-mono: Courier, monospace;
 
   box-sizing: border-box;
   font-family: var(--font-sans-serif);
