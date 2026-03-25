@@ -9,6 +9,7 @@ export interface Props {
   description?: string;
   activeNav?: "blog" | "create" | "about";
   hideNav?: boolean;
+  coverSrc?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   activeNav,
   description = "Enoch's Website",
   hideNav,
+  coverSrc = penguinSvg.src,
 } = Astro.props as Props;
 ---
 
@@ -38,7 +40,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="title" property="og:title" content={title} />
     <meta name="description" property="og:description" content={description} />
-    <meta name="image" property="og:image" content={penguinSvg.src} />
+    <meta name="image" property="og:image" content={coverSrc} />
     <meta name="author" content="Enoch Chau" />
     <meta
       property="og:url"
@@ -76,10 +78,7 @@ const {
     <footer class="root-child-outer rest-outer">
       <div class="root-child-inner rest-inner">
         <a class="rss-btn" href="/rss.xml">
-          <img
-            src="/rss_news_feed_badge.gif"
-            alt="rss newsfeed"
-          />
+          <img src="/rss_news_feed_badge.gif" alt="rss newsfeed" />
         </a>
       </div>
     </footer>
