@@ -26,6 +26,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "^3.8.0",
     "prettier-plugin-astro": "^0.14.1",
+    "shiki-image": "^0.1.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1"
   },
