@@ -17,7 +17,7 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-  const playButton = document.getElementById("faaaaaaaaaaaaa-button");
+  const playButton = document.getElementById("faaaaaaaaaaaaa-button")!;
   playButton.addEventListener('click', () =>{
     const audio = new Audio('/sounds/faaaaaaaaaaaaa.mp3')
     audio.volume = 0.5;
