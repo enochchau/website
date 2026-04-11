@@ -9,6 +9,7 @@ export interface Props {
   description?: string;
   activeNav?: "blog" | "create" | "about";
   hideNav?: boolean;
+  hideFooter?: boolean;
   coverSrc?: string;
 }
 
@@ -17,6 +18,7 @@ const {
   activeNav,
   description = "Enoch's Website",
   hideNav,
+  hideFooter,
   coverSrc = penguinSvg.src,
 } = Astro.props as Props;
 ---
@@ -75,13 +77,15 @@ const {
     </script>
     {!hideNav && <GlobalNav activeNav={activeNav} />}
     <slot />
-    <footer class="root-child-outer rest-outer">
-      <div class="root-child-inner rest-inner">
-        <a class="rss-btn" href="/rss.xml">
-          <img src="/rss_news_feed_badge.gif" alt="rss newsfeed" />
-        </a>
-      </div>
-    </footer>
+    {!hideFooter && 
+      <footer class="root-child-outer rest-outer">
+        <div class="root-child-inner rest-inner">
+          <a class="rss-btn" href="/rss.xml">
+            <img src="/rss_news_feed_badge.gif" alt="rss newsfeed" />
+          </a>
+        </div>
+      </footer>
+    }
   </body>
 </html>
 <style>

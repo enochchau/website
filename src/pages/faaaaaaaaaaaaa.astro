@@ -1,0 +1,37 @@
+---
+import ThemeToggle from "~/components/ThemeToggle.astro";
+
+import Button from "../components/Button.tsx";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="faaaaaaaaaaaaa" hideNav={true} hideFooter={true}>
+  <div class="root-child-outer">
+    <div class="root-child-inner grid-bg">
+      <div class="container">
+        <Button id="faaaaaaaaaaaaa-button">Play</Button>
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const playButton = document.getElementById("faaaaaaaaaaaaa-button");
+  playButton.addEventListener('click', () =>{
+    const audio = new Audio('/sounds/faaaaaaaaaaaaa.mp3')
+    audio.volume = 0.5;
+    audio.play()
+  })
+</script>
+
+<style>
+  .container {
+    height: 80dvh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
