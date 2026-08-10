@@ -1,11 +1,23 @@
+import { satteri } from '@astrojs/markdown-satteri';
 import mdx from "@astrojs/mdx";
-import { unified } from "@astrojs/markdown-remark";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
+import getReadingTime from "reading-time";
+import { defineMdastPlugin } from "satteri";
 
-import { remarkReadingTime } from "./remark-reading-time";
+const readingTimePlugin = defineMdastPlugin({
+  name: "reading-time",
+  text(node, ctx) {
+    if (!ctx.data.astro?.frontmatter.readingTime) {
+      ctx.data.astro!.frontmatter.readingTime = getReadingTime(node.value).minutes
+    } else {
+      ctx.data.astro!.frontmatter.readingTime += getReadingTime(node.value).minutes
+    }
+  },
+});
+
 const site = "https://enochchau.com";
 
 // https://astro.build/config
@@ -29,12 +41,11 @@ export default defineConfig({
         ].some((p) => site + p === page);
       },
     }),
-    react({ include: "**/react/**" }),
+    react({ include: "**/react/**/*.tsx" }),
   ],
   markdown: {
-    processor: unified({
-      gfm: true,
-      remarkPlugins: [remarkReadingTime],
+    processor:satteri({
+      mdastPlugins: [readingTimePlugin]
     }),
     shikiConfig: {
       theme: "one-dark-pro",

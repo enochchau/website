@@ -11,9 +11,6 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.10
         version: 0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@5.9.3)
-      '@astrojs/markdown-remark':
-        specifier: ^7.2.2
-        version: 7.2.2(supports-color@7.2.0)
       '@astrojs/mdx':
         specifier: ^7.0.5
         version: 7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.2.0(@astrojs/markdown-remark@7.2.2(supports-color@7.2.0))(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.4.2)(less@4.8.1(supports-color@7.2.0))(sass@1.102.0)(stylus@0.63.0(supports-color@7.2.0))(yaml@2.9.0))(supports-color@7.2.0)
@@ -41,18 +38,9 @@ importers:
       dayjs:
         specifier: ^1.11.21
         version: 1.11.21
-      hast-util-to-html:
-        specifier: ^9.0.5
-        version: 9.0.5
       lightningcss:
         specifier: ^1.33.0
         version: 1.33.0
-      mdast-util-to-hast:
-        specifier: ^13.2.1
-        version: 13.2.1
-      mdast-util-to-string:
-        specifier: ^4.0.0
-        version: 4.0.0
       react:
         specifier: ^19.2.8
         version: 19.2.8
@@ -75,6 +63,9 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(supports-color@7.2.0)(typescript@5.9.3)
     devDependencies:
+      '@astrojs/markdown-satteri':
+        specifier: ^0.3.5
+        version: 0.3.5
       '@eslint/js':
         specifier: ^9.39.5
         version: 9.39.5
@@ -102,6 +93,9 @@ importers:
       sanitize-filename:
         specifier: ^1.6.4
         version: 1.6.4
+      satteri:
+        specifier: ^0.9.5
+        version: 0.9.5
       shiki-image:
         specifier: ^0.1.4
         version: 0.1.4
