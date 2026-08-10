@@ -26,15 +26,16 @@ const getViewerID = (index: number) => `${containerID}-viewer-${index}`;
 <div id={containerID} class="recipe-container">
   {
     pics.map(({ src, alt }, i) => (
-      <div
+      <button
         class="img-container"
         tabindex="0"
         role="button"
         aria-label={`Open ${alt}`}
-        data-viewer={getViewerID(i)}
+        command="show-modal"
+        commandfor={getViewerID(i)}
       >
-        <MdImage src={src.default} alt={alt} data-viewer={getViewerID(i)} />
-      </div>
+        <MdImage src={src.default} alt={alt} />
+      </button>
     ))
   }
   {
@@ -48,27 +49,18 @@ const getViewerID = (index: number) => `${containerID}-viewer-${index}`;
 
 <script define:vars={{ containerID }}>
   const container = document.getElementById(containerID);
-  if (!container) return;
-
   container.addEventListener("click", (e) => {
     const target = e.target;
-    if (target.dataset.viewer) {
-      document.getElementById(target.dataset.viewer)?.showModal();
-    } else if (target instanceof HTMLDialogElement && target === event.target) {
+    if (target instanceof HTMLDialogElement) {
       target.close();
-    }
-  });
-
-  container.addEventListener("keydown", (e) => {
-    const target = e.target;
-    if ((e.key === "Enter" || e.key === " ") && target.dataset.viewer) {
-      e.preventDefault();
-      document.getElementById(target.dataset.viewer)?.showModal();
     }
   });
 </script>
 
 <style>
+  button {
+    all: unset;
+  }
   .recipe-container {
     display: flex;
     flex-wrap: wrap;
