@@ -6,9 +6,9 @@ const { ...props } = Astro.props as JSX.DialogHTMLAttributes;
 
 <dialog {...props}><slot /></dialog>
 
-<script define:vars={{ id: props.id }}>
-  const container = document.getElementById(id);
-  container.addEventListener("click", (e) => {
+<script define:vars={{ id: props.id }} is:inline>
+  const dialog = document.getElementById(id);
+  dialog.addEventListener("click", (e) => {
     const target = e.target;
     if (target instanceof HTMLDialogElement && e.target.id === id) {
       target.close();

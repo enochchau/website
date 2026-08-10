@@ -28,6 +28,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "sanitize-filename": "^1.6.4",
     "shiki-image": "^0.1.4",
+    "solid-devtools": "^0.34.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1"
   },
