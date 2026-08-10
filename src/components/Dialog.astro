@@ -1,0 +1,39 @@
+---
+import type { JSX } from "astro/jsx-runtime";
+
+const { ...props } = Astro.props as JSX.DialogHTMLAttributes;
+---
+
+<dialog {...props}><slot /></dialog>
+
+<script define:vars={{ id: props.id }}>
+  const container = document.getElementById(id);
+  container.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target instanceof HTMLDialogElement && e.target.id === id) {
+      target.close();
+    }
+  });
+</script>
+
+<style>
+  dialog {
+    border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 400px;
+    height: fit-content;
+    padding: 0;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 720px) {
+    dialog {
+      max-width: 500px;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>

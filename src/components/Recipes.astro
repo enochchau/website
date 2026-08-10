@@ -1,5 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
+
+import Dialog from "./Dialog.astro";
 import MdImage from "./MdImage.astro";
 
 let urls = import.meta.glob<{ default: ImageMetadata }>(
@@ -40,22 +42,12 @@ const getViewerID = (index: number) => `${containerID}-viewer-${index}`;
   }
   {
     pics.map(({ src, alt }, i) => (
-      <dialog id={getViewerID(i)}>
+      <Dialog id={getViewerID(i)}>
         <MdImage src={src.default} alt={alt} />
-      </dialog>
+      </Dialog>
     ))
   }
 </div>
-
-<script define:vars={{ containerID }}>
-  const container = document.getElementById(containerID);
-  container.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target instanceof HTMLDialogElement) {
-      target.close();
-    }
-  });
-</script>
 
 <style>
   button {

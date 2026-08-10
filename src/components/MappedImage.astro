@@ -1,5 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
+
+import Dialog from "./Dialog.astro";
 import MdImage, { type Props as MdImageProps } from "./MdImage.astro";
 
 export interface ImageBox {
@@ -66,9 +68,9 @@ const componentId = `mapped-image-${crypto.randomUUID()}`;
     boxes.map((box, index) => {
       const viewerId = `${componentId}-viewer-${index}`;
       return (
-        <dialog id={viewerId}>
+        <Dialog id={viewerId}>
           <MdImage src={box.src} alt={box.alt} width={1600} />
-        </dialog>
+        </Dialog>
       );
     })
   }
@@ -82,8 +84,6 @@ const componentId = `mapped-image-${crypto.randomUUID()}`;
     const target = event.target;
     if (target instanceof SVGRectElement) {
       document.getElementById(target.dataset.viewer ?? "")?.showModal();
-    } else if (target instanceof HTMLDialogElement && target === event.target) {
-      target.close();
     }
   });
 
@@ -123,5 +123,4 @@ const componentId = `mapped-image-${crypto.randomUUID()}`;
     fill-opacity: 0;
     cursor: pointer;
   }
-
 </style>
