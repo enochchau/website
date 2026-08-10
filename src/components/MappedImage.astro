@@ -4,6 +4,8 @@ import type { ImageMetadata } from "astro";
 import Dialog from "./Dialog.astro";
 import MdImage, { type Props as MdImageProps } from "./MdImage.astro";
 
+// Use https://www.image-map.net/ to determine image size and coords
+
 export interface ImageBox {
   /** Pixel coordinates in the source image: [left, top, width, height]. */
   coords: [number, number, number, number];
