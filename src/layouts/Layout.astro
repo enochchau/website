@@ -140,4 +140,24 @@ const {
   @view-transition {
     navigation: auto;
   }
+
+  dialog {
+    border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 400px;
+    height: fit-content;
+    padding: 0;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 720px) {
+    dialog {
+      max-width: 500px;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 </style>

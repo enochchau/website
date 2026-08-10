@@ -5,7 +5,6 @@ import { createMemo, createSignal, Show } from "solid-js";
 
 import emailGif from "../assets/email.gif";
 import Anchor from "./Anchor";
-import Button from "./Button";
 import styles from "./ContactButton.module.css";
 
 export default function ContactButton() {
@@ -37,7 +36,7 @@ export default function ContactButton() {
       <Show
         when={show()}
         fallback={
-          <Button onclick={() => setShow((show) => !show)}>Show Contact</Button>
+          <button onclick={() => setShow((show) => !show)}>Show Contact</button>
         }
       >
         <p>

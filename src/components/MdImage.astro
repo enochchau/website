@@ -1,24 +1,26 @@
 ---
+import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
-interface Props {
-  src: string;
+export interface Props {
+  src: ImageMetadata | string;
   alt: string;
   width?: number;
   height?: number;
   class?: string;
 }
 
-let { src, alt, width = 800, height = 0} = Astro.props as Props;
+let { src, alt, width = 800, height = 0, ...rest} = Astro.props as Props;
 ---
 
 <Image
-  src={src}
+  src={src as unknown as string}
   alt={alt}
   format="avif"
   width={width}
   height={height}
   class={Astro.props.class ? Astro.props.class : "image"}
+  {...rest}
 />
 
 <style>

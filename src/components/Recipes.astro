@@ -1,71 +1,75 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import MdImage from "./MdImage.astro";
 
 let urls = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/college-recipes/*.webp"
+  "../assets/college-recipes/*.avif",
 );
 
-let pics = Object.entries(urls).map(([k, v]) => {
-  let alt = k
-    .split("/")
-    .pop()!
-    .replace(/\.[^/.]+$/, "");
-  return {
-    alt,
-    src: v,
-  };
-});
+let pics = await Promise.all(
+  Object.entries(urls).map(async ([k, v]) => {
+    let alt = k
+      .split("/")
+      .pop()!
+      .replace(/\.[^/.]+$/, "");
+    return {
+      alt,
+      src: await v(),
+    };
+  }),
+);
+
+let containerID = `recipes-${crypto.randomUUID()}`;
+const getViewerID = (index: number) => `${containerID}-viewer-${index}`;
 ---
 
-<div id="recipe-container">
+<div id={containerID} class="recipe-container">
   {
-    pics.map(({ src, alt }) => (
-      <div class="img-container">
-        <Image
-          src={src()}
-          alt={alt}
-          width={600}
-          format="avif"
-          class="full-image"
-        />
+    pics.map(({ src, alt }, i) => (
+      <div
+        class="img-container"
+        tabindex="0"
+        role="button"
+        aria-label={`Open ${alt}`}
+        data-viewer={getViewerID(i)}
+      >
+        <MdImage src={src.default} alt={alt} data-viewer={getViewerID(i)} />
       </div>
     ))
   }
-</div>
-<dialog id="recipe-viewer"></dialog>
-
-<script>
-  function handleImageClick() {
-    const container = document.getElementById("recipe-container");
-    if (!container || !(container instanceof HTMLDivElement)) {
-      return;
-    }
-    const viewer = document.getElementById("recipe-viewer");
-    if (!viewer || !(viewer instanceof HTMLDialogElement)) {
-      return;
-    }
-
-    console.log(container);
-    container.addEventListener("click", (e) => {
-      console.log("Clicked");
-      if (e.target instanceof HTMLImageElement) {
-        viewer.innerHTML = "";
-        viewer.appendChild(e.target.cloneNode());
-        viewer.showModal();
-      }
-    });
-    viewer.addEventListener("click", (e) => {
-      if (e.target === viewer) {
-        viewer.close();
-      }
-    });
+  {
+    pics.map(({ src, alt }, i) => (
+      <dialog id={getViewerID(i)}>
+        <MdImage src={src.default} alt={alt} />
+      </dialog>
+    ))
   }
-  handleImageClick();
+</div>
+
+<script define:vars={{ containerID }}>
+  const container = document.getElementById(containerID);
+  if (!container) return;
+
+  container.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.dataset.viewer) {
+      document.getElementById(target.dataset.viewer)?.showModal();
+    } else if (target instanceof HTMLDialogElement && target === event.target) {
+      target.close();
+    }
+  });
+
+  container.addEventListener("keydown", (e) => {
+    const target = e.target;
+    if ((e.key === "Enter" || e.key === " ") && target.dataset.viewer) {
+      e.preventDefault();
+      document.getElementById(target.dataset.viewer)?.showModal();
+    }
+  });
 </script>
 
 <style>
-  #recipe-container {
+  .recipe-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -81,32 +85,5 @@ let pics = Object.entries(urls).map(([k, v]) => {
       border: 1px solid var(--color-purple-500);
       cursor: pointer;
     }
-  }
-  .full-image {
-    margin: 0;
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-  }
-
-  dialog {
-    border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
-    border-radius: 4px;
-    overflow: hidden;
-    width: 400px;
-    height: fit-content;
-    padding: 0;
-    margin: auto;
-  }
-
-  @media screen and (min-width: 720px) {
-    dialog {
-      width: 500px;
-    }
-    
-  }
-
-  dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
   }
 </style>

@@ -1,0 +1,127 @@
+---
+import type { ImageMetadata } from "astro";
+import MdImage, { type Props as MdImageProps } from "./MdImage.astro";
+
+export interface ImageBox {
+  /** Pixel coordinates in the source image: [left, top, width, height]. */
+  coords: [number, number, number, number];
+  src: ImageMetadata | string;
+  alt: string;
+}
+
+interface Props extends Omit<MdImageProps, "usemap" | "width" | "height"> {
+  boxes: ImageBox[];
+  /** Needed only when `src` is a URL instead of an imported Astro image. */
+  imageSize?: { width: number; height: number };
+  width?: number;
+  height?: number;
+}
+
+const { boxes, imageSize, ...imageProps } = Astro.props as Props;
+const imageSource = imageProps.src;
+const sourceSize = typeof imageSource === "object" ? imageSource : undefined;
+const mapWidth = imageSize?.width ?? sourceSize?.width;
+const mapHeight = imageSize?.height ?? sourceSize?.height;
+
+if (!mapWidth || !mapHeight) {
+  throw new Error("MappedImage needs imageSize when src is a URL.");
+}
+
+const componentId = `mapped-image-${crypto.randomUUID()}`;
+---
+
+<div
+  id={componentId}
+  class="mapped-image"
+  style={`--map-width: ${mapWidth}; --map-height: ${mapHeight};`}
+>
+  <MdImage {...imageProps} />
+  <svg
+    class="map-overlay"
+    viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+    role="group"
+    aria-label={`${imageProps.alt} image map`}
+  >
+    {
+      boxes.map((box, index) => {
+        const [x, y, width, height] = box.coords;
+        const viewerId = `${componentId}-viewer-${index}`;
+        return (
+          <rect
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+            tabindex="0"
+            role="button"
+            aria-label={`Open ${box.alt}`}
+            data-viewer={viewerId}
+          />
+        );
+      })
+    }
+  </svg>
+
+  {
+    boxes.map((box, index) => {
+      const viewerId = `${componentId}-viewer-${index}`;
+      return (
+        <dialog id={viewerId}>
+          <MdImage src={box.src} alt={box.alt} width={1600} />
+        </dialog>
+      );
+    })
+  }
+</div>
+
+<script is:inline define:vars={{ componentId }}>
+  const root = document.getElementById(componentId);
+  if (!root) return;
+
+  root.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof SVGRectElement) {
+      document.getElementById(target.dataset.viewer ?? "")?.showModal();
+    } else if (target instanceof HTMLDialogElement && target === event.target) {
+      target.close();
+    }
+  });
+
+  root.addEventListener("keydown", (event) => {
+    if (
+      (event.key === "Enter" || event.key === " ") &&
+      event.target instanceof SVGRectElement
+    ) {
+      event.preventDefault();
+      document.getElementById(event.target.dataset.viewer ?? "")?.showModal();
+    }
+  });
+</script>
+
+<style>
+  .mapped-image {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: var(--map-width) / var(--map-height);
+  }
+
+  .mapped-image :global(.image) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-overlay rect {
+    fill-opacity: 0;
+    cursor: pointer;
+  }
+
+</style>

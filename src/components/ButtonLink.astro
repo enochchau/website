@@ -1,5 +1,4 @@
 ---
-import Button from "./Button";
 interface Props {
   href?: string;
 }
@@ -8,5 +7,5 @@ const { href } = Astro.props;
 ---
 
 <a href={href}>
-  <Button><slot /></Button>
+  <button><slot /></button>
 </a>

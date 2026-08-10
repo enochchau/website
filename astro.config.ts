@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     solid({
+      devtools: true,
       include: "**/components/**",
     }),
     sitemap({
