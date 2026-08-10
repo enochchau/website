@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import { unified } from "@astrojs/markdown-remark";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
@@ -31,11 +32,13 @@ export default defineConfig({
     react({ include: "**/react/**" }),
   ],
   markdown: {
-    gfm: true,
+    processor: unified({
+      gfm: true,
+      remarkPlugins: [remarkReadingTime],
+    }),
     shikiConfig: {
       theme: "one-dark-pro",
     },
-    remarkPlugins: [remarkReadingTime],
   },
   site,
   vite: {

@@ -80,7 +80,6 @@ const componentId = `mapped-image-${crypto.randomUUID()}`;
 
 <script is:inline define:vars={{ componentId }}>
   const root = document.getElementById(componentId);
-  if (!root) return;
 
   root.addEventListener("click", (event) => {
     const target = event.target;
