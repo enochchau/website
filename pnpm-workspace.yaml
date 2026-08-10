@@ -3,6 +3,7 @@ allowBuilds:
   esbuild: false
   less: false
   sharp: false
+  workerd: true
 onlyBuiltDependencies:
   - esbuild
   - sharp
