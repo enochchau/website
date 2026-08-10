@@ -1,4 +1,4 @@
-import { satteri } from '@astrojs/markdown-satteri';
+import { satteri } from "@astrojs/markdown-satteri";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -11,9 +11,13 @@ const readingTimePlugin = defineMdastPlugin({
   name: "reading-time",
   text(node, ctx) {
     if (!ctx.data.astro?.frontmatter.readingTime) {
-      ctx.data.astro!.frontmatter.readingTime = getReadingTime(node.value).minutes
+      ctx.data.astro!.frontmatter.readingTime = getReadingTime(
+        node.value,
+      ).minutes;
     } else {
-      ctx.data.astro!.frontmatter.readingTime += getReadingTime(node.value).minutes
+      ctx.data.astro!.frontmatter.readingTime += getReadingTime(
+        node.value,
+      ).minutes;
     }
   },
 });
@@ -44,8 +48,8 @@ export default defineConfig({
     react({ include: "**/react/**/*.tsx" }),
   ],
   markdown: {
-    processor:satteri({
-      mdastPlugins: [readingTimePlugin]
+    processor: satteri({
+      mdastPlugins: [readingTimePlugin],
     }),
     shikiConfig: {
       theme: "one-dark-pro",
