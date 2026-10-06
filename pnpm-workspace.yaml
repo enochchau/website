@@ -4,6 +4,22 @@ allowBuilds:
   less: false
   sharp: false
   workerd: true
+minimumReleaseAgeExclude:
+  - '@astrojs/internal-helpers@0.12.0'
+  - '@astrojs/markdown-satteri@0.4.3'
+  - astro@7.3.6
 onlyBuiltDependencies:
   - esbuild
   - sharp
+
+overrides:
+  "js-yaml": "4.3.2"
+  "fast-uri": "3.1.8"
+  "seroval": "1.6.8"
+  "devalue": "5.9.4"
+  "svgo": "4.1.0"
+  "http-cache-semantics": "4.3.0"
+  "probe-image-size": "7.4.0"
+  "smol-toml": "1.9.0"
+  "source-map-js": "1.2.2"
+  "postcss-selector-parser": "7.1.6"
